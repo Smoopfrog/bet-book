@@ -1,9 +1,9 @@
 import { Button, View, StyleSheet, Alert } from "react-native"
 
-const NavBar = () => {
+const NavBar = (props) => {
   return (
     <View style={styles.container}>
-      <Button color='white' title='New bet' onPress={() => Alert.alert('button')}/>
+      <Button color='white' title='New bet' onPress={props.openModal}/>
     </View>
   )
 }

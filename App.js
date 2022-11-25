@@ -1,13 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import NavBar from './components/NavBar';
-import NewBet from './components/NewBet';
+import NewBetModal from './components/NewBetModal';
 
 export default function App() {
+  const [showModal, setShowModal] = useState(false)
+  const modalHandler = () => {
+    setShowModal(!showModal)
+  }
+
   return (
     <View>
-      <NavBar />
-      <NewBet />
+      <NavBar openModal={modalHandler}/>
+      {showModal && <NewBetModal closeModal={modalHandler}/>}
     </View>
   );
 }
