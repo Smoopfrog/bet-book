@@ -1,10 +1,18 @@
-import { Button, Modal, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 
 const NewBetModal = (props) => {
+  const [title, setTitle] = useState("");
+
   return (
     <View style={styles.centeredView}>
-      <Modal>
+      <Modal animationType="slide" transparent={true} visible={props.showModal}>
         <View style={styles.modalView}>
+          <TextInput
+            style={styles.input}
+            value={title}
+            onChangeText={setTitle}
+          />
           <Text>Bet area</Text>
           <Button title="Close" onPress={props.closeModal} />
         </View>
@@ -14,6 +22,13 @@ const NewBetModal = (props) => {
 };
 
 const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    width: 100,
+    borderWidth: 1,
+    padding: 10,
+  },
   centeredView: {
     flex: 1,
     justifyContent: "center",

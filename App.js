@@ -13,7 +13,7 @@ export default function App() {
   return (
     <View>
       <NavBar openModal={modalHandler}/>
-      {showModal && <NewBetModal closeModal={modalHandler}/>}
+      <NewBetModal closeModal={modalHandler} showModal={showModal}/>
     </View>
   );
 }
