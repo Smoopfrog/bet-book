@@ -2,16 +2,27 @@ import { useState } from "react";
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 import NewBetInput from "./NewBetInput";
 
-const NewBetModal = (props) => {
+const NewBetModal = ({ setBets, closeModal, showModal }) => {
   const [title, setTitle] = useState("");
   const [person, setPerson] = useState("");
   const [wager, setWager] = useState("");
   const [desciption, setDesciption] = useState("");
 
+  const createNewBet = () => {
+    const newBet = {
+      title,
+      person,
+      wager,
+      desciption,
+    };
+
+    setBets(prev => [newBet, ...prev])
+    closeModal()
+  };
 
   return (
     <View style={styles.centeredView}>
-      <Modal animationType="slide" transparent={true} visible={props.showModal}>
+      <Modal animationType="slide" transparent={true} visible={showModal}>
         <View style={styles.modalView}>
           <Text>Bet area</Text>
           <NewBetInput label="Title" value={title} changeHandler={setTitle} />
@@ -21,11 +32,15 @@ const NewBetModal = (props) => {
             changeHandler={setPerson}
           />
           <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
-          <NewBetInput label="Desciption" value={desciption} changeHandler={setDesciption} />
+          <NewBetInput
+            label="Desciption"
+            value={desciption}
+            changeHandler={setDesciption}
+          />
 
           <View style={styles.buttonContainer}>
-            <Button title="Close" onPress={props.closeModal} />
-            <Button title="Confirm" onPress={props.closeModal} />
+            <Button title="Close" onPress={closeModal} />
+            <Button title="Confirm" onPress={createNewBet} />
           </View>
         </View>
       </Modal>
