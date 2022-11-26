@@ -4,8 +4,10 @@ import NewBetInput from "./NewBetInput";
 
 const NewBetModal = (props) => {
   const [title, setTitle] = useState("");
-  const [wager, setWager] = useState("");
   const [person, setPerson] = useState("");
+  const [wager, setWager] = useState("");
+  const [desciption, setDesciption] = useState("");
+
 
   return (
     <View style={styles.centeredView}>
@@ -13,33 +15,18 @@ const NewBetModal = (props) => {
         <View style={styles.modalView}>
           <Text>Bet area</Text>
           <NewBetInput label="Title" value={title} changeHandler={setTitle} />
-          <View style={styles.rowContainer}>
-            <Text>Title</Text>
-            <TextInput
-              label="Title"
-              style={styles.input}
-              value={title}
-              onChangeText={setTitle}
-            />
+          <NewBetInput
+            label="Person"
+            value={person}
+            changeHandler={setPerson}
+          />
+          <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
+          <NewBetInput label="Desciption" value={desciption} changeHandler={setDesciption} />
+
+          <View style={styles.buttonContainer}>
+            <Button title="Close" onPress={props.closeModal} />
+            <Button title="Confirm" onPress={props.closeModal} />
           </View>
-          <View style={styles.rowContainer}>
-            <Text>Person</Text>
-            <TextInput
-              style={styles.input}
-              value={person}
-              onChangeText={setPerson}
-            />
-          </View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>Wager</Text>
-            <TextInput
-              style={styles.input}
-              value={wager}
-              onChangeText={setWager}
-            />
-          </View>
-          <Button title="Close" onPress={props.closeModal} />
-          <Button title="Confirm" onPress={props.closeModal} />
         </View>
       </Modal>
     </View>
@@ -69,6 +56,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  buttonContainer: {
+    flexDirection: "row",
   },
 });
 

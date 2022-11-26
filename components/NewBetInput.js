@@ -17,17 +17,19 @@ const styles = StyleSheet.create({
   rowContainer: {
     alignItems: "center",
     flexDirection: "row",
+    justifyContent: 'space-between',
+    width: '100%'
   },
   text: {
-    flex: 1,
+
   },
   input: {
-    flex: 3,
     height: 40,
     margin: 12,
-    width: 100,
+    width: '70%',
     borderWidth: 1,
     padding: 10,
   },
+
 });
 export default NewBetInput;
