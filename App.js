@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 import NavBar from './components/NavBar';
 import NewBetModal from './components/NewBetModal';
 

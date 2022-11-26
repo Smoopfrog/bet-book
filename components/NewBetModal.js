@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
+import NewBetInput from "./NewBetInput";
 
 const NewBetModal = (props) => {
   const [title, setTitle] = useState("");
@@ -11,19 +12,24 @@ const NewBetModal = (props) => {
       <Modal animationType="slide" transparent={true} visible={props.showModal}>
         <View style={styles.modalView}>
           <Text>Bet area</Text>
-          {/* <Text>Description</Text>
-          <TextInput
-            label="Title"
-            style={styles.input}
-            value={title}
-            onChangeText={setTitle}
-          />
-          <Text>Person</Text>
-          <TextInput
-            style={styles.input}
-            value={person}
-            onChangeText={setPerson}
-          /> */}
+          <NewBetInput label="Title" value={title} changeHandler={setTitle} />
+          <View style={styles.rowContainer}>
+            <Text>Title</Text>
+            <TextInput
+              label="Title"
+              style={styles.input}
+              value={title}
+              onChangeText={setTitle}
+            />
+          </View>
+          <View style={styles.rowContainer}>
+            <Text>Person</Text>
+            <TextInput
+              style={styles.input}
+              value={person}
+              onChangeText={setPerson}
+            />
+          </View>
           <View style={styles.rowContainer}>
             <Text style={styles.text}>Wager</Text>
             <TextInput
@@ -41,7 +47,6 @@ const NewBetModal = (props) => {
 };
 
 const styles = StyleSheet.create({
-
   centeredView: {
     flexDirection: "column",
     justifyContent: "center",
@@ -65,21 +70,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  rowContainer: {
-    flexDirection: 'row'
-  },
-  text: {
-    flex: 1
-  },
-  input: {
-    flex: 2,
-    height: 40,
-    margin: 12,
-    width: 100,
-    borderWidth: 1,
-    padding: 10,
-  },
-  
 });
 
 export default NewBetModal;
