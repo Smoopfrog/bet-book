@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-
-const NewBetInput = ({label, value, changeHandler}) => {
+const NewBetInput = ({ label, value, changeHandler }) => {
   return (
     <View style={styles.rowContainer}>
       <Text>{label}</Text>
@@ -30,5 +29,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
-})
-export default NewBetInput
+});
+export default NewBetInput;
