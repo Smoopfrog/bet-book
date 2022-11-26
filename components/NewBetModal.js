@@ -3,18 +3,37 @@ import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 
 const NewBetModal = (props) => {
   const [title, setTitle] = useState("");
+  const [wager, setWager] = useState("");
+  const [person, setPerson] = useState("");
 
   return (
     <View style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={props.showModal}>
         <View style={styles.modalView}>
+          <Text>Bet area</Text>
+          {/* <Text>Description</Text>
           <TextInput
+            label="Title"
             style={styles.input}
             value={title}
             onChangeText={setTitle}
           />
-          <Text>Bet area</Text>
+          <Text>Person</Text>
+          <TextInput
+            style={styles.input}
+            value={person}
+            onChangeText={setPerson}
+          /> */}
+          <View style={styles.rowContainer}>
+            <Text style={styles.text}>Wager</Text>
+            <TextInput
+              style={styles.input}
+              value={wager}
+              onChangeText={setWager}
+            />
+          </View>
           <Button title="Close" onPress={props.closeModal} />
+          <Button title="Confirm" onPress={props.closeModal} />
         </View>
       </Modal>
     </View>
@@ -22,15 +41,9 @@ const NewBetModal = (props) => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    width: 100,
-    borderWidth: 1,
-    padding: 10,
-  },
+
   centeredView: {
-    flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
@@ -52,5 +65,21 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  rowContainer: {
+    flexDirection: 'row'
+  },
+  text: {
+    flex: 1
+  },
+  input: {
+    flex: 2,
+    height: 40,
+    margin: 12,
+    width: 100,
+    borderWidth: 1,
+    padding: 10,
+  },
+  
 });
+
 export default NewBetModal;
