@@ -6,7 +6,7 @@ const Bet = (props) => {
     <View style={styles.card}>
       <View style={styles.header}>
         <View>
-          <Text style={styles.text}>Date</Text>
+          <Text style={styles.text}>{props.date}</Text>
           <Text style={styles.text}>{props.person}</Text>
           <Text style={styles.text}>{props.wager}</Text>
         </View>
@@ -40,4 +40,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
 export default Bet;
