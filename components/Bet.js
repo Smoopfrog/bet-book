@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const Bet = () => {
+const Bet = (props) => {
   return (
     <View style={styles.card}>
       <View style={styles.header}>
         <View>
           <Text style={styles.text}>Date</Text>
-          <Text style={styles.text}>Person</Text>
-          <Text style={styles.text}>Wager</Text>
+          <Text style={styles.text}>{props.person}</Text>
+          <Text style={styles.text}>{props.wager}</Text>
         </View>
         <View style={styles.title}>
-          <Text >Title</Text>
+          <Text >{props.title}</Text>
         </View>
         <View style={styles.icon}>
           <Feather name="chevrons-down" size={24} color="black" />

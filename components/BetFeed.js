@@ -3,7 +3,7 @@ import Bet from "./Bet";
 
 const BetFeed = ({ bets, setBets }) => {
   const betsArray = bets.map((bet) => {
-    return <Bet key={Math.random()}/>;
+    return <Bet key={Math.random()} title={bet.title} description={bet.description} wager={bet.wager} person={bet.person} />;
   });
   return (
     <ScrollView contentContainerStyle={styles.innerContainer}>
