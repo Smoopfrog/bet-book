@@ -29,6 +29,8 @@ const Bet = (props) => {
           <Text style={styles.text}>{props.date}</Text>
           <Text style={styles.text}>{props.person}</Text>
           <Text style={styles.text}>{props.wager}</Text>
+          <Text style={styles.text}>#{props.id}</Text>
+
         </View>
 
         <View style={styles.icon}>

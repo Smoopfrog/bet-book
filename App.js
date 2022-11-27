@@ -11,7 +11,8 @@ const dummyData = [
     wager: "$100",
     date: "Nov 2, 2022",
     winner: undefined,
-    settled: false
+    settled: false,
+    id: 4
   },
   {
     title: "Raptors beat the Celtics",
@@ -19,7 +20,8 @@ const dummyData = [
     wager: "Steak dinner",
     date: "Apr 20, 2021",
     winner: undefined,
-    settled: false
+    settled: false,
+    id: 3
   },
   {
     title: "10km foot race",
@@ -27,7 +29,8 @@ const dummyData = [
     wager: "$20",
     date: "Jul 2, 1999",
     winner: undefined,
-    settled: false
+    settled: false,
+    id: 2
   },
   {
     title: "Trae scores over 50 points",
@@ -35,7 +38,8 @@ const dummyData = [
     wager: "$10",
     date: "Jan 7, 2020",
     winner: undefined,
-    settled: false
+    settled: false,
+    id: 1
   },
 ];
 
@@ -54,6 +58,7 @@ export default function App() {
         closeModal={modalHandler}
         showModal={showModal}
         setBets={setBets}
+        bets={bets}
       />
       <BetFeed setBets={setBets} bets={bets} />
     </View>

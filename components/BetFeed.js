@@ -5,11 +5,13 @@ const BetFeed = ({ bets, setBets }) => {
   const betsArray = bets.map((bet) => {
     return (
       <Bet
-        key={Math.random()}
+        key={bet.id}
         title={bet.title}
         date={bet.date}
         wager={bet.wager}
         person={bet.person}
+        id={bet.id}
+        setBets={setBets}
       />
     );
   });
