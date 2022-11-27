@@ -18,7 +18,6 @@ const Bet = (props) => {
     const newArray = [...filteredArr, changedBet ].sort((a, b) => b.id - a.id )
     props.setBets(newArray)
   };
-  console.log(props.bets)
 
   return (
     <View style={styles.card}>
