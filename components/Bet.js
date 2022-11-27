@@ -1,24 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useState } from "react";
 
 const Bet = (props) => {
-  const [winnerChecked, setWinnerChecked] = useState(false);
-  const [loserChecked, setLoserChecked] = useState(false);
-  const [settledChecked, setSettledChecked] = useState(false);
-
   const winnerHandler = () => {
-    console.log('winner')
-    setWinnerChecked(true);
-    setLoserChecked(false);
+    const [changedBet] = props.bets.filter(bet => bet.id === props.id)
+    const filteredArr = props.bets.filter(bet => bet.id !== props.id)
+    changedBet.winner = !changedBet.winner;
+    const newArray = [...filteredArr, changedBet ].sort((a, b) => b.id - a.id )
+    props.setBets(newArray)
   };
 
-  const loserHandler = () => {
-    console.log('loser')
-
-    setWinnerChecked(true);
-    setLoserChecked(true);
+  const settledHandler = () => {
+    const [changedBet] = props.bets.filter(bet => bet.id === props.id)
+    const filteredArr = props.bets.filter(bet => bet.id !== props.id)
+    changedBet.settled = !changedBet.settled;
+    const newArray = [...filteredArr, changedBet ].sort((a, b) => b.id - a.id )
+    props.setBets(newArray)
   };
 
   return (
@@ -36,18 +34,19 @@ const Bet = (props) => {
         <View style={styles.icon}>
           <BouncyCheckbox
             fillColor={styles.winnerButton.color}
-            isChecked={winnerChecked}
+            isChecked={props.winner}
             onPress={winnerHandler}
           />
           <BouncyCheckbox
             iconComponent={<Feather name="x" size={15} color="white" />}
-            isChecked={loserChecked}
-            onPress={loserHandler}
+            isChecked={!props.winner}
+            onPress={winnerHandler}
           />
           <BouncyCheckbox
             fillColor={"black"}
             iconComponent={<Feather name="lock" size={15} color="white" />}
-            onPress={setSettledChecked}
+            isChecked={props.settled}
+            // onPress={setSettledChecked}
           />
         </View>
       </View>

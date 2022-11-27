@@ -10,8 +10,11 @@ const BetFeed = ({ bets, setBets }) => {
         date={bet.date}
         wager={bet.wager}
         person={bet.person}
+        winner={bet.winner}
+        settled={bet.settled}
         id={bet.id}
         setBets={setBets}
+        bets={bets}
       />
     );
   });

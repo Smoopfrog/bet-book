@@ -3,6 +3,7 @@ import { View } from "react-native";
 import BetFeed from "./components/BetFeed";
 import NavBar from "./components/NavBar";
 import NewBetModal from "./components/NewBetModal";
+import StatBar from "./components/StatBar";
 
 const dummyData = [
   {
@@ -10,8 +11,8 @@ const dummyData = [
     person: "Bobby",
     wager: "$100",
     date: "Nov 2, 2022",
-    winner: undefined,
-    settled: false,
+    winner: true,
+    settled: true,
     id: 4
   },
   {
@@ -19,7 +20,7 @@ const dummyData = [
     person: "Tommy",
     wager: "Steak dinner",
     date: "Apr 20, 2021",
-    winner: undefined,
+    winner: false,
     settled: false,
     id: 3
   },
@@ -54,6 +55,7 @@ export default function App() {
   return (
     <View>
       <NavBar openModal={modalHandler} />
+      <StatBar bets={bets}/>
       <NewBetModal
         closeModal={modalHandler}
         showModal={showModal}
