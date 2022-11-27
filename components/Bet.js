@@ -18,6 +18,7 @@ const Bet = (props) => {
     const newArray = [...filteredArr, changedBet ].sort((a, b) => b.id - a.id )
     props.setBets(newArray)
   };
+  console.log(props.bets)
 
   return (
     <View style={styles.card}>
@@ -46,7 +47,7 @@ const Bet = (props) => {
             fillColor={"black"}
             iconComponent={<Feather name="lock" size={15} color="white" />}
             isChecked={props.settled}
-            // onPress={setSettledChecked}
+            onPress={settledHandler}
           />
         </View>
       </View>
