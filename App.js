@@ -10,24 +10,32 @@ const dummyData = [
     person: "Bobby",
     wager: "$100",
     date: "Nov 2, 2022",
+    winner: undefined,
+    settled: false
   },
   {
     title: "Raptors beat the Celtics",
     person: "Tommy",
     wager: "Steak dinner",
     date: "Apr 20, 2021",
+    winner: undefined,
+    settled: false
   },
   {
     title: "10km foot race",
     person: "Billy",
     wager: "$20",
     date: "Jul 2, 1999",
+    winner: undefined,
+    settled: false
   },
   {
     title: "Trae scores over 50 points",
     person: "Sally",
     wager: "$10",
     date: "Jan 7, 2020",
+    winner: undefined,
+    settled: false
   },
 ];
 
