@@ -4,33 +4,33 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const Bet = (props) => {
   const winnerHandler = () => {
-    const [changedBet] = props.bets.filter(bet => bet.id === props.id)
-    const filteredArr = props.bets.filter(bet => bet.id !== props.id)
+    const [changedBet] = props.bets.filter((bet) => bet.id === props.id);
+    const filteredArr = props.bets.filter((bet) => bet.id !== props.id);
     changedBet.winner = !changedBet.winner;
-    const newArray = [...filteredArr, changedBet ].sort((a, b) => b.id - a.id )
-    props.setBets(newArray)
+    const newArray = [...filteredArr, changedBet].sort((a, b) => b.id - a.id);
+    props.setBets(newArray);
   };
 
   const settledHandler = () => {
-    const [changedBet] = props.bets.filter(bet => bet.id === props.id)
-    const filteredArr = props.bets.filter(bet => bet.id !== props.id)
+    const [changedBet] = props.bets.filter((bet) => bet.id === props.id);
+    const filteredArr = props.bets.filter((bet) => bet.id !== props.id);
     changedBet.settled = !changedBet.settled;
-    const newArray = [...filteredArr, changedBet ].sort((a, b) => b.id - a.id )
-    props.setBets(newArray)
+    const newArray = [...filteredArr, changedBet].sort((a, b) => b.id - a.id);
+    props.setBets(newArray);
   };
 
   return (
     <View style={styles.card}>
       <View style={styles.header}>
-        <View>
-          <Text style={styles.title}>{props.title}</Text>
-          <Text style={styles.text}>{props.date}</Text>
-          <Text style={styles.text}>{props.person}</Text>
-          <Text style={styles.text}>{props.wager}</Text>
-          <Text style={styles.text}>#{props.id}</Text>
-
+        <View style={styles.title}>
+          <Text style={styles.titleFont}>{props.title}</Text>
+          <Text>#{props.id}</Text>
         </View>
-
+        <View style={styles.body}>
+          <Text>{props.date}</Text>
+          <Text>{props.person}</Text>
+          <Text>{props.wager}</Text>
+        </View>
         <View style={styles.icon}>
           <BouncyCheckbox
             fillColor={styles.winnerButton.color}
@@ -56,17 +56,18 @@ const Bet = (props) => {
 
 const styles = StyleSheet.create({
   card: {
-    margin: 5,
-    width: "90%",
-    borderColor: "#CD104D",
-    borderWidth: 2,
-    borderRadius: 10,
+    width: "100%",
+    borderWidth: 1,
+    padding: 10
   },
-  header: {
+  body: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
   },
   title: {
+    alignItems: 'center'
+  },
+  titleFont: {
     fontSize: 20,
     fontWeight: "bold",
   },
