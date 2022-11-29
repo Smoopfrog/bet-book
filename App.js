@@ -4,6 +4,7 @@ import BetFeed from "./components/BetFeed";
 import NavBar from "./components/NavBar";
 import NewBetModal from "./components/NewBetModal";
 import StatBar from "./components/StatBar";
+import 'react-native-gesture-handler';
 
 const dummyData = [
   {

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import 'react-native-gesture-handler';
 
 const Bet = (props) => {
   const winnerHandler = () => {
@@ -45,7 +46,7 @@ const Bet = (props) => {
           <BouncyCheckbox
             fillColor={"black"}
             iconComponent={<Feather name="lock" size={15} color="white" />}
-            isChecked={props.active}
+            isChecked={!props.active}
             onPress={settledHandler}
           />
         </View>

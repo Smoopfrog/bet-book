@@ -19,7 +19,8 @@
     "react-native-progress": "^5.0.0",
     "react-native-progress-circle": "^2.1.0",
     "react-native-svg": "13.4.0",
-    "react-native-web": "~0.18.9"
+    "react-native-web": "~0.18.9",
+    "react-native-gesture-handler": "~2.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

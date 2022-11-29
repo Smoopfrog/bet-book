@@ -21,7 +21,7 @@ const BetFeed = ({ bets, setBets }) => {
       />
     );
   });
-
+  
   const settledBetsArray = settledBets.map((bet) => {
     return (
       <Bet
@@ -38,7 +38,7 @@ const BetFeed = ({ bets, setBets }) => {
       />
     );
   });
-  
+
   return (
     <ScrollView horizontal>
       <ScrollView contentContainerStyle={styles.innerContainer}>
@@ -55,7 +55,7 @@ const BetFeed = ({ bets, setBets }) => {
 const styles = StyleSheet.create({
   innerContainer: {
     alignItems: "center",
-    width: "100%",
+    width: '100%',
   },
 });
 
