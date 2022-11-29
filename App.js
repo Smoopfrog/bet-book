@@ -4,7 +4,6 @@ import BetFeed from "./components/BetFeed";
 import NavBar from "./components/NavBar";
 import NewBetModal from "./components/NewBetModal";
 import StatBar from "./components/StatBar";
-import 'react-native-gesture-handler';
 
 const dummyData = [
   {
@@ -14,35 +13,35 @@ const dummyData = [
     date: "Nov 2, 2022",
     winner: true,
     active: true,
-    id: 4
+    id: 4,
   },
-  {
-    title: "Raptors beat the Celtics",
-    person: "Tommy",
-    wager: "Steak dinner",
-    date: "Apr 20, 2021",
-    winner: false,
-    active: true,
-    id: 3
-  },
-  {
-    title: "10km foot race",
-    person: "Billy",
-    wager: "$20",
-    date: "Jul 2, 1999",
-    winner: undefined,
-    active: true,
-    id: 2
-  },
-  {
-    title: "Trae scores over 50 points",
-    person: "Sally",
-    wager: "$10",
-    date: "Jan 7, 2020",
-    winner: undefined,
-    active: false,
-    id: 1
-  },
+  // {
+  //   title: "Raptors beat the Celtics",
+  //   person: "Tommy",
+  //   wager: "Steak dinner",
+  //   date: "Apr 20, 2021",
+  //   winner: false,
+  //   active: true,
+  //   id: 3,
+  // },
+  // {
+  //   title: "10km foot race",
+  //   person: "Billy",
+  //   wager: "$20",
+  //   date: "Jul 2, 1999",
+  //   winner: undefined,
+  //   active: true,
+  //   id: 2,
+  // },
+  // {
+  //   title: "Trae scores over 50 points",
+  //   person: "Sally",
+  //   wager: "$10",
+  //   date: "Jan 7, 2020",
+  //   winner: undefined,
+  //   active: false,
+  //   id: 1,
+  // },
 ];
 
 export default function App() {
@@ -56,7 +55,7 @@ export default function App() {
   return (
     <View style={styles.app}>
       <NavBar openModal={modalHandler} />
-      <StatBar bets={bets}/>
+      <StatBar bets={bets} />
       <NewBetModal
         closeModal={modalHandler}
         showModal={showModal}
@@ -70,6 +69,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   app: {
-    backgroundColor: '#323232'
-  }
-})
+    backgroundColor: "#323232",
+  },
+});

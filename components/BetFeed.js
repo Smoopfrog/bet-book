@@ -40,18 +40,15 @@ const BetFeed = ({ bets, setBets }) => {
   });
 
   return (
-    <ScrollView horizontal>
+    // <ScrollView horizontal>
       <ScrollView contentContainerStyle={styles.innerContainer}>
         {activeBetsArray}
       </ScrollView>
-
-      <ScrollView contentContainerStyle={styles.innerContainer}>
-        {settledBetsArray}
-      </ScrollView>
-    </ScrollView>
   );
 };
-
+{/* <AppleStyleSwipeableRow>
+<Row item={item} />
+</AppleStyleSwipeableRow> */}
 const styles = StyleSheet.create({
   innerContainer: {
     alignItems: "center",
