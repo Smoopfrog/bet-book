@@ -2,7 +2,10 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import Bet from "./Bet";
 
 const BetFeed = ({ bets, setBets }) => {
-  const betsArray = bets.map((bet) => {
+  const activeBets = bets.filter((bet) => bet.active);
+  const settledBets = bets.filter((bet) => !bet.active);
+
+  const activeBetsArray = activeBets.map((bet) => {
     return (
       <Bet
         key={bet.id}
@@ -18,19 +21,41 @@ const BetFeed = ({ bets, setBets }) => {
       />
     );
   });
+
+  const settledBetsArray = settledBets.map((bet) => {
+    return (
+      <Bet
+        key={bet.id}
+        title={bet.title}
+        date={bet.date}
+        wager={bet.wager}
+        person={bet.person}
+        winner={bet.winner}
+        active={bet.active}
+        id={bet.id}
+        setBets={setBets}
+        bets={bets}
+      />
+    );
+  });
+  
   return (
-    <ScrollView contentContainerStyle={styles.innerContainer}>
-      {betsArray}
+    <ScrollView horizontal>
+      <ScrollView contentContainerStyle={styles.innerContainer}>
+        {activeBetsArray}
+      </ScrollView>
+
+      <ScrollView contentContainerStyle={styles.innerContainer}>
+        {settledBetsArray}
+      </ScrollView>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  // outerContainer: {
-  //   height: '100%'
-  // },
   innerContainer: {
     alignItems: "center",
+    width: "100%",
   },
 });
 
