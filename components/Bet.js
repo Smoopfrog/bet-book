@@ -14,7 +14,7 @@ const Bet = (props) => {
   const settledHandler = () => {
     const [changedBet] = props.bets.filter((bet) => bet.id === props.id);
     const filteredArr = props.bets.filter((bet) => bet.id !== props.id);
-    changedBet.settled = !changedBet.settled;
+    changedBet.active = !changedBet.active;
     const newArray = [...filteredArr, changedBet].sort((a, b) => b.id - a.id);
     props.setBets(newArray);
   };
@@ -45,7 +45,7 @@ const Bet = (props) => {
           <BouncyCheckbox
             fillColor={"black"}
             iconComponent={<Feather name="lock" size={15} color="white" />}
-            isChecked={props.settled}
+            isChecked={props.active}
             onPress={settledHandler}
           />
         </View>
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
   card: {
     width: "100%",
     borderWidth: 1,
-    padding: 10
+    padding: 10,
+    backgroundColor: "#FFAC41"
   },
   body: {
     flexDirection: "row",

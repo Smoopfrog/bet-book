@@ -8,10 +8,7 @@ const NewBetModal = ({ bets, setBets, closeModal, showModal }) => {
   const [wager, setWager] = useState("");
   const [desciption, setDesciption] = useState("");
 
-  let id = bets[bets.length - 1].id + 1;
-  if (!id) {
-    id = 1;
-  }
+  let id = Date.now()
 
   const createNewBet = () => {
     const newBet = {

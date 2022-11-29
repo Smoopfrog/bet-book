@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import BetFeed from "./components/BetFeed";
 import NavBar from "./components/NavBar";
 import NewBetModal from "./components/NewBetModal";
@@ -12,7 +12,7 @@ const dummyData = [
     wager: "$100",
     date: "Nov 2, 2022",
     winner: true,
-    settled: true,
+    active: true,
     id: 4
   },
   {
@@ -21,7 +21,7 @@ const dummyData = [
     wager: "Steak dinner",
     date: "Apr 20, 2021",
     winner: false,
-    settled: false,
+    active: true,
     id: 3
   },
   {
@@ -30,7 +30,7 @@ const dummyData = [
     wager: "$20",
     date: "Jul 2, 1999",
     winner: undefined,
-    settled: false,
+    active: true,
     id: 2
   },
   {
@@ -39,7 +39,7 @@ const dummyData = [
     wager: "$10",
     date: "Jan 7, 2020",
     winner: undefined,
-    settled: false,
+    active: false,
     id: 1
   },
 ];
@@ -53,7 +53,7 @@ export default function App() {
   };
 
   return (
-    <View>
+    <View style={styles.app}>
       <NavBar openModal={modalHandler} />
       <StatBar bets={bets}/>
       <NewBetModal
@@ -66,3 +66,9 @@ export default function App() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  app: {
+    backgroundColor: '#323232'
+  }
+})

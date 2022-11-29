@@ -11,7 +11,7 @@ const BetFeed = ({ bets, setBets }) => {
         wager={bet.wager}
         person={bet.person}
         winner={bet.winner}
-        settled={bet.settled}
+        active={bet.active}
         id={bet.id}
         setBets={setBets}
         bets={bets}
