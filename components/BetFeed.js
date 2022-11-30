@@ -40,10 +40,6 @@ const BetFeed = ({ bets, setBets }) => {
   });
 
   return (
-    // // <ScrollView horizontal>
-    // <ScrollView contentContainerStyle={styles.innerContainer}>
-    //   {activeBetsArray}
-    // </ScrollView>
     <FlatList
       data={bets}
       renderItem={({ item, index }) => (
@@ -53,16 +49,5 @@ const BetFeed = ({ bets, setBets }) => {
     />
   );
 };
-{
-  /* <AppleStyleSwipeableRow>
-<Row item={item} />
-</AppleStyleSwipeableRow> */
-}
-const styles = StyleSheet.create({
-  innerContainer: {
-    alignItems: "center",
-    width: "100%",
-  },
-});
 
 export default BetFeed;

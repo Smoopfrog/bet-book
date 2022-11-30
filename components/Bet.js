@@ -1,8 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { StyleSheet, Text, View, Animated } from "react-native";
-import { Swipeable, RectButton } from "react-native-gesture-handler";
-import { useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import SwipeableCard from "./SwipeableCard";
 
 const Bet = ({ item, setBets, bets }) => {
