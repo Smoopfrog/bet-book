@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, FlatList } from "react-native";
 import Bet from "./Bet";
 
 const BetFeed = ({ bets, setBets }) => {
@@ -21,7 +21,7 @@ const BetFeed = ({ bets, setBets }) => {
       />
     );
   });
-  
+
   const settledBetsArray = settledBets.map((bet) => {
     return (
       <Bet
@@ -40,19 +40,26 @@ const BetFeed = ({ bets, setBets }) => {
   });
 
   return (
-    // <ScrollView horizontal>
-      <ScrollView contentContainerStyle={styles.innerContainer}>
-        {activeBetsArray}
-      </ScrollView>
+    // // <ScrollView horizontal>
+    // <ScrollView contentContainerStyle={styles.innerContainer}>
+    //   {activeBetsArray}
+    // </ScrollView>
+    <FlatList
+      data={bets}
+      renderItem={({item, index}) =>  <Bet item={item} bets={bets} setBets={setBets}/>}
+      keyExtractor={(item) => item.id}
+    />
   );
 };
-{/* <AppleStyleSwipeableRow>
+{
+  /* <AppleStyleSwipeableRow>
 <Row item={item} />
-</AppleStyleSwipeableRow> */}
+</AppleStyleSwipeableRow> */
+}
 const styles = StyleSheet.create({
   innerContainer: {
     alignItems: "center",
-    width: '100%',
+    width: "100%",
   },
 });
 
