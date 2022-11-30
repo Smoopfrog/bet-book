@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <View style={styles.app}>
-      <NavBar openModal={modalHandler} />
+      <NavBar />
       <StatBar bets={bets} />
       <NewBetModal
         closeModal={modalHandler}
@@ -64,13 +64,13 @@ export default function App() {
         bets={bets}
       />
       <BetFeed setBets={setBets} bets={bets} />
-      <FooterBar />
+      <FooterBar openModal={modalHandler} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   app: {
-    backgroundColor: "#323232",
+    backgroundColor: "white",
   },
 });

@@ -4,18 +4,7 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 const NavBar = (props) => {
   return (
     <View style={styles.container}>
-      <View style={styles.icon}>
-        <SimpleLineIcons
-          name="menu"
-          size={24}
-          color="white"
-          onPress={props.openModal}
-        />
-      </View>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>BETBOOK</Text>
-      </View>
-      <View></View>
+      <Text style={styles.title}>BETBOOK</Text>
     </View>
   );
 };
@@ -24,7 +13,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     backgroundColor: "#000000",
     padding: 5,
     paddingTop: 20,

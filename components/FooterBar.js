@@ -1,22 +1,30 @@
 import { StyleSheet, Text, View } from "react-native";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
-const FooterBar = () => {
+const FooterBar = (props) => {
   return (
     <View style={styles.container}>
-      <Text>
-        Footer Bar
-      </Text>
+      <View>
+        <SimpleLineIcons
+          name="plus"
+          size={30}
+          color="white"
+          onPress={props.openModal}
+        />
+      </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#000',
-    width: '100%',
-    height: 0,
-    position: 'fixed',
-  }
-})
+    height: 45,
+    backgroundColor: "#000",
+    width: "100%",
+    position: "fixed",
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+});
 
 export default FooterBar;
