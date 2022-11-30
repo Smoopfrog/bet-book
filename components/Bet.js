@@ -33,12 +33,12 @@ const Bet = ({ item, setBets, bets }) => {
         <View style={styles.header}>
           <View style={styles.title}>
             <Text style={styles.titleFont}>{item.title}</Text>
-            <Text>#{item.id}</Text>
+            <Text style={styles.text}>#{item.id}</Text>
           </View>
           <View style={styles.body}>
-            <Text>{item.date}</Text>
-            <Text>{item.person}</Text>
-            <Text>{item.wager}</Text>
+            <Text style={styles.text}>{item.date}</Text>
+            <Text style={styles.text}>{item.person}</Text>
+            <Text style={styles.text}>{item.wager}</Text>
           </View>
           <View style={styles.icon}>
             <BouncyCheckbox
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleFont: {
+    color: 'white',
     fontSize: 20,
     fontWeight: "bold",
   },
@@ -86,6 +87,9 @@ const styles = StyleSheet.create({
   winnerButton: {
     color: "green",
   },
+  text: {
+    color: 'white'
+  }
 });
 
 export default Bet;
