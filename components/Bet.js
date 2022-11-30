@@ -2,6 +2,7 @@ import { Feather } from "@expo/vector-icons";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { StyleSheet, Text, View } from "react-native";
 import SwipeableCard from "./SwipeableCard";
+import moment from "moment";
 
 const Bet = ({ item, setBets, bets }) => {
   const resultHandler = (result) => {
@@ -20,6 +21,8 @@ const Bet = ({ item, setBets, bets }) => {
     setBets(newArray);
   };
 
+  const date = moment(item.date).format("MMM Do, YYYY");
+
   return (
     <SwipeableCard resultHandler={resultHandler} cardType={item.result}>
       <View
@@ -36,7 +39,7 @@ const Bet = ({ item, setBets, bets }) => {
             <Text style={styles.text}>#{item.id}</Text>
           </View>
           <View style={styles.body}>
-            <Text style={styles.text}>{item.date}</Text>
+            <Text style={styles.text}>{date}</Text>
             <Text style={styles.text}>{item.person}</Text>
             <Text style={styles.text}>{item.wager}</Text>
           </View>
@@ -77,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleFont: {
-    color: 'white',
+    color: "white",
     fontSize: 20,
     fontWeight: "bold",
   },
@@ -88,8 +91,8 @@ const styles = StyleSheet.create({
     color: "green",
   },
   text: {
-    color: 'white'
-  }
+    color: "white",
+  },
 });
 
 export default Bet;

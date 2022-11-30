@@ -1,5 +1,4 @@
-import { Button, View, StyleSheet, Alert, Text } from "react-native";
-import { SimpleLineIcons } from "@expo/vector-icons";
+import { View, StyleSheet, Text } from "react-native";
 
 const NavBar = (props) => {
   return (

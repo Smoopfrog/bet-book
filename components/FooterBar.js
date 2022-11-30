@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SimpleLineIcons, FontAwesome } from "@expo/vector-icons";
 
 const FooterBar = (props) => {

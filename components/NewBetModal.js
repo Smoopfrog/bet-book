@@ -32,7 +32,6 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
         <TouchableOpacity style={styles.modalContainer} onPress={closeModal}>
           <TouchableOpacity
             style={styles.modal}
-            onPress={() => console.log("do nothing")}
             activeOpacity={1}
           >
             <View style={styles.modalView}>
