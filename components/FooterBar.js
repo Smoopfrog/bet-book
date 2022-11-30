@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { SimpleLineIcons } from "@expo/vector-icons";
+import { SimpleLineIcons, FontAwesome } from "@expo/vector-icons";
 
 const FooterBar = (props) => {
   return (
@@ -7,6 +7,14 @@ const FooterBar = (props) => {
       <View>
         <SimpleLineIcons
           name="plus"
+          size={30}
+          color="white"
+          onPress={props.showBetModal}
+        />
+      </View>
+      <View>
+        <FontAwesome
+          name="unsorted"
           size={30}
           color="white"
           onPress={props.showSortModal}
@@ -22,8 +30,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     width: "100%",
     position: "fixed",
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexDirection: "row",
   },
 });
 

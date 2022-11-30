@@ -2,13 +2,13 @@ import { useState } from "react";
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
 import NewBetInput from "./NewBetInput";
 
-const NewBetModal = ({ bets, setBets, closeModal, showModal }) => {
+const NewBetModal = ({ setBets, closeModal, showModal }) => {
   const [title, setTitle] = useState("");
   const [person, setPerson] = useState("");
   const [wager, setWager] = useState("");
   const [desciption, setDesciption] = useState("");
 
-  let id = Date.now()
+  let date = Date.now()
 
   const createNewBet = () => {
     const newBet = {
@@ -16,7 +16,8 @@ const NewBetModal = ({ bets, setBets, closeModal, showModal }) => {
       person,
       wager,
       desciption,
-      id,
+      id: date,
+      date: date,
       active: true,
       result: 'pending'
     };

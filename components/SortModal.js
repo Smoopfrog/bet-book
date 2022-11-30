@@ -1,10 +1,12 @@
-import { View, Modal, StyleSheet } from "react-native";
+import { View, Modal, StyleSheet, Button } from "react-native";
 
-const SortModal = ({ showModal }) => {
+const SortModal = ({ showModal, closeModal }) => {
   return (
     <View>
       <Modal animationType="slide" transparent={true} visible={showModal}>
-        <View style={styles.modalView}></View>
+        <View style={styles.modalView}>
+        <Button title="Close" onPress={closeModal} />
+        </View>
       </Modal>
     </View>
   );
