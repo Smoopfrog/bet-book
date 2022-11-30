@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import NewBetInput from "./NewBetInput";
 
 const NewBetModal = ({ setBets, closeModal, showModal }) => {
@@ -8,7 +8,7 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
   const [wager, setWager] = useState("");
   const [desciption, setDesciption] = useState("");
 
-  let date = Date.now()
+  let date = Date.now();
 
   const createNewBet = () => {
     const newBet = {
@@ -19,36 +19,52 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
       id: date,
       date: date,
       active: true,
-      result: 'pending'
+      result: "pending",
     };
 
-    setBets(prev => [newBet, ...prev])
-    closeModal()
+    setBets((prev) => [newBet, ...prev]);
+    closeModal();
   };
 
   return (
     <View style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={showModal}>
-        <View style={styles.modalView}>
-          <Text>Bet area</Text>
-          <NewBetInput label="Title" value={title} changeHandler={setTitle} />
-          <NewBetInput
-            label="Person"
-            value={person}
-            changeHandler={setPerson}
-          />
-          <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
-          <NewBetInput
-            label="Desciption"
-            value={desciption}
-            changeHandler={setDesciption}
-          />
+        <TouchableOpacity style={styles.modalContainer} onPress={closeModal}>
+          <TouchableOpacity
+            style={styles.modal}
+            onPress={() => console.log("do nothing")}
+            activeOpacity={1}
+          >
+            <View style={styles.modalView}>
+              <Text>Bet area</Text>
+              <NewBetInput
+                label="Title"
+                value={title}
+                changeHandler={setTitle}
+              />
+              <NewBetInput
+                label="Person"
+                value={person}
+                changeHandler={setPerson}
+              />
+              <NewBetInput
+                label="Wager"
+                value={wager}
+                changeHandler={setWager}
+              />
+              <NewBetInput
+                label="Desciption"
+                value={desciption}
+                changeHandler={setDesciption}
+              />
 
-          <View style={styles.buttonContainer}>
-            <Button title="Close" onPress={closeModal} />
-            <Button title="Confirm" onPress={createNewBet} />
-          </View>
-        </View>
+              <View style={styles.buttonContainer}>
+                <Button title="Close" onPress={closeModal} />
+                <Button title="Confirm" onPress={createNewBet} />
+              </View>
+            </View>
+          </TouchableOpacity>
+        </TouchableOpacity>
       </Modal>
     </View>
   );
@@ -80,6 +96,15 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modal: {
+    width: '90%',
+    height: 300,
   },
 });
 

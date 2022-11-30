@@ -1,12 +1,31 @@
-import { View, Modal, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Modal,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 
 const SortModal = ({ showModal, closeModal }) => {
   return (
     <View>
-      <Modal animationType="slide" transparent={true} visible={showModal}>
-        <View style={styles.modalView}>
-        <Button title="Close" onPress={closeModal} />
-        </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showModal}
+        onRequestClose={closeModal}
+      >
+        <TouchableOpacity style={styles.modalContainer} onPress={closeModal}>
+          <TouchableOpacity
+            style={styles.modal}
+            onPress={() => console.log("do nothing")}
+            activeOpacity={1}
+          >
+            <View style={styles.modalView}>
+              <Button title="Close" onPress={closeModal} />
+            </View>
+          </TouchableOpacity>
+        </TouchableOpacity>
       </Modal>
     </View>
   );
@@ -38,6 +57,15 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modal: {
+    width: '50%',
+    height: 300,
   },
 });
 
