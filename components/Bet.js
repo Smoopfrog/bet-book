@@ -16,7 +16,7 @@ const RenderRight = (progress, dragX) => {
   return (
     <View
       style={{
-        width: '100%',
+        width: "100%",
         backgroundColor: "green",
         alignItems: "center",
         justifyContent: "center",
@@ -42,7 +42,7 @@ const RenderLeft = (progress, dragX) => {
   return (
     <View
       style={{
-        width: '100%',
+        width: "100%",
         backgroundColor: "red",
         alignItems: "center",
         justifyContent: "center",
@@ -93,7 +93,7 @@ const Bet = ({ item, setBets, bets }) => {
       // overshootLeft={false}
       onSwipeableLeftOpen={loserHandler}
     >
-      <View style={styles.card}>
+      <View style={[styles.card, item.winner ? styles.winnercard : styles.loserCard]}>
         <View style={styles.header}>
           <View style={styles.title}>
             <Text style={styles.titleFont}>{item.title}</Text>
@@ -119,11 +119,19 @@ const Bet = ({ item, setBets, bets }) => {
 };
 
 const styles = StyleSheet.create({
+  winnercard: {
+    backgroundColor: "green",
+  },
+  loserCard: {
+    backgroundColor: "red",
+  },
+  activeCard: {
+    backgroundColor: "#FFAC41",
+  },
   card: {
-    width: '100%',
+    width: "100%",
     borderWidth: 1,
     padding: 10,
-    backgroundColor: "#FFAC41",
   },
   body: {
     flexDirection: "row",
