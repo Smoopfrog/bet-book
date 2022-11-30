@@ -9,7 +9,7 @@ const FooterBar = (props) => {
           name="plus"
           size={30}
           color="white"
-          onPress={props.openModal}
+          onPress={props.showSortModal}
         />
       </View>
     </View>

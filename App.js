@@ -4,6 +4,7 @@ import BetFeed from "./components/BetFeed";
 import FooterBar from "./components/FooterBar";
 import NavBar from "./components/NavBar";
 import NewBetModal from "./components/NewBetModal";
+import SortModal from "./components/SortModal";
 import StatBar from "./components/StatBar";
 
 const dummyData = [
@@ -12,7 +13,7 @@ const dummyData = [
     person: "Bobby",
     wager: "$100",
     date: "Nov 2, 2022",
-    result: 'winner',
+    result: "winner",
     active: true,
     id: 4,
   },
@@ -21,7 +22,7 @@ const dummyData = [
     person: "Tommy",
     wager: "Steak dinner",
     date: "Apr 20, 2021",
-    result: 'pending',
+    result: "pending",
     active: true,
     id: 3,
   },
@@ -30,7 +31,7 @@ const dummyData = [
     person: "Billy",
     wager: "$20",
     date: "Jul 2, 1999",
-    result: 'loser',
+    result: "loser",
     active: true,
     id: 2,
   },
@@ -39,18 +40,24 @@ const dummyData = [
     person: "Sally",
     wager: "$10",
     date: "Jan 7, 2020",
-    result: 'pending',
+    result: "pending",
     active: false,
     id: 1,
   },
 ];
 
 export default function App() {
-  const [showModal, setShowModal] = useState(false);
+  const [showBetModal, setShowBetModal] = useState(false);
+  const [showSortModal, setShowSortModal] = useState(false);
+
   const [bets, setBets] = useState(dummyData);
 
-  const modalHandler = () => {
-    setShowModal(!showModal);
+  const betModalHandler = () => {
+    setShowBetModal(!showBetModal);
+  };
+
+  const sortModalHandler = () => {
+    setShowSortModal(!showSortModal);
   };
 
   return (
@@ -58,13 +65,13 @@ export default function App() {
       <NavBar />
       <StatBar bets={bets} />
       <NewBetModal
-        closeModal={modalHandler}
-        showModal={showModal}
+        closeModal={betModalHandler}
+        showModal={showBetModal}
         setBets={setBets}
-        bets={bets}
       />
       <BetFeed setBets={setBets} bets={bets} />
-      <FooterBar openModal={modalHandler} />
+      <SortModal showModal={showSortModal} closeModal={sortModalHandler} />
+      <FooterBar showSortModal={sortModalHandler} showBetModal={betModalHandler}/>
     </View>
   );
 }
