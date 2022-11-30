@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import BetFeed from "./components/BetFeed";
+import FooterBar from "./components/FooterBar";
 import NavBar from "./components/NavBar";
 import NewBetModal from "./components/NewBetModal";
 import StatBar from "./components/StatBar";
@@ -63,6 +64,7 @@ export default function App() {
         bets={bets}
       />
       <BetFeed setBets={setBets} bets={bets} />
+      <FooterBar />
     </View>
   );
 }
