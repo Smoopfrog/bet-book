@@ -3,8 +3,8 @@ import * as Progress from "react-native-progress";
 
 const StatBar = ({ bets }) => {
   const totalBets = bets.length;
-  const betsWon = bets.filter((bet) => bet.winner).length;
-  const betsLost = bets.filter((bet) => !bet.winner).length;
+  const betsWon = bets.filter((bet) => bet.result === 'winner').length;
+  const betsLost = bets.filter((bet) => bet.result === 'loser').length;
   const betsSettled = bets.filter((bet) => !bet.active).length;
 
   const winningPercentage = betsWon / totalBets;

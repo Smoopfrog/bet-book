@@ -16,7 +16,9 @@ const NewBetModal = ({ bets, setBets, closeModal, showModal }) => {
       person,
       wager,
       desciption,
-      id
+      id,
+      active: true,
+      result: 'pending'
     };
 
     setBets(prev => [newBet, ...prev])

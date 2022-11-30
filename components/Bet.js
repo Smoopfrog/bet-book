@@ -62,7 +62,7 @@ const Bet = ({ item, setBets, bets }) => {
   const winnerHandler = () => {
     const [changedBet] = bets.filter((bet) => bet.id === item.id);
     const filteredArr = bets.filter((bet) => bet.id !== item.id);
-    changedBet.winner = true;
+    changedBet.result = "winner";
     const newArray = [...filteredArr, changedBet].sort((a, b) => b.id - a.id);
     setBets(newArray);
   };
@@ -70,7 +70,7 @@ const Bet = ({ item, setBets, bets }) => {
   const loserHandler = () => {
     const [changedBet] = bets.filter((bet) => bet.id === item.id);
     const filteredArr = bets.filter((bet) => bet.id !== item.id);
-    changedBet.winner = false;
+    changedBet.result = "loser";
     const newArray = [...filteredArr, changedBet].sort((a, b) => b.id - a.id);
     setBets(newArray);
   };
@@ -93,7 +93,14 @@ const Bet = ({ item, setBets, bets }) => {
       // overshootLeft={false}
       onSwipeableLeftOpen={loserHandler}
     >
-      <View style={[styles.card, item.winner ? styles.winnercard : styles.loserCard]}>
+      <View
+        style={[
+          styles.card,
+          item.result === "winner" && styles.winnercard,
+          item.result === "pending" && styles.activeCard,
+          item.result === "loser" && styles.loserCard,
+        ]}
+      >
         <View style={styles.header}>
           <View style={styles.title}>
             <Text style={styles.titleFont}>{item.title}</Text>

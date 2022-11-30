@@ -13,7 +13,7 @@ const BetFeed = ({ bets, setBets }) => {
         date={bet.date}
         wager={bet.wager}
         person={bet.person}
-        winner={bet.winner}
+        result={bet.result}
         active={bet.active}
         id={bet.id}
         setBets={setBets}
@@ -30,7 +30,7 @@ const BetFeed = ({ bets, setBets }) => {
         date={bet.date}
         wager={bet.wager}
         person={bet.person}
-        winner={bet.winner}
+        result={bet.result}
         active={bet.active}
         id={bet.id}
         setBets={setBets}
@@ -46,7 +46,9 @@ const BetFeed = ({ bets, setBets }) => {
     // </ScrollView>
     <FlatList
       data={bets}
-      renderItem={({item, index}) =>  <Bet item={item} bets={bets} setBets={setBets}/>}
+      renderItem={({ item, index }) => (
+        <Bet item={item} bets={bets} setBets={setBets} />
+      )}
       keyExtractor={(item) => item.id}
     />
   );
