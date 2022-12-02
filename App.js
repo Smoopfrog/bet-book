@@ -12,7 +12,7 @@ const dummyData = [
     title: "Vikings win the superbowl",
     person: "Bobby",
     wager: "$100",
-    date: "Nov 2, 2022",
+    date: 1669943023177,
     result: "winner",
     active: true,
     id: 4,
@@ -21,7 +21,7 @@ const dummyData = [
     title: "Raptors beat the Celtics",
     person: "Tommy",
     wager: "Steak dinner",
-    date: "Apr 20, 2021",
+    date: 1659963221177,
     result: "pending",
     active: true,
     id: 3,
@@ -30,7 +30,7 @@ const dummyData = [
     title: "10km foot race",
     person: "Billy",
     wager: "$20",
-    date: "Jul 2, 1999",
+    date: 1668973024177,
     result: "loser",
     active: true,
     id: 2,
@@ -39,7 +39,7 @@ const dummyData = [
     title: "Trae scores over 50 points",
     person: "Sally",
     wager: "$10",
-    date: "Jan 7, 2020",
+    date: 4263983023177,
     result: "pending",
     active: false,
     id: 1,
@@ -49,7 +49,6 @@ const dummyData = [
 export default function App() {
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
-
   const [bets, setBets] = useState(dummyData);
 
   const betModalHandler = () => {
@@ -58,6 +57,18 @@ export default function App() {
 
   const sortModalHandler = () => {
     setShowSortModal(!showSortModal);
+  };
+
+  const sortBetsAlphabetically = () => {
+    const sortedBets = bets.sort((a, b) => {
+      return a.person.localeCompare(b.person);
+    });
+    setBets(sortedBets);
+  };
+
+  const sortBetsChronologically = () => {
+    const sortedBets = bets.sort((a, b) => b.date - a.date);
+    setBets(sortedBets);
   };
 
   return (
@@ -70,8 +81,16 @@ export default function App() {
         setBets={setBets}
       />
       <BetFeed setBets={setBets} bets={bets} />
-      <SortModal showModal={showSortModal} closeModal={sortModalHandler} />
-      <FooterBar showSortModal={sortModalHandler} showBetModal={betModalHandler}/>
+      <SortModal
+        showModal={showSortModal}
+        closeModal={sortModalHandler}
+        sortBetsAlphabetically={sortBetsAlphabetically}
+        sortBetsChronologically={sortBetsChronologically}
+      />
+      <FooterBar
+        showSortModal={sortModalHandler}
+        showBetModal={betModalHandler}
+      />
     </View>
   );
 }
