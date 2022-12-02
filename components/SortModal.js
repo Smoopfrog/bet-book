@@ -8,13 +8,21 @@ import {
   Text,
   Switch,
 } from "react-native";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const SortModal = ({
   showModal,
   closeModal,
   sortBetsAlphabetically,
   sortBetsChronologically,
+  filterAllBets,
+  filterActiveBets,
+  filterSettledBets,
+  activeFilter,
 }) => {
+  const [filterAllButton, setFilterAllButton] = useState();
+  const [filterActiveButton, setFilterActiveButton] = useState();
+  const [filterSettledButton, setFilterSettledButton] = useState();
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => setIsEnabled(!isEnabled);
@@ -25,6 +33,24 @@ const SortModal = ({
       sortBetsAlphabetically();
     }
   }, [isEnabled]);
+
+  useEffect(() => {
+    if (activeFilter === "all") {
+      setFilterAllButton(true);
+      setFilterActiveButton(false);
+      setFilterSettledButton(false);
+    }
+    if (activeFilter === "active") {
+      setFilterAllButton(false);
+      setFilterActiveButton(true);
+      setFilterSettledButton(false);
+    }
+    if (activeFilter === "settled") {
+      setFilterAllButton(false);
+      setFilterActiveButton(false);
+      setFilterSettledButton(true);
+    }
+  }, [activeFilter]);
 
   return (
     <View>
@@ -43,16 +69,33 @@ const SortModal = ({
               <View style={styles.sortContainer}>
                 <Text>A-Z</Text>
                 <Switch
-                  onChange={sortBetsAlphabetically}
                   onValueChange={toggleSwitch}
                   value={isEnabled}
                 />
                 <Text>Date</Text>
               </View>
               <View>
-                <Button title="Active" onPress={closeModal} />
-                <Button title="Settled" onPress={closeModal} />
-                <Button title="All" onPress={closeModal} />
+                <View>
+                  <Text>All</Text>
+                  <Switch
+                    onValueChange={filterAllBets}
+                    value={filterAllButton}
+                  />
+                </View>
+                <View>
+                  <Text>Active</Text>
+                  <Switch
+                    onValueChange={filterActiveBets}
+                    value={filterActiveButton}
+                  />
+                </View>
+                <View>
+                  <Text>Settled</Text>
+                  <Switch
+                    onValueChange={filterSettledBets}
+                    value={filterSettledButton}
+                  />
+                </View>
               </View>
               <Button title="Close" onPress={closeModal} />
             </View>

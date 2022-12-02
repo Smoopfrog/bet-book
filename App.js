@@ -55,8 +55,18 @@ export default function App() {
 
   useEffect(() => {
     if (activeFilter === "all") {
+      setSortedBets(bets);
+    }
+    if (activeFilter === "active") {
+      const activeBets = bets.filter((bet) => bet.active);
+      setSortedBets(activeBets);
+    }
+    if (activeFilter === "settled") {
+      const settledBets = bets.filter((bet) => !bet.active);
+      setSortedBets(settledBets);
     }
   }, [activeFilter]);
+
   const betModalHandler = () => {
     setShowBetModal(!showBetModal);
   };
@@ -78,17 +88,15 @@ export default function App() {
   };
 
   const filterAllBets = () => {
-    setSortedBets(bets);
+    setActiveFilter("all");
   };
-
+  
   const filterActiveBets = () => {
-    const activeBets = bets.filter((bet) => bet.active);
-    setSortedBets(activeBets);
+    setActiveFilter("active");
   };
 
   const filterSettledBets = () => {
-    const settledBets = bets.filter((bet) => !bet.active);
-    setSortedBets(settledBets);
+    setActiveFilter("settled");
   };
 
   return (
@@ -109,6 +117,7 @@ export default function App() {
         filterAllBets={filterAllBets}
         filterActiveBets={filterActiveBets}
         filterSettledBets={filterSettledBets}
+        activeFilter={activeFilter}
       />
       <FooterBar
         showSortModal={sortModalHandler}
