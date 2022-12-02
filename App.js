@@ -12,7 +12,7 @@ const dummyData = [
     title: "Vikings win the superbowl",
     person: "Bobby",
     wager: "$100",
-    date: 1669943023177,
+    date: 4263983023177,
     result: "winner",
     active: true,
     id: 4,
@@ -21,7 +21,7 @@ const dummyData = [
     title: "Raptors beat the Celtics",
     person: "Tommy",
     wager: "Steak dinner",
-    date: 1659963221177,
+    date:1669943023177,
     result: "pending",
     active: true,
     id: 3,
@@ -39,7 +39,7 @@ const dummyData = [
     title: "Trae scores over 50 points",
     person: "Sally",
     wager: "$10",
-    date: 4263983023177,
+    date: 1659963221177,
     result: "pending",
     active: false,
     id: 1,
@@ -52,6 +52,7 @@ export default function App() {
   const [bets, setBets] = useState(dummyData);
   const [sortedBets, setSortedBets] = useState(dummyData);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [sortMethod, setSortMethod] = useState("date");
 
   useEffect(() => {
     if (activeFilter === "all") {
@@ -67,6 +68,19 @@ export default function App() {
     }
   }, [activeFilter]);
 
+  useEffect(() => {
+    if (sortMethod === "date") {
+      const sortedArray = sortedBets.sort((a, b) => b.date - a.date);
+      setSortedBets(sortedArray);
+    }
+    if (sortMethod === "alphabetical") {
+      const sortedArray = sortedBets.sort((a, b) => {
+        return a.person.localeCompare(b.person);
+      });
+      setSortedBets(sortedArray);
+    }
+  }, [sortMethod]);
+
   const betModalHandler = () => {
     setShowBetModal(!showBetModal);
   };
@@ -76,21 +90,17 @@ export default function App() {
   };
 
   const sortBetsAlphabetically = () => {
-    const sortedArray = sortedBets.sort((a, b) => {
-      return a.person.localeCompare(b.person);
-    });
-    setSortedBets(sortedArray);
+    setSortMethod('alphabetical');
   };
 
   const sortBetsChronologically = () => {
-    const sortedArray = sortedBets.sort((a, b) => b.date - a.date);
-    setSortedBets(sortedArray);
+    setSortMethod('date');
   };
 
   const filterAllBets = () => {
     setActiveFilter("all");
   };
-  
+
   const filterActiveBets = () => {
     setActiveFilter("active");
   };
@@ -118,6 +128,7 @@ export default function App() {
         filterActiveBets={filterActiveBets}
         filterSettledBets={filterSettledBets}
         activeFilter={activeFilter}
+        sortMethod={sortMethod}
       />
       <FooterBar
         showSortModal={sortModalHandler}

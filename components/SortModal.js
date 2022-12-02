@@ -19,20 +19,27 @@ const SortModal = ({
   filterActiveBets,
   filterSettledBets,
   activeFilter,
+  sortMethod,
 }) => {
   const [filterAllButton, setFilterAllButton] = useState();
   const [filterActiveButton, setFilterActiveButton] = useState();
   const [filterSettledButton, setFilterSettledButton] = useState();
+  const [sortDateButton, setSortDateButton] = useState();
+  const [sortAlphabeticalButton, setSortAlphabeticalButton] = useState();
+
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const toggleSwitch = () => setIsEnabled(!isEnabled);
+  const toggleSwitch = () => setIsEnabled();
   useEffect(() => {
-    if (isEnabled) {
-      sortBetsChronologically();
-    } else {
-      sortBetsAlphabetically();
+    if (sortMethod === "date") {
+      setSortDateButton(true);
+      setSortAlphabeticalButton(false);
     }
-  }, [isEnabled]);
+    if (sortMethod === "alphabetical") {
+      setSortDateButton(false);
+      setSortAlphabeticalButton(true);
+    }
+  }, [sortMethod]);
 
   useEffect(() => {
     if (activeFilter === "all") {
@@ -66,13 +73,13 @@ const SortModal = ({
               <View>
                 <Text>Sort by:</Text>
               </View>
-              <View style={styles.sortContainer}>
-                <Text>A-Z</Text>
-                <Switch
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
-                />
+              <View>
                 <Text>Date</Text>
+                <Switch onValueChange={sortBetsChronologically} value={sortDateButton} />
+              </View>
+              <View>
+                <Text>A-Z</Text>
+                <Switch onValueChange={sortBetsAlphabetically} value={sortAlphabeticalButton} />
               </View>
               <View>
                 <View>
