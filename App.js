@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import BetFeed from "./components/BetFeed";
 import FooterBar from "./components/FooterBar";
@@ -50,7 +50,13 @@ export default function App() {
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
   const [bets, setBets] = useState(dummyData);
+  const [sortedBets, setSortedBets] = useState(dummyData);
+  const [activeFilter, setActiveFilter] = useState("all");
 
+  useEffect(() => {
+    if (activeFilter === "all") {
+    }
+  }, [activeFilter]);
   const betModalHandler = () => {
     setShowBetModal(!showBetModal);
   };
@@ -60,32 +66,49 @@ export default function App() {
   };
 
   const sortBetsAlphabetically = () => {
-    const sortedBets = bets.sort((a, b) => {
+    const sortedArray = sortedBets.sort((a, b) => {
       return a.person.localeCompare(b.person);
     });
-    setBets(sortedBets);
+    setSortedBets(sortedArray);
   };
 
   const sortBetsChronologically = () => {
-    const sortedBets = bets.sort((a, b) => b.date - a.date);
-    setBets(sortedBets);
+    const sortedArray = sortedBets.sort((a, b) => b.date - a.date);
+    setSortedBets(sortedArray);
+  };
+
+  const filterAllBets = () => {
+    setSortedBets(bets);
+  };
+
+  const filterActiveBets = () => {
+    const activeBets = bets.filter((bet) => bet.active);
+    setSortedBets(activeBets);
+  };
+
+  const filterSettledBets = () => {
+    const settledBets = bets.filter((bet) => !bet.active);
+    setSortedBets(settledBets);
   };
 
   return (
     <View style={styles.app}>
       <NavBar />
-      <StatBar bets={bets} />
+      <StatBar bets={sortedBets} />
       <NewBetModal
         closeModal={betModalHandler}
         showModal={showBetModal}
         setBets={setBets}
       />
-      <BetFeed setBets={setBets} bets={bets} />
+      <BetFeed setBets={setBets} bets={sortedBets} />
       <SortModal
         showModal={showSortModal}
         closeModal={sortModalHandler}
         sortBetsAlphabetically={sortBetsAlphabetically}
         sortBetsChronologically={sortBetsChronologically}
+        filterAllBets={filterAllBets}
+        filterActiveBets={filterActiveBets}
+        filterSettledBets={filterSettledBets}
       />
       <FooterBar
         showSortModal={sortModalHandler}
