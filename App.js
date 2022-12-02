@@ -116,7 +116,7 @@ export default function App() {
       <NewBetModal
         closeModal={betModalHandler}
         showModal={showBetModal}
-        setBets={setBets}
+        setBets={setSortedBets}
       />
       <BetFeed setBets={setBets} bets={sortedBets} />
       <SortModal

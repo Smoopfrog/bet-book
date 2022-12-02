@@ -1,9 +1,17 @@
 import { StyleSheet, View } from "react-native";
-import { SimpleLineIcons, FontAwesome } from "@expo/vector-icons";
+import { SimpleLineIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
 
 const FooterBar = (props) => {
   return (
     <View style={styles.container}>
+      <View>
+        <FontAwesome
+          name="unsorted"
+          size={30}
+          color="white"
+          onPress={props.showSortModal}
+        />
+      </View>
       <View>
         <SimpleLineIcons
           name="plus"
@@ -13,8 +21,8 @@ const FooterBar = (props) => {
         />
       </View>
       <View>
-        <FontAwesome
-          name="unsorted"
+        <Ionicons
+          name="stats-chart-sharp"
           size={30}
           color="white"
           onPress={props.showSortModal}
