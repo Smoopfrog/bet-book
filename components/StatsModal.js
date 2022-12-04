@@ -9,17 +9,16 @@ const StatsModal = ({ showModal, closeModal, bets }) => {
   const betsSettled = bets.filter((bet) => !bet.active).length;
   const winningPercentage = (betsWon / (totalBets - betsPending)) * 100;
 
-  const calculateWinnings = (bets) => {
+  const calculateWinnings = (bets, result) => {
     let winnings = 0;
     for (const bet of bets) {
-      if(bet.wager[0] === "$"){
+      if(bet.wager[0] === "$" && bet.result === result) {
         winnings += Number(bet.wager.slice(1))
       }
     }
     return winnings
   };
 
-  console.log(calculateWinnings(bets));
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <View style={styles.modalView}>
@@ -45,7 +44,10 @@ const StatsModal = ({ showModal, closeModal, bets }) => {
           <Text>Win Percentage: {winningPercentage}%</Text>
         </View>
         <View>
-          <Text>Total Winnings: ${calculateWinnings(bets)}</Text>
+          <Text>Total Winnings: ${calculateWinnings(bets, 'winner')}</Text>
+        </View>
+        <View>
+          <Text>Total Winnings: ${calculateWinnings(bets, 'loser')}</Text>
         </View>
       </View>
     </ModalCard>
