@@ -3,14 +3,14 @@ import { RectButton, Swipeable } from "react-native-gesture-handler";
 
 const SwipeableCard = (props) => {
   const RenderRight = (progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [-50, 0.5],
-      outputRange: [1, 0.1],
-    });
+    // const scale = dragX.interpolate({
+    //   inputRange: [-50, 0.5],
+    //   outputRange: [1, 0.1],
+    // });
 
-    const Style = {
-      transform: [{ scale }],
-    };
+    // const Style = {
+    //   transform: [{ scale }],
+    // };
     let result = "winner";
     if (props.cardType === "loser") {
       result = "Reset?";
@@ -24,7 +24,7 @@ const SwipeableCard = (props) => {
           justifyContent: "center",
         }}
       >
-        <Animated.Text style={[Style, { color: "#fff", fontWeight: "600" }]}>
+        <Animated.Text style={{ color: "#fff", fontWeight: "600" }}>
           {result}
         </Animated.Text>
       </View>
@@ -32,14 +32,14 @@ const SwipeableCard = (props) => {
   };
 
   const RenderLeft = (progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [0.5, 50],
-      outputRange: [0.1, 1],
-    });
+    // const scale = dragX.interpolate({
+    //   inputRange: [0.5, 50],
+    //   outputRange: [0.1, 1],
+    // });
 
-    const Style = {
-      transform: [{ scale }],
-    };
+    // const Style = {
+    //   transform: [{ scale }],
+    // };
 
     let result = "loser";
     if (props.cardType === "winner") {
@@ -55,7 +55,7 @@ const SwipeableCard = (props) => {
           justifyContent: "center",
         }}
       >
-        <Animated.Text style={[Style, { color: "#fff", fontWeight: "600" }]}>
+        <Animated.Text style={{ color: "#fff", fontWeight: "600" }}>
           {result}
         </Animated.Text>
       </View>

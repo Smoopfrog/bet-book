@@ -18,7 +18,7 @@ const StatBar = ({ bets }) => {
         <Progress.Circle
           color={"green"}
           unfilledColor={"red"}
-          progress={winningPercentage}
+          progress={winningPercentage >= 0 ? winningPercentage : 0}
           size={100}
           showsText={true}
         />
