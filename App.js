@@ -66,7 +66,7 @@ export default function App() {
       const settledBets = bets.filter((bet) => !bet.active);
       setSortedBets(settledBets);
     }
-  }, [activeFilter]);
+  }, [activeFilter, bets]);
 
   useEffect(() => {
     if (sortMethod === "date") {
@@ -79,7 +79,7 @@ export default function App() {
       });
       setSortedBets(sortedArray);
     }
-  }, [sortMethod]);
+  }, [sortMethod, bets]);
 
   const betModalHandler = () => {
     setShowBetModal(!showBetModal);

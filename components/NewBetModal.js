@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { Button, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Button,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import NewBetInput from "./NewBetInput";
 
 const NewBetModal = ({ setBets, closeModal, showModal }) => {
   const [title, setTitle] = useState("");
   const [person, setPerson] = useState("");
   const [wager, setWager] = useState("");
-  const [desciption, setDesciption] = useState("");
 
   let date = Date.now();
 
@@ -15,7 +21,6 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
       title,
       person,
       wager,
-      desciption,
       id: date,
       date: date,
       active: true,
@@ -30,10 +35,7 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
     <View style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={showModal}>
         <TouchableOpacity style={styles.modalContainer} onPress={closeModal}>
-          <TouchableOpacity
-            style={styles.modal}
-            activeOpacity={1}
-          >
+          <TouchableOpacity style={styles.modal} activeOpacity={1}>
             <View style={styles.modalView}>
               <Text>Bet area</Text>
               <NewBetInput
@@ -51,12 +53,6 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
                 value={wager}
                 changeHandler={setWager}
               />
-              <NewBetInput
-                label="Desciption"
-                value={desciption}
-                changeHandler={setDesciption}
-              />
-
               <View style={styles.buttonContainer}>
                 <Button title="Close" onPress={closeModal} />
                 <Button title="Confirm" onPress={createNewBet} />
@@ -101,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modal: {
-    width: '90%',
+    width: "90%",
     height: 300,
   },
 });
