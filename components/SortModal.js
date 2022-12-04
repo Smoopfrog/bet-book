@@ -70,38 +70,49 @@ const SortModal = ({
         <TouchableOpacity style={styles.modalContainer} onPress={closeModal}>
           <TouchableOpacity style={styles.modal} activeOpacity={1}>
             <View style={styles.modalView}>
-              <View>
-                <Text>Sort by:</Text>
-              </View>
-              <View>
-                <Text>Date</Text>
-                <Switch onValueChange={sortBetsChronologically} value={sortDateButton} />
-              </View>
-              <View>
-                <Text>A-Z</Text>
-                <Switch onValueChange={sortBetsAlphabetically} value={sortAlphabeticalButton} />
-              </View>
-              <View>
-                <View>
-                  <Text>All</Text>
-                  <Switch
-                    onValueChange={filterAllBets}
-                    value={filterAllButton}
-                  />
+              <View style={styles.buttonContainer}>
+                <View style={styles.leftContainer}>
+                  <View>
+                    <Text style={styles.sectionTitle}>Sort by:</Text>
+                  </View>
+                  <View style={styles.switchContainer}>
+                    <Text>Date</Text>
+                    <Switch
+                      onValueChange={sortBetsChronologically}
+                      value={sortDateButton}
+                    />
+                  </View>
+                  <View style={styles.switchContainer}>
+                    <Text>A-Z</Text>
+                    <Switch
+                      onValueChange={sortBetsAlphabetically}
+                      value={sortAlphabeticalButton}
+                    />
+                  </View>
                 </View>
                 <View>
-                  <Text>Active</Text>
-                  <Switch
-                    onValueChange={filterActiveBets}
-                    value={filterActiveButton}
-                  />
-                </View>
-                <View>
-                  <Text>Settled</Text>
-                  <Switch
-                    onValueChange={filterSettledBets}
-                    value={filterSettledButton}
-                  />
+                  <Text style={styles.sectionTitle}>Filter by:</Text>
+                  <View style={styles.switchContainer}>
+                    <Switch
+                      onValueChange={filterAllBets}
+                      value={filterAllButton}
+                    />
+                    <Text>All</Text>
+                  </View>
+                  <View style={styles.switchContainer}>
+                    <Switch
+                      onValueChange={filterActiveBets}
+                      value={filterActiveButton}
+                    />
+                    <Text>Active</Text>
+                  </View>
+                  <View style={styles.switchContainer}>
+                    <Switch
+                      onValueChange={filterSettledBets}
+                      value={filterSettledButton}
+                    />
+                    <Text>Settled</Text>
+                  </View>
                 </View>
               </View>
               <Button title="Close" onPress={closeModal} />
@@ -153,6 +164,26 @@ const styles = StyleSheet.create({
   modal: {
     height: 300,
   },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "100%",
+  },
+  leftContainer: {
+    borderRightWidth: 2,
+    borderRightColor: 'black' 
+  },
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: 'space-between',
+    margin: 10,
+    width: 100
+  },
+  sectionTitle: {
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
 });
 
 export default SortModal;
