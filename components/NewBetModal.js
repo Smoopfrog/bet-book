@@ -6,8 +6,16 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import NewBetInput from "./NewBetInput";
+const createTwoButtonAlert = (msg) =>
+  Alert.alert("Missing Info", msg, [
+    {
+      text: "Cancel",
+      style: "cancel",
+    },
+  ]);
 
 const NewBetModal = ({ setBets, closeModal, showModal }) => {
   const [title, setTitle] = useState("");
@@ -17,6 +25,20 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
   let date = Date.now();
 
   const createNewBet = () => {
+    if (!title) {
+      createTwoButtonAlert("Please enter a title");
+      return;
+    }
+
+    if (!person) {
+      createTwoButtonAlert("Please enter a person");
+      return;
+    }
+    if (!wager) {
+      createTwoButtonAlert("Please enter a wager");
+      return;
+    }
+    
     const newBet = {
       title,
       person,
@@ -73,6 +95,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
+    marginTop: -60,
     backgroundColor: "white",
     borderColor: "#9C2C77",
     borderWidth: 1,
