@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import NewBetModal from "./components/NewBetModal";
 import SortModal from "./components/SortModal";
 import StatBar from "./components/StatBar";
+import StatsModal from "./components/StatsModal";
 
 const dummyData = [
   {
@@ -49,6 +50,7 @@ const dummyData = [
 export default function App() {
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
+  const [showStatsModal, setShowStatsModal] = useState(false);
   const [bets, setBets] = useState(dummyData);
   const [sortedBets, setSortedBets] = useState(dummyData);
   const [activeFilter, setActiveFilter] = useState("all");
@@ -89,6 +91,10 @@ export default function App() {
     setShowSortModal(!showSortModal);
   };
 
+  const statsModalHandler = () => {
+    setShowStatsModal(!showStatsModal);
+  };
+
   const sortBetsAlphabetically = () => {
     setSortMethod("alphabetical");
   };
@@ -117,6 +123,7 @@ export default function App() {
       <FooterBar
         showSortModal={sortModalHandler}
         showBetModal={betModalHandler}
+        showStatsModal={statsModalHandler}
       />
       <NewBetModal
         closeModal={betModalHandler}
@@ -134,6 +141,7 @@ export default function App() {
         activeFilter={activeFilter}
         sortMethod={sortMethod}
       />
+      <StatsModal closeModal={statsModalHandler} showModal={showStatsModal} />
     </View>
   );
 }

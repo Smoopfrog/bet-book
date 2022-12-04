@@ -25,7 +25,7 @@ const FooterBar = (props) => {
           name="stats-chart-sharp"
           size={30}
           color="white"
-          onPress={props.showSortModal}
+          onPress={props.showStatsModal}
         />
       </View>
     </View>
