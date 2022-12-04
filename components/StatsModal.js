@@ -1,10 +1,53 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import ModalCard from "./ModalCard";
 
-const StatsModal = ({ showModal, closeModal }) => {
+const StatsModal = ({ showModal, closeModal, bets }) => {
+  const totalBets = bets.length;
+  const betsWon = bets.filter((bet) => bet.result === "winner").length;
+  const betsLost = bets.filter((bet) => bet.result === "loser").length;
+  const betsPending = bets.filter((bet) => bet.result === "pending").length;
+  const betsSettled = bets.filter((bet) => !bet.active).length;
+  const winningPercentage = (betsWon / (totalBets - betsPending)) * 100;
+
+  const calculateWinnings = (bets) => {
+    let winnings = 0;
+    for (const bet of bets) {
+      if(bet.wager[0] === "$"){
+        winnings += Number(bet.wager.slice(1))
+      }
+    }
+    return winnings
+  };
+
+  console.log(calculateWinnings(bets));
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
-      <View style={styles.modalView}></View>
+      <View style={styles.modalView}>
+        <View>
+          <Text>Total Bets: {totalBets}</Text>
+        </View>
+        <View>
+          <Text>Total Wins: {betsWon}</Text>
+        </View>
+        <View>
+          <Text>Total Loses: {betsLost}</Text>
+        </View>
+        <View>
+          <Text>Total Pending: {betsPending}</Text>
+        </View>
+        <View>
+          <Text>Total Settled: {betsSettled}</Text>
+        </View>
+        <View>
+          <Text>Win Percentage: {winningPercentage}%</Text>
+        </View>
+        <View>
+          <Text>Win Percentage: {winningPercentage}%</Text>
+        </View>
+        <View>
+          <Text>Total Winnings: ${calculateWinnings(bets)}</Text>
+        </View>
+      </View>
     </ModalCard>
   );
 };

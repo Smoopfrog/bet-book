@@ -141,7 +141,7 @@ export default function App() {
         activeFilter={activeFilter}
         sortMethod={sortMethod}
       />
-      <StatsModal closeModal={statsModalHandler} showModal={showStatsModal} />
+      <StatsModal closeModal={statsModalHandler} showModal={showStatsModal} bets={bets} />
     </View>
   );
 }
