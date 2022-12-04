@@ -141,5 +141,6 @@ export default function App() {
 const styles = StyleSheet.create({
   app: {
     backgroundColor: "white",
+    flex: 1
   },
 });
