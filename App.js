@@ -21,7 +21,7 @@ const dummyData = [
     title: "Raptors beat the Celtics",
     person: "Tommy",
     wager: "Steak dinner",
-    date:1669943023177,
+    date: 1669943023177,
     result: "pending",
     active: true,
     id: 3,
@@ -90,11 +90,11 @@ export default function App() {
   };
 
   const sortBetsAlphabetically = () => {
-    setSortMethod('alphabetical');
+    setSortMethod("alphabetical");
   };
 
   const sortBetsChronologically = () => {
-    setSortMethod('date');
+    setSortMethod("date");
   };
 
   const filterAllBets = () => {
@@ -113,12 +113,16 @@ export default function App() {
     <View style={styles.app}>
       <NavBar />
       <StatBar bets={sortedBets} />
+      <BetFeed setBets={setBets} bets={sortedBets} />
+      <FooterBar
+        showSortModal={sortModalHandler}
+        showBetModal={betModalHandler}
+      />
       <NewBetModal
         closeModal={betModalHandler}
         showModal={showBetModal}
         setBets={setSortedBets}
       />
-      <BetFeed setBets={setBets} bets={sortedBets} />
       <SortModal
         showModal={showSortModal}
         closeModal={sortModalHandler}
@@ -130,10 +134,6 @@ export default function App() {
         activeFilter={activeFilter}
         sortMethod={sortMethod}
       />
-      <FooterBar
-        showSortModal={sortModalHandler}
-        showBetModal={betModalHandler}
-      />
     </View>
   );
 }
@@ -141,6 +141,6 @@ export default function App() {
 const styles = StyleSheet.create({
   app: {
     backgroundColor: "white",
-    flex: 1
+    flex: 1,
   },
 });

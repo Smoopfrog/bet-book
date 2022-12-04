@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  TouchableWithoutFeedback,
 } from "react-native";
 import NewBetInput from "./NewBetInput";
 import ModalCard from "./ModalCard";
@@ -67,6 +68,7 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
           <Button title="Confirm" onPress={createNewBet} />
         </View>
       </View>
+      
     </ModalCard>
   );
 };

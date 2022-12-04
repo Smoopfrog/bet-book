@@ -133,14 +133,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modal: {
-    height: 300,
-  },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",

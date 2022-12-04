@@ -1,12 +1,20 @@
-import { View, Modal, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Modal, TouchableOpacity, StyleSheet, Keyboard, TouchableWithoutFeedback } from "react-native";
 
 const ModalCard = (props) => {
   return (
     <View style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={props.showModal}>
-        <TouchableOpacity style={styles.modalContainer} onPress={props.closeModal}>
+        <TouchableOpacity
+          style={styles.modalContainer}
+          onPress={props.closeModal}
+        >
           <TouchableOpacity style={styles.modal} activeOpacity={1}>
-            {props.children}
+            <TouchableWithoutFeedback
+              onPress={Keyboard.dismiss}
+              accessible={false}
+            >
+              {props.children}
+            </TouchableWithoutFeedback>
           </TouchableOpacity>
         </TouchableOpacity>
       </Modal>
@@ -17,6 +25,14 @@ const ModalCard = (props) => {
 const styles = StyleSheet.create({
   centeredView: {
     flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  // modal: {
+  //   height: 300,
+  // },
+  modalContainer: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
