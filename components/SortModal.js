@@ -8,6 +8,7 @@ import {
   Text,
   Switch,
 } from "react-native";
+import ModalCard from "./ModalCard";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const SortModal = ({
@@ -60,81 +61,57 @@ const SortModal = ({
   }, [activeFilter]);
 
   return (
-    <View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={closeModal}
-      >
-        <TouchableOpacity style={styles.modalContainer} onPress={closeModal}>
-          <TouchableOpacity style={styles.modal} activeOpacity={1}>
-            <View style={styles.modalView}>
-              <View style={styles.buttonContainer}>
-                <View style={styles.leftContainer}>
-                  <View>
-                    <Text style={styles.sectionTitle}>Sort by:</Text>
-                  </View>
-                  <View style={styles.switchContainer}>
-                    <Text>Date</Text>
-                    <Switch
-                      onValueChange={sortBetsChronologically}
-                      value={sortDateButton}
-                    />
-                  </View>
-                  <View style={styles.switchContainer}>
-                    <Text>A-Z</Text>
-                    <Switch
-                      onValueChange={sortBetsAlphabetically}
-                      value={sortAlphabeticalButton}
-                    />
-                  </View>
-                </View>
-                <View>
-                  <Text style={styles.sectionTitle}>Filter by:</Text>
-                  <View style={styles.switchContainer}>
-                    <Switch
-                      onValueChange={filterAllBets}
-                      value={filterAllButton}
-                    />
-                    <Text>All</Text>
-                  </View>
-                  <View style={styles.switchContainer}>
-                    <Switch
-                      onValueChange={filterActiveBets}
-                      value={filterActiveButton}
-                    />
-                    <Text>Active</Text>
-                  </View>
-                  <View style={styles.switchContainer}>
-                    <Switch
-                      onValueChange={filterSettledBets}
-                      value={filterSettledButton}
-                    />
-                    <Text>Settled</Text>
-                  </View>
-                </View>
-              </View>
-              <Button title="Close" onPress={closeModal} />
+    <ModalCard showModal={showModal} closeModal={closeModal}>
+      <View style={styles.modalView}>
+        <View style={styles.buttonContainer}>
+          <View style={styles.leftContainer}>
+            <View>
+              <Text style={styles.sectionTitle}>Sort by:</Text>
             </View>
-          </TouchableOpacity>
-        </TouchableOpacity>
-      </Modal>
-    </View>
+            <View style={styles.switchContainer}>
+              <Text>Date</Text>
+              <Switch
+                onValueChange={sortBetsChronologically}
+                value={sortDateButton}
+              />
+            </View>
+            <View style={styles.switchContainer}>
+              <Text>A-Z</Text>
+              <Switch
+                onValueChange={sortBetsAlphabetically}
+                value={sortAlphabeticalButton}
+              />
+            </View>
+          </View>
+          <View>
+            <Text style={styles.sectionTitle}>Filter by:</Text>
+            <View style={styles.switchContainer}>
+              <Switch onValueChange={filterAllBets} value={filterAllButton} />
+              <Text>All</Text>
+            </View>
+            <View style={styles.switchContainer}>
+              <Switch
+                onValueChange={filterActiveBets}
+                value={filterActiveButton}
+              />
+              <Text>Active</Text>
+            </View>
+            <View style={styles.switchContainer}>
+              <Switch
+                onValueChange={filterSettledBets}
+                value={filterSettledButton}
+              />
+              <Text>Settled</Text>
+            </View>
+          </View>
+        </View>
+        <Button title="Close" onPress={closeModal} />
+      </View>
+    </ModalCard>
   );
 };
 
 const styles = StyleSheet.create({
-  sortContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  centeredView: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
   modalView: {
     width: 300,
     margin: 20,
@@ -171,19 +148,19 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     borderRightWidth: 2,
-    borderRightColor: 'black' 
+    borderRightColor: "black",
   },
   switchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     margin: 10,
-    width: 100
+    width: 100,
   },
   sectionTitle: {
-    textAlign: 'center',
-    fontWeight: 'bold'
-  }
+    textAlign: "center",
+    fontWeight: "bold",
+  },
 });
 
 export default SortModal;

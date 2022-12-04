@@ -9,6 +9,8 @@ import {
   Alert,
 } from "react-native";
 import NewBetInput from "./NewBetInput";
+import ModalCard from "./ModalCard";
+
 const createTwoButtonAlert = (msg) =>
   Alert.alert("Missing Info", msg, [
     {
@@ -38,7 +40,7 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
       createTwoButtonAlert("Please enter a wager");
       return;
     }
-    
+
     const newBet = {
       title,
       person,
@@ -54,48 +56,26 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
   };
 
   return (
-    <View style={styles.centeredView}>
-      <Modal animationType="slide" transparent={true} visible={showModal}>
-        <TouchableOpacity style={styles.modalContainer} onPress={closeModal}>
-          <TouchableOpacity style={styles.modal} activeOpacity={1}>
-            <View style={styles.modalView}>
-              <Text>Bet area</Text>
-              <NewBetInput
-                label="Title"
-                value={title}
-                changeHandler={setTitle}
-              />
-              <NewBetInput
-                label="Person"
-                value={person}
-                changeHandler={setPerson}
-              />
-              <NewBetInput
-                label="Wager"
-                value={wager}
-                changeHandler={setWager}
-              />
-              <View style={styles.buttonContainer}>
-                <Button title="Close" onPress={closeModal} />
-                <Button title="Confirm" onPress={createNewBet} />
-              </View>
-            </View>
-          </TouchableOpacity>
-        </TouchableOpacity>
-      </Modal>
-    </View>
+    <ModalCard showModal={showModal} closeModal={closeModal}>
+      <View style={styles.modalView}>
+        <Text>Bet area</Text>
+        <NewBetInput label="Title" value={title} changeHandler={setTitle} />
+        <NewBetInput label="Person" value={person} changeHandler={setPerson} />
+        <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
+        <View style={styles.buttonContainer}>
+          <Button title="Close" onPress={closeModal} />
+          <Button title="Confirm" onPress={createNewBet} />
+        </View>
+      </View>
+    </ModalCard>
   );
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   modalView: {
     margin: 20,
-    marginTop: -60,
+    marginTop: 60,
     backgroundColor: "white",
     borderColor: "#9C2C77",
     borderWidth: 1,
@@ -113,15 +93,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modal: {
-    width: "90%",
-    height: 300,
   },
 });
 
