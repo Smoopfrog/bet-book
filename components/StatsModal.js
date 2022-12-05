@@ -9,14 +9,24 @@ const StatsModal = ({ showModal, closeModal, bets }) => {
   const betsSettled = bets.filter((bet) => !bet.active).length;
   const winningPercentage = (betsWon / (totalBets - betsPending)) * 100;
 
-  const calculateWinnings = (bets, result) => {
+  const calculateDollarWinnings = (bets, result) => {
     let winnings = 0;
     for (const bet of bets) {
-      if(bet.wager[0] === "$" && bet.result === result) {
-        winnings += Number(bet.wager.slice(1))
+      if (bet.wager[0] === "$" && bet.result === result) {
+        winnings += Number(bet.wager.slice(1));
       }
     }
-    return winnings
+    return winnings;
+  };
+
+  const calculateOtherWinnings = (bets, result) => {
+    let winnings = [];
+    for (const bet of bets) {
+      if (bet.wager[0] !== "$" && bet.result === result) {
+        winnings.push(bet.wager);
+      }
+    }
+    return winnings.join(", ");
   };
 
   return (
@@ -41,13 +51,20 @@ const StatsModal = ({ showModal, closeModal, bets }) => {
           <Text>Win Percentage: {winningPercentage}%</Text>
         </View>
         <View>
-          <Text>Win Percentage: {winningPercentage}%</Text>
+          <Text>
+            Total Money Won: ${calculateDollarWinnings(bets, "winner")}
+          </Text>
         </View>
         <View>
-          <Text>Total Winnings: ${calculateWinnings(bets, 'winner')}</Text>
+          <Text>
+            Total Money Lost: ${calculateDollarWinnings(bets, "loser")}
+          </Text>
         </View>
         <View>
-          <Text>Total Winnings: ${calculateWinnings(bets, 'loser')}</Text>
+          <Text>Total Winnings: {calculateOtherWinnings(bets, "winner")}</Text>
+        </View>
+        <View>
+          <Text>Total Lost: {calculateOtherWinnings(bets, "loser")}</Text>
         </View>
       </View>
     </ModalCard>
