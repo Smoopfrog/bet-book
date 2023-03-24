@@ -6,14 +6,20 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { auth } from "../../firebase";
 
 const FooterBar = (props) => {
   const navigation = useNavigation();
 
   const handleLogout = () => {
-    navigation.replace("LoginScreen");
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("LoginScreen");
+      })
+      .catch((error) => alert(error.mess));
   };
-  
+
   return (
     <View style={styles.container}>
       <View>
