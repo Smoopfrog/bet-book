@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: 'grey',
     borderStyle: "solid",
-    borderWidth: '1',
+    borderWidth: 1,
     backgroundColor: "white",
     paddingHorizontal: 15,
     paddingVertical: 10,
