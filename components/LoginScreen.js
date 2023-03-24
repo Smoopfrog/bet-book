@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -8,13 +8,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-// import { auth } from "../firebase";
+import { auth } from "../firebase";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   // useEffect(() => {
   //   const unsubscribe = auth.onAuthStateChanged(user => {
@@ -27,27 +27,25 @@ const LoginScreen = () => {
   // }, [])
 
   const handleSignUp = () => {
-    // auth
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then(userCredentials => {
-    //     const user = userCredentials.user;
-    console.log("Registered with:");
-    navigation.replace("Home")
-
-    // })
-    // .catch(error => alert(error.message))
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log("Registered with:", user.email);
+        navigation.replace("Home");
+      })
+      .catch((error) => alert(error.message));
   };
 
   const handleLogin = () => {
-    // auth
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then((userCredentials) => {
-    //     const user = userCredentials.user;
-        console.log("Logged in with:");
-        navigation.replace("Home")
-
-      // })
-      // .catch((error) => alert(error.message));
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log("Logged in with:", user.email);
+        navigation.replace("Home");
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    borderColor: 'grey',
+    borderColor: "grey",
     borderStyle: "solid",
     borderWidth: 1,
     backgroundColor: "white",
