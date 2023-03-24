@@ -8,6 +8,7 @@ import {
   View,
   Alert,
   TouchableWithoutFeedback,
+  KeyboardAvoidingView,
 } from "react-native";
 import NewBetInput from "./NewBetInput";
 import ModalCard from "./ModalCard";
@@ -58,23 +59,27 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
 
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
-      <View style={styles.modalView}>
-        <Text>Bet area</Text>
-        <NewBetInput label="Title" value={title} changeHandler={setTitle} />
-        <NewBetInput label="Person" value={person} changeHandler={setPerson} />
-        <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
-        <View style={styles.buttonContainer}>
-          <Button title="Close" onPress={closeModal} />
-          <Button title="Confirm" onPress={createNewBet} />
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.modalView}>
+          <Text>Bet area</Text>
+          <NewBetInput label="Title" value={title} changeHandler={setTitle} />
+          <NewBetInput
+            label="Person"
+            value={person}
+            changeHandler={setPerson}
+          />
+          <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
+          <View style={styles.buttonContainer}>
+            <Button title="Close" onPress={closeModal} />
+            <Button title="Confirm" onPress={createNewBet} />
+          </View>
         </View>
-      </View>
-      
+      </KeyboardAvoidingView>
     </ModalCard>
   );
 };
 
 const styles = StyleSheet.create({
-
   modalView: {
     margin: 20,
     marginTop: 60,
