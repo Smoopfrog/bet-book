@@ -1,7 +1,19 @@
 import { StyleSheet, View } from "react-native";
-import { SimpleLineIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
+import {
+  SimpleLineIcons,
+  FontAwesome,
+  Ionicons,
+  MaterialIcons,
+} from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const FooterBar = (props) => {
+  const navigation = useNavigation();
+
+  const handleLogout = () => {
+    navigation.replace("LoginScreen");
+  };
+  
   return (
     <View style={styles.container}>
       <View>
@@ -26,6 +38,14 @@ const FooterBar = (props) => {
           size={30}
           color="white"
           onPress={props.showStatsModal}
+        />
+      </View>
+      <View>
+        <MaterialIcons
+          name="logout"
+          size={30}
+          color="white"
+          onPress={handleLogout}
         />
       </View>
     </View>
