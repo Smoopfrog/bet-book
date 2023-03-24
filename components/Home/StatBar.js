@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    height: "25%",
+    padding: 10,
   },
   porgressCircleContainter: {
     justifyContent: "center",

@@ -117,7 +117,7 @@ export default Home = () => {
 
   return (
     <View style={styles.app}>
-      <NavBar />
+      {/* <NavBar /> */}
       <StatBar bets={sortedBets} />
       <BetFeed setBets={setBets} bets={sortedBets} />
       <FooterBar

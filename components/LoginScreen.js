@@ -1,4 +1,4 @@
-// import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -14,7 +14,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
 
   // useEffect(() => {
   //   const unsubscribe = auth.onAuthStateChanged(user => {
@@ -32,6 +32,8 @@ const LoginScreen = () => {
     //   .then(userCredentials => {
     //     const user = userCredentials.user;
     console.log("Registered with:");
+    navigation.replace("Home")
+
     // })
     // .catch(error => alert(error.message))
   };
@@ -42,6 +44,8 @@ const LoginScreen = () => {
     //   .then((userCredentials) => {
     //     const user = userCredentials.user;
         console.log("Logged in with:");
+        navigation.replace("Home")
+
       // })
       // .catch((error) => alert(error.message));
   };
