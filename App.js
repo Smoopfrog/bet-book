@@ -1,10 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import Home from "./components/Home/Home";
+import LoginScreen from "./components/LoginScreen";
 
 export default App = () => {
   return (
     <View style={styles.app}>
-      <Home />
+      <LoginScreen />
+      {/* <Home /> */}
     </View>
   );
 };
