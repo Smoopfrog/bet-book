@@ -3,8 +3,14 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
+import EditBetModal from "./EditBetModal";
+import { useState } from "react";
+const Bet = ({ item, setBets, bets, showEditModal }) => {
+  const [showEditBetModal, setShowEditBetModal] = useState(false);
 
-const Bet = ({ item, setBets, bets }) => {
+  const editBetModalHandler = () => {
+    setShowEditBetModal(!showEditBetModal);
+  };
   const resultHandler = (result) => {
     const [changedBet] = bets.filter((bet) => bet.id === item.id);
     const filteredArr = bets.filter((bet) => bet.id !== item.id);
@@ -25,7 +31,7 @@ const Bet = ({ item, setBets, bets }) => {
 
   return (
     <SwipeableCard resultHandler={resultHandler} cardType={item.result}>
-      <TouchableHighlight delayLongPress='1000' onLongPress={() => alert('hello')}>
+      <TouchableHighlight delayLongPress="1000" onLongPress={editBetModalHandler}>
         <View
           style={[
             styles.card,
@@ -53,6 +59,11 @@ const Bet = ({ item, setBets, bets }) => {
               />
             </View>
           </View>
+          <EditBetModal
+            closeModal={editBetModalHandler}
+            showModal={showEditBetModal}
+            bet={item}
+          />
         </View>
       </TouchableHighlight>
     </SwipeableCard>
