@@ -12,6 +12,8 @@ import {
 } from "react-native";
 import NewBetInput from "./NewBetInput";
 import ModalCard from "./ModalCard";
+import { ref, set } from "firebase/database";
+import { db } from "../../firebase";
 
 const createTwoButtonAlert = (msg) =>
   Alert.alert("Missing Info", msg, [
@@ -52,6 +54,14 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
       active: true,
       result: "pending",
     };
+
+    set(ref(db, "bets/" + newBet.id), newBet)
+      .then(() => {
+        alert("Bet added");
+      })
+      .catch((error) => {
+        alert(error);
+      });
 
     setBets((prev) => [newBet, ...prev]);
     closeModal();
