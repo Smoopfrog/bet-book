@@ -60,10 +60,9 @@ const FooterBar = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 45,
     backgroundColor: "#000",
     width: "100%",
-    position: "fixed",
+    padding:12, 
     justifyContent: "space-evenly",
     alignItems: "center",
     flexDirection: "row",
