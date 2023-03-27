@@ -9,7 +9,7 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
     set(ref(db, "bets/" + bet.id), null)
       .then(() => {
         alert("Bet deleted");
-        closeModal()
+        closeModal();
       })
       .catch((error) => {
         alert(error);
@@ -21,10 +21,7 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
       <View style={styles.modalView}>
         <Text>Bet {bet.wager}</Text>
         <Text>Bet {bet.wager}</Text>
-        <TouchableHighlight
-          onPress={deleteBet}
-          style={styles.deleteButton}
-        >
+        <TouchableHighlight onPress={deleteBet} style={styles.deleteButton}>
           <Text style={styles.deleteButtonText}>Delete</Text>
         </TouchableHighlight>
       </View>

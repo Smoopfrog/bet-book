@@ -5,7 +5,7 @@ import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
 import EditBetModal from "./EditBetModal";
 import { useState } from "react";
-const Bet = ({ item, setBets, bets, showEditModal }) => {
+const Bet = ({ item, setBets, bets }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
 
   const editBetModalHandler = () => {

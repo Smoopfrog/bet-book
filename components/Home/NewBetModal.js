@@ -1,13 +1,10 @@
 import { useState } from "react";
 import {
   Button,
-  Modal,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Alert,
-  TouchableWithoutFeedback,
   KeyboardAvoidingView,
 } from "react-native";
 import NewBetInput from "./NewBetInput";

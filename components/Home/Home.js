@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { db } from "../../firebase";
+import { ref, onValue } from "firebase/database";
 import BetFeed from "./BetFeed";
 import FooterBar from "./FooterBar";
 import NavBar from "./NavBar";
@@ -55,6 +57,16 @@ const Home = () => {
   const [sortedBets, setSortedBets] = useState(dummyData);
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
+  const fireBets = ref(db, "/bets");
+
+  useEffect(() => {
+    onValue(fireBets, (snapshot) => {
+      const fireData = snapshot.val();
+      const arrayBets = Object.values(fireData)
+      console.log(arrayBets)
+      setSortedBets(arrayBets)
+    });
+  }, []);
 
   useEffect(() => {
     if (activeFilter === "all") {
@@ -156,6 +168,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
 
 export default Home;
