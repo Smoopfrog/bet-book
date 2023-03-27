@@ -1,6 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
 
@@ -25,34 +25,36 @@ const Bet = ({ item, setBets, bets }) => {
 
   return (
     <SwipeableCard resultHandler={resultHandler} cardType={item.result}>
-      <View
-        style={[
-          styles.card,
-          item.result === "winner" && styles.winnercard,
-          item.result === "pending" && styles.activeCard,
-          item.result === "loser" && styles.loserCard,
-        ]}
-      >
-        <View style={styles.header}>
-          <View style={styles.title}>
-            <Text style={styles.titleFont}>{item.title}</Text>
-            <Text style={styles.text}>#{item.id}</Text>
-          </View>
-          <View style={styles.body}>
-            <Text style={styles.text}>{date}</Text>
-            <Text style={styles.text}>{item.person}</Text>
-            <Text style={styles.text}>{item.wager}</Text>
-          </View>
-          <View style={styles.icon}>
-            <BouncyCheckbox
-              fillColor={"black"}
-              iconComponent={<Feather name="lock" size={15} color="white" />}
-              isChecked={!item.active}
-              onPress={settledHandler}
-            />
+      <TouchableHighlight delayLongPress='1000' onLongPress={() => alert('hello')}>
+        <View
+          style={[
+            styles.card,
+            item.result === "winner" && styles.winnercard,
+            item.result === "pending" && styles.activeCard,
+            item.result === "loser" && styles.loserCard,
+          ]}
+        >
+          <View style={styles.header}>
+            <View style={styles.title}>
+              <Text style={styles.titleFont}>{item.title}</Text>
+              <Text style={styles.text}>#{item.id}</Text>
+            </View>
+            <View style={styles.body}>
+              <Text style={styles.text}>{date}</Text>
+              <Text style={styles.text}>{item.person}</Text>
+              <Text style={styles.text}>{item.wager}</Text>
+            </View>
+            <View style={styles.icon}>
+              <BouncyCheckbox
+                fillColor={"black"}
+                iconComponent={<Feather name="lock" size={15} color="white" />}
+                isChecked={!item.active}
+                onPress={settledHandler}
+              />
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableHighlight>
     </SwipeableCard>
   );
 };
