@@ -47,7 +47,7 @@ const dummyData = [
   },
 ];
 
-export default Home = () => {
+const Home = () => {
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
@@ -156,3 +156,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+
+export default Home;
