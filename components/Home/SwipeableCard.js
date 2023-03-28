@@ -14,6 +14,21 @@ const SwipeableCard = (props) => {
     let result = "winner";
     if (props.cardType === "loser") {
       result = "Reset?";
+
+      return (
+        <View
+          style={{
+            width: "100%",
+            backgroundColor: "#FFAC41",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Animated.Text style={{ color: "#fff", fontWeight: "600" }}>
+            {result}
+          </Animated.Text>
+        </View>
+      );
     }
     return (
       <View
@@ -44,6 +59,20 @@ const SwipeableCard = (props) => {
     let result = "loser";
     if (props.cardType === "winner") {
       result = "Reset?";
+      return (
+        <View
+          style={{
+            width: "100%",
+            backgroundColor: "#FFAC41",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Animated.Text style={{ color: "#fff", fontWeight: "600" }}>
+            {result}
+          </Animated.Text>
+        </View>
+      );
     }
 
     return (
