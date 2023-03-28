@@ -11,13 +11,8 @@ import { auth } from "../../firebase";
 const FooterBar = (props) => {
   const navigation = useNavigation();
 
-  const handleLogout = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigation.replace("ProfileScreen");
-      })
-      .catch((error) => alert(error.mess));
+  const profileScreenHandler = () => {
+    navigation.replace("ProfileScreen");
   };
 
   return (
@@ -51,7 +46,7 @@ const FooterBar = (props) => {
           name="logout"
           size={30}
           color="white"
-          onPress={handleLogout}
+          onPress={profileScreenHandler}
         />
       </View>
     </View>
@@ -62,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#000",
     width: "100%",
-    padding:12, 
+    padding: 12,
     justifyContent: "space-evenly",
     alignItems: "center",
     flexDirection: "row",
