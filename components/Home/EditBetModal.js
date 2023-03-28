@@ -3,8 +3,19 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 import ModalCard from "./ModalCard";
 import { set, ref } from "firebase/database";
 import { db } from "../../firebase";
+import { useState } from "react";
+import NewBetInput from "./NewBetInput";
 
 const EditBetModal = ({ showModal, closeModal, bet }) => {
+  const [editMode, setEditMode] = useState(false);
+  const [title, setTitle] = useState(bet.title);
+  const [wager, setWager] = useState(bet.wager);
+  const [person, setPerson] = useState(bet.person);
+
+  const editModeHandler = () => {
+    setEditMode(!editMode);
+  };
+
   const deleteBet = () => {
     set(ref(db, "bets/" + bet.id), null)
       .then(() => {
@@ -16,14 +27,65 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
       });
   };
 
+  const editBet = () => {
+    const newBet = {
+      active: bet.active,
+      date: bet.date,
+      id: bet.id,
+      result: bet.result,
+      person,
+      title,
+      wager,
+    };
+
+    set(ref(db, "bets/" + bet.id), newBet)
+      .then(() => {
+        alert("Bet updated");
+        setEditMode(false);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <View style={styles.modalView}>
-        <Text>Bet {bet.wager}</Text>
-        <Text>Bet {bet.wager}</Text>
-        <TouchableHighlight onPress={deleteBet} style={styles.deleteButton}>
-          <Text style={styles.deleteButtonText}>Delete</Text>
+        <TouchableHighlight onPress={editModeHandler} style={styles.editButton}>
+          <Text style={styles.deleteButtonText}>Edit</Text>
         </TouchableHighlight>
+        {editMode ? (
+          <View>
+            <Text>Edit your bet</Text>
+            <NewBetInput label="Title" value={title} changeHandler={setTitle} />
+            <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
+            <NewBetInput
+              label="Person"
+              value={person}
+              changeHandler={setPerson}
+            />
+
+            <TouchableHighlight onPress={editBet} style={styles.saveButton}>
+              <Text style={styles.deleteButtonText}>Save</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              onPress={editModeHandler}
+              style={styles.deleteButton}
+            >
+              <Text style={styles.deleteButtonText}>Cancel</Text>
+            </TouchableHighlight>
+          </View>
+        ) : (
+          <View>
+            <Text>{bet.title}</Text>
+            <Text>{bet.wager}</Text>
+            <Text>{bet.person}</Text>
+            <TouchableHighlight onPress={deleteBet} style={styles.deleteButton}>
+              <Text style={styles.deleteButtonText}>Delete</Text>
+            </TouchableHighlight>
+          </View>
+        )}
       </View>
     </ModalCard>
   );
@@ -46,6 +108,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  editButton: {
+    backgroundColor: "blue",
+    borderRadius: 6,
+    padding: 6,
+  },
+  saveButton: {
+    backgroundColor: "green",
+    borderRadius: 6,
+    padding: 6,
   },
   deleteButton: {
     backgroundColor: "red",
