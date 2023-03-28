@@ -5,33 +5,46 @@ import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
 import EditBetModal from "./EditBetModal";
 import { useState } from "react";
+import { ref, set } from "firebase/database";
+import { db } from "../../firebase";
+
 const Bet = ({ item, setBets, bets }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
+  const [active, setActive] = useState(item.active);
 
   const editBetModalHandler = () => {
     setShowEditBetModal(!showEditBetModal);
   };
+
   const resultHandler = (result) => {
-    const [changedBet] = bets.filter((bet) => bet.id === item.id);
-    const filteredArr = bets.filter((bet) => bet.id !== item.id);
-    changedBet.result = result;
-    const newArray = [...filteredArr, changedBet].sort((a, b) => b.id - a.id);
-    setBets(newArray);
+    set(ref(db, "bets/" + item.id + "/result"), result)
+      .then(() => {
+        console.log("Result updated");
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const settledHandler = () => {
-    const [changedBet] = bets.filter((bet) => bet.id === item.id);
-    const filteredArr = bets.filter((bet) => bet.id !== item.id);
-    changedBet.active = !changedBet.active;
-    const newArray = [...filteredArr, changedBet].sort((a, b) => b.id - a.id);
-    setBets(newArray);
+    setActive(!active)
+    set(ref(db, "bets/" + item.id + "/active"), active)
+      .then(() => {
+        console.log("Active status updated");
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const date = moment(item.date).format("MMM Do, YYYY");
 
   return (
     <SwipeableCard resultHandler={resultHandler} cardType={item.result}>
-      <TouchableHighlight delayLongPress="1000" onLongPress={editBetModalHandler}>
+      <TouchableHighlight
+        delayLongPress="1000"
+        onLongPress={editBetModalHandler}
+      >
         <View
           style={[
             styles.card,
@@ -54,7 +67,7 @@ const Bet = ({ item, setBets, bets }) => {
               <BouncyCheckbox
                 fillColor={"black"}
                 iconComponent={<Feather name="lock" size={15} color="white" />}
-                isChecked={!item.active}
+                isChecked={item.active}
                 onPress={settledHandler}
               />
             </View>
