@@ -7,10 +7,10 @@ import {
   Alert,
   KeyboardAvoidingView,
 } from "react-native";
-import NewBetInput from "./NewBetInput";
-import ModalCard from "./ModalCard";
 import { ref, set } from "firebase/database";
 import { db } from "../../firebase";
+import NewBetInput from "./NewBetInput";
+import ModalCard from "./ModalCard";
 
 const createTwoButtonAlert = (msg) =>
   Alert.alert("Missing Info", msg, [
@@ -20,7 +20,7 @@ const createTwoButtonAlert = (msg) =>
     },
   ]);
 
-const NewBetModal = ({ setBets, closeModal, showModal }) => {
+const NewBetModal = ({ closeModal, showModal }) => {
   const [title, setTitle] = useState("");
   const [person, setPerson] = useState("");
   const [wager, setWager] = useState("");
@@ -60,7 +60,6 @@ const NewBetModal = ({ setBets, closeModal, showModal }) => {
         alert(error);
       });
 
-    setBets((prev) => [newBet, ...prev]);
     closeModal();
   };
 
