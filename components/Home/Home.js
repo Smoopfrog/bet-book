@@ -24,6 +24,7 @@ const Home = () => {
       const fireData = snapshot.val();
       const arrayBets = Object.values(fireData)
       console.log(arrayBets)
+      setBets(arrayBets)
       setSortedBets(arrayBets)
     });
   }, []);

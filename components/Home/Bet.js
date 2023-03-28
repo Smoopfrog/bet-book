@@ -8,7 +8,7 @@ import { useState } from "react";
 import { ref, set } from "firebase/database";
 import { db } from "../../firebase";
 
-const Bet = ({ item, setBets, bets }) => {
+const Bet = ({ item }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
   const [active, setActive] = useState(item.active);
 
@@ -27,10 +27,12 @@ const Bet = ({ item, setBets, bets }) => {
   };
 
   const settledHandler = () => {
-    setActive(!active)
-    set(ref(db, "bets/" + item.id + "/active"), active)
+    const newActiveStatus = !active;
+    
+    set(ref(db, "bets/" + item.id + "/active"), newActiveStatus)
       .then(() => {
         console.log("Active status updated");
+        setActive(!newActiveStatus);
       })
       .catch((error) => {
         alert(error);
