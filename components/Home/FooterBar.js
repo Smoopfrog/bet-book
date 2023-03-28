@@ -15,7 +15,7 @@ const FooterBar = (props) => {
     auth
       .signOut()
       .then(() => {
-        navigation.replace("LoginScreen");
+        navigation.replace("ProfileScreen");
       })
       .catch((error) => alert(error.mess));
   };
