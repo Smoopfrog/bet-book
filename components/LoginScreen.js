@@ -11,8 +11,8 @@ import {
 import { auth } from "../firebase";
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("test@test.com");
+  const [password, setPassword] = useState("password");
 
   const navigation = useNavigation();
 

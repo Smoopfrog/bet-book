@@ -6,13 +6,13 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { auth } from "../../firebase";
+// import { auth } from "../../firebase";
 
 const FooterBar = (props) => {
   const navigation = useNavigation();
 
   const profileScreenHandler = () => {
-    navigation.replace("ProfileScreen");
+    navigation.navigate("ProfileScreen");
   };
 
   return (

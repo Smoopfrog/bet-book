@@ -23,7 +23,7 @@ const App = () => {
         <Stack.Screen
           name="ProfileScreen"
           component={ProfileScreen}
-          options={{ title: "BETBOOK" }}
+          options={{ title: "Profile" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
