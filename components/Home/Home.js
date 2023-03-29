@@ -9,23 +9,22 @@ import SortModal from "./SortModal";
 import StatBar from "./StatBar";
 import StatsModal from "./StatsModal";
 
-const Home = () => {
+const Home = ({ bets, setBets }) => {
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
-  const [bets, setBets] = useState([]);
   const [sortedBets, setSortedBets] = useState([]);
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
   const fireBets = ref(db, "/bets");
-
+  console.log('bets', bets);
   useEffect(() => {
     onValue(fireBets, (snapshot) => {
       const fireData = snapshot.val();
-      const arrayBets = Object.values(fireData)
-      console.log(arrayBets)
-      setBets(arrayBets)
-      setSortedBets(arrayBets)
+      const arrayBets = Object.values(fireData);
+      // console.log(arrayBets);
+      setBets(arrayBets);
+      setSortedBets(arrayBets);
     });
   }, []);
 

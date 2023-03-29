@@ -9,10 +9,13 @@ import {
   View,
 } from "react-native";
 import { auth } from "../firebase";
+import { db } from "../firebase";
+import { get, ref, child } from "firebase/database";
 
-const LoginScreen = () => {
+const LoginScreen = ({ setBets }) => {
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("password");
+  const dbRef = ref(db);
 
   const navigation = useNavigation();
 
@@ -42,6 +45,24 @@ const LoginScreen = () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Logged in with:", user.email);
+        //       get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+        // if (snapshot.exists()) {
+        //   console.log(snapshot.val());
+        // } else {
+        //   console.log("No data available");
+        // }
+        // db.ref("/bets/")
+        //   .once("value")
+        //   .then((snapshot) => {
+        //     console.log("User data: ", snapshot.val());
+        //   });
+        get(child(dbRef, "/bets")).then((snapshot) => {
+          const fireData = snapshot.val();
+          const arrayBets = Object.values(fireData);
+          console.log("sign in arrayBets", arrayBets);
+          setBets(arrayBets);
+          // setSortedBets(arrayBets);
+        });
       })
       .catch((error) => alert(error.message));
   };
