@@ -1,11 +1,11 @@
 import { useState } from "react";
 import {
-  Button,
   StyleSheet,
   Text,
   View,
   Alert,
   KeyboardAvoidingView,
+  TouchableOpacity,
 } from "react-native";
 import { ref, set } from "firebase/database";
 import { db } from "../../firebase";
@@ -76,8 +76,12 @@ const NewBetModal = ({ closeModal, showModal }) => {
           />
           <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
           <View style={styles.buttonContainer}>
-            <Button title="Close" onPress={closeModal} />
-            <Button title="Confirm" onPress={createNewBet} />
+            <TouchableOpacity style={styles.closeBtn} onPress={closeModal}>
+              <Text style={styles.innerBtn}>Close</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.confirmBtn} onPress={createNewBet}>
+              <Text style={styles.innerBtn}>Confirm</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -105,7 +109,26 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonContainer: {
+    width: "100%",
     flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+  closeBtn: {
+    width: 100,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    backgroundColor: "red",
+  },
+  confirmBtn: {
+    width: 100,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    backgroundColor: "green",
+  },
+  innerBtn: {
+    color: "white",
   },
 });
 

@@ -105,7 +105,9 @@ const SortModal = ({
             </View>
           </View>
         </View>
-        <Button title="Close" onPress={closeModal} />
+        <TouchableOpacity onPress={closeModal} style={styles.closeBtn}>
+          <Text style={styles.innerBtn}>Close</Text>
+        </TouchableOpacity>
       </View>
     </ModalCard>
   );
@@ -152,6 +154,17 @@ const styles = StyleSheet.create({
   sectionTitle: {
     textAlign: "center",
     fontWeight: "bold",
+  },
+  closeBtn: {
+    marginTop: 5,
+    width: 100,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    backgroundColor: "green",
+  },
+  innerBtn: {
+    color: "white",
   },
 });
 
