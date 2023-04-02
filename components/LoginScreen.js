@@ -20,8 +20,10 @@ const LoginScreen = ({ setBets }) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         navigation.replace("Home");
       }
     });
@@ -51,6 +53,7 @@ const LoginScreen = ({ setBets }) => {
           const arrayBets = Object.values(fireData);
           console.log("sign in arrayBets", arrayBets);
           setBets(arrayBets);
+          navigation.replace("Home");
         });
       })
       .catch((error) => alert(error.message));
