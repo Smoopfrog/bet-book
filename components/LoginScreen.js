@@ -45,23 +45,12 @@ const LoginScreen = ({ setBets }) => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Logged in with:", user.email);
-        //       get(child(dbRef, `users/${userId}`)).then((snapshot) => {
-        // if (snapshot.exists()) {
-        //   console.log(snapshot.val());
-        // } else {
-        //   console.log("No data available");
-        // }
-        // db.ref("/bets/")
-        //   .once("value")
-        //   .then((snapshot) => {
-        //     console.log("User data: ", snapshot.val());
-        //   });
+
         get(child(dbRef, "/bets")).then((snapshot) => {
           const fireData = snapshot.val();
           const arrayBets = Object.values(fireData);
           console.log("sign in arrayBets", arrayBets);
           setBets(arrayBets);
-          // setSortedBets(arrayBets);
         });
       })
       .catch((error) => alert(error.message));

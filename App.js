@@ -13,18 +13,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="LoginScreen"
-          // component={LoginScreen}
-          options={{ title: "BETBOOK" }}
-        >
+        <Stack.Screen name="LoginScreen" options={{ title: "BETBOOK" }}>
           {() => <LoginScreen setBets={setBets} />}
         </Stack.Screen>
-        <Stack.Screen
-          name="Home"
-          // component={Home}
-          options={{ title: "BETBOOK" }}
-        >
+        <Stack.Screen name="Home" options={{ title: "BETBOOK" }}>
           {() => <Home bets={bets} setBets={setBets} />}
         </Stack.Screen>
         <Stack.Screen

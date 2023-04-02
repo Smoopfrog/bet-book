@@ -17,13 +17,11 @@ const Home = ({ bets, setBets }) => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
   const fireBets = ref(db, "/bets");
-  console.log('bets inside home', bets);
 
   useEffect(() => {
     onValue(fireBets, (snapshot) => {
       const fireData = snapshot.val();
       const arrayBets = Object.values(fireData);
-      // console.log(arrayBets);
       setBets(arrayBets);
       setSortedBets(arrayBets);
     });
@@ -90,7 +88,6 @@ const Home = ({ bets, setBets }) => {
 
   return (
     <View style={styles.app}>
-      {/* <NavBar /> */}
       <StatBar bets={sortedBets} />
       <BetFeed setBets={setBets} bets={sortedBets} />
       <FooterBar

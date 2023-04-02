@@ -11,7 +11,8 @@ const SwipeableCard = (props) => {
     // const Style = {
     //   transform: [{ scale }],
     // };
-    let result = "winner";
+
+    let result = "Winner";
     if (props.cardType === "loser") {
       result = "Reset?";
 
@@ -56,7 +57,7 @@ const SwipeableCard = (props) => {
     //   transform: [{ scale }],
     // };
 
-    let result = "loser";
+    let result = "Loser";
     if (props.cardType === "winner") {
       result = "Reset?";
       return (
