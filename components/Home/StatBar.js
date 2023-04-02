@@ -4,16 +4,20 @@ import * as Progress from "react-native-progress";
 const StatBar = ({ bets }) => {
   const totalBets = bets.length;
   const betsWon = bets.filter((bet) => bet.result === "winner").length;
-  // const betsLost = bets.filter((bet) => bet.result === "loser").length;
+  const betsLost = bets.filter((bet) => bet.result === "loser").length;
   const betsPending = bets.filter((bet) => bet.result === "pending").length;
-  const betsSettled = bets.filter((bet) => bet.active).length;
+  const betsSettled = bets.filter((bet) => !bet.active).length;
   const winningPercentage = betsWon / (totalBets - betsPending);
 
   return (
     <View style={styles.container}>
-      {/* <Text>Total Bets: {totalBets}</Text>
-      <Text>Unsettled bets: {betsSettled}</Text> */}
-      <Text>Winning Percentage</Text>
+      <View>
+        <Text>Total Bets: {totalBets}</Text>
+        <Text>Won: {betsWon}</Text>
+        <Text>Lost: {betsLost}</Text>
+        <Text>Winning Percentage</Text>
+        <Text>Unsettled: {betsSettled}</Text>
+      </View>
       <View style={styles.porgressCircleContainter}>
         <Progress.Circle
           color={"green"}
@@ -29,7 +33,8 @@ const StatBar = ({ bets }) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     padding: 10,
   },
