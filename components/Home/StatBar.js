@@ -11,11 +11,10 @@ const StatBar = ({ bets }) => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.statsContainer}>
         <Text>Total Bets: {totalBets}</Text>
         <Text>Won: {betsWon}</Text>
         <Text>Lost: {betsLost}</Text>
-        <Text>Winning Percentage</Text>
         <Text>Unsettled: {betsSettled}</Text>
       </View>
       <View style={styles.porgressCircleContainter}>
@@ -27,6 +26,9 @@ const StatBar = ({ bets }) => {
           showsText={true}
         />
       </View>
+      <View style={styles.statsContainer}>
+        
+      </View>
     </View>
   );
 };
@@ -36,11 +38,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  statsContainer: {
+    // justifyContent: "center",
+    // alignItems: "center",
+    flex: 1,
   },
   porgressCircleContainter: {
     justifyContent: "center",
     alignItems: "center",
+    flex: 1,
   },
 });
 export default StatBar;
