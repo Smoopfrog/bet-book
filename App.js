@@ -13,7 +13,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="LoginScreen" options={{ title: "BETBOOK" }}>
+        <Stack.Screen name="LoginScreen" options={{ headerShown: false }}>
           {() => <LoginScreen setBets={setBets} />}
         </Stack.Screen>
         <Stack.Screen name="Home" options={{ title: "BETBOOK" }}>

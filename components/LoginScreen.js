@@ -62,6 +62,9 @@ const LoginScreen = ({ setBets }) => {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <View style={styles.inputContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>BETBOOK</Text>
+        </View>
         <TextInput
           placeholder="Email"
           value={email}
@@ -100,6 +103,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  titleContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom:30,
+  },
+  title: {
+    fontSize: 50,
+    fontWeight: 700,
+  },
+
   inputContainer: {
     width: "80%",
   },
@@ -117,7 +130,7 @@ const styles = StyleSheet.create({
     width: "60%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 20,
   },
   button: {
     backgroundColor: "#0782F9",
