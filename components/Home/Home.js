@@ -13,11 +13,12 @@ const Home = ({ bets, setBets }) => {
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
-  const [sortedBets, setSortedBets] = useState([]);
+  const [sortedBets, setSortedBets] = useState(bets);
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
   const fireBets = ref(db, "/bets");
-  console.log('bets', bets);
+  console.log('bets inside home', bets);
+
   useEffect(() => {
     onValue(fireBets, (snapshot) => {
       const fireData = snapshot.val();
