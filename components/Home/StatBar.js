@@ -6,7 +6,7 @@ const StatBar = ({ bets }) => {
   const betsWon = bets.filter((bet) => bet.result === "winner").length;
   const betsLost = bets.filter((bet) => bet.result === "loser").length;
   const betsPending = bets.filter((bet) => bet.result === "pending").length;
-  const betsSettled = bets.filter((bet) => !bet.active).length;
+  const betsUnsettled = bets.filter((bet) => bet.active).length;
   const winningPercentage = betsWon / (totalBets - betsPending);
 
   return (
@@ -15,7 +15,7 @@ const StatBar = ({ bets }) => {
         <Text>Total Bets: {totalBets}</Text>
         <Text>Won: {betsWon}</Text>
         <Text>Lost: {betsLost}</Text>
-        <Text>Unsettled: {betsSettled}</Text>
+        <Text>Unsettled: {betsUnsettled}</Text>
       </View>
       <View style={styles.porgressCircleContainter}>
         <Progress.Circle

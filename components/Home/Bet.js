@@ -4,22 +4,34 @@ import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
 import EditBetModal from "./EditBetModal";
-import { useState } from "react";
-import { ref, set } from "firebase/database";
+import { useEffect, useState } from "react";
+// import { ref, set } from "firebase/database";
 import { db } from "../../firebase";
+import { get, ref, child, set } from "firebase/database";
 
-const Bet = ({ item }) => {
+const Bet = ({ bet, setBets }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
-  const [active, setActive] = useState(item.active);
+  const [active, setActive] = useState(bet.active);
+  const dbRef = ref(db);
 
+  // useEffect(() => {
+  //   get(child(dbRef, "/bets")).then((snapshot) => {
+  //     const fireData = snapshot.val();
+  //     const arrayBets = Object.values(fireData);
+  //     console.log("result change bets", arrayBets);
+  //     setBets([...arrayBets]);
+  //     // navigation.replace("Home");
+  //   });
+  // }, [bet.result]);
+  
   const editBetModalHandler = () => {
     setShowEditBetModal(!showEditBetModal);
   };
 
   const resultHandler = (result) => {
-    set(ref(db, "bets/" + item.id + "/result"), result)
+    set(ref(db, "bets/" + bet.id + "/result"), result)
       .then(() => {
-        console.log("Result updated");
+        console.log("Result updated to: ", result);
       })
       .catch((error) => {
         alert(error);
@@ -28,21 +40,21 @@ const Bet = ({ item }) => {
 
   const settledHandler = () => {
     const newActiveStatus = !active;
-    
-    set(ref(db, "bets/" + item.id + "/active"), newActiveStatus)
+
+    set(ref(db, "bets/" + bet.id + "/active"), newActiveStatus)
       .then(() => {
-        console.log("Active status updated");
-        setActive(!newActiveStatus);
+        console.log("Active status updated to: ", newActiveStatus);
+        setActive(newActiveStatus);
       })
       .catch((error) => {
         alert(error);
       });
   };
 
-  const date = moment(item.date).format("MMM Do, YYYY");
+  const date = moment(bet.date).format("MMM Do, YYYY");
 
   return (
-    <SwipeableCard resultHandler={resultHandler} cardType={item.result}>
+    <SwipeableCard resultHandler={resultHandler} cardType={bet.result}>
       <TouchableHighlight
         delayLongPress="1000"
         onLongPress={editBetModalHandler}
@@ -50,26 +62,26 @@ const Bet = ({ item }) => {
         <View
           style={[
             styles.card,
-            item.result === "winner" && styles.winnercard,
-            item.result === "pending" && styles.activeCard,
-            item.result === "loser" && styles.loserCard,
+            bet.result === "winner" && styles.winnercard,
+            bet.result === "pending" && styles.activeCard,
+            bet.result === "loser" && styles.loserCard,
           ]}
         >
           <View style={styles.header}>
             <View style={styles.title}>
-              <Text style={styles.titleFont}>{item.title}</Text>
-              <Text style={styles.text}>#{item.id}</Text>
+              <Text style={styles.titleFont}>{bet.title}</Text>
+              <Text style={styles.text}>#{bet.id}</Text>
             </View>
             <View style={styles.body}>
               <Text style={styles.text}>{date}</Text>
-              <Text style={styles.text}>{item.person}</Text>
-              <Text style={styles.text}>{item.wager}</Text>
+              <Text style={styles.text}>{bet.person}</Text>
+              <Text style={styles.text}>{bet.wager}</Text>
             </View>
             <View style={styles.icon}>
               <BouncyCheckbox
                 fillColor={"black"}
                 iconComponent={<Feather name="lock" size={15} color="white" />}
-                isChecked={item.active}
+                isChecked={!bet.active}
                 onPress={settledHandler}
               />
             </View>
@@ -77,7 +89,7 @@ const Bet = ({ item }) => {
           <EditBetModal
             closeModal={editBetModalHandler}
             showModal={showEditBetModal}
-            bet={item}
+            bet={bet}
           />
         </View>
       </TouchableHighlight>
