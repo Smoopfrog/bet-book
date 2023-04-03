@@ -22,7 +22,11 @@ const LoginScreen = ({ setBets }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await get(child(dbRef, "/bets")).then((snapshot) => {
+          const fireData = snapshot.val();
+          const arrayBets = Object.values(fireData);
+          setBets(arrayBets);
+        });
 
         navigation.replace("Home");
       }
@@ -47,14 +51,6 @@ const LoginScreen = ({ setBets }) => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Logged in with:", user.email);
-
-        get(child(dbRef, "/bets")).then((snapshot) => {
-          const fireData = snapshot.val();
-          const arrayBets = Object.values(fireData);
-          console.log("sign in arrayBets", arrayBets);
-          setBets(arrayBets);
-          navigation.replace("Home");
-        });
       })
       .catch((error) => alert(error.message));
   };
