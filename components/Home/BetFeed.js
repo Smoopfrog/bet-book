@@ -1,15 +1,21 @@
-import { ScrollView, StyleSheet, View, FlatList } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 import Bet from "./Bet";
 
 const BetFeed = ({ bets, setBets }) => {
+  const betComponents = bets.map((bet) => {
+    return <Bet key={bet.id} bet={bet} />;
+  });
+
   return (
-    <FlatList
-      data={bets}
-      renderItem={({ item, index }) => (
-        <Bet item={item} bets={bets} setBets={setBets} />
-      )}
-      keyExtractor={(item) => item.id}
-    />
+    <SafeAreaView>
+      <ScrollView>{betComponents}</ScrollView>
+    </SafeAreaView>
   );
 };
 
