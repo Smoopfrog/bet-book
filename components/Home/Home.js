@@ -16,14 +16,13 @@ const Home = ({ bets, setBets }) => {
   const [sortedBets, setSortedBets] = useState(bets);
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
-  const fireBets = ref(db, "/bets");
+  const betsDbRef = ref(db, "/bets");
 
   useEffect(() => {
-    onValue(fireBets, (snapshot) => {
+    onValue(betsDbRef, (snapshot) => {
       const fireData = snapshot.val();
       const arrayBets = Object.values(fireData);
       setBets(arrayBets);
-      setSortedBets(arrayBets);
     });
   }, []);
 
