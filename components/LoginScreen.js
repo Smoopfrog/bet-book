@@ -24,7 +24,9 @@ const LoginScreen = ({ setBets }) => {
       if (user) {
         await get(child(dbRef, "/bets")).then((snapshot) => {
           const fireData = snapshot.val();
-          const arrayBets = Object.values(fireData);
+          const arrayBets = Object.values(fireData).sort(
+            (a, b) => b.date - a.date
+          );
           setBets(arrayBets);
         });
 
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom:30,
+    marginBottom: 30,
   },
   title: {
     fontSize: 50,

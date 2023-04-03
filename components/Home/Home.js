@@ -21,7 +21,7 @@ const Home = ({ bets, setBets }) => {
   useEffect(() => {
     onValue(betsDbRef, (snapshot) => {
       const fireData = snapshot.val();
-      const arrayBets = Object.values(fireData);
+      const arrayBets = Object.values(fireData).sort((a, b) => a.date < b.date);
       setBets(arrayBets);
     });
   }, []);
