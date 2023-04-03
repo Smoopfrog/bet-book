@@ -19,11 +19,9 @@ const App = () => {
         <Stack.Screen name="Home" options={{ title: "BETBOOK" }}>
           {() => <Home bets={bets} setBets={setBets} />}
         </Stack.Screen>
-        <Stack.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
-          options={{ title: "Profile" }}
-        />
+        <Stack.Screen name="ProfileScreen" options={{ title: "Profile" }}>
+          {() => <ProfileScreen bets={bets} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
