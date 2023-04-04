@@ -7,7 +7,7 @@ import { useState } from "react";
 import NewBetInput from "./NewBetInput";
 
 const EditBetModal = ({ showModal, closeModal, bet }) => {
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(true);
   const [title, setTitle] = useState(bet.title);
   const [wager, setWager] = useState(bet.wager);
   const [person, setPerson] = useState(bet.person);
@@ -51,12 +51,12 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <View style={styles.modalView}>
-        <TouchableHighlight onPress={editModeHandler} style={styles.editButton}>
+        {/* <TouchableHighlight onPress={editModeHandler} style={styles.editButton}>
           <Text style={styles.deleteButtonText}>Edit</Text>
-        </TouchableHighlight>
+        </TouchableHighlight> */}
         {editMode ? (
           <View>
-            <Text>Edit your bet</Text>
+            <Text style={styles.title}>Edit your bet</Text>
             <NewBetInput label="Title" value={title} changeHandler={setTitle} />
             <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
             <NewBetInput
@@ -64,17 +64,17 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
               value={person}
               changeHandler={setPerson}
             />
-
-            <TouchableHighlight onPress={editBet} style={styles.saveButton}>
-              <Text style={styles.deleteButtonText}>Save</Text>
-            </TouchableHighlight>
-
-            <TouchableHighlight
-              onPress={editModeHandler}
-              style={styles.deleteButton}
-            >
-              <Text style={styles.deleteButtonText}>Cancel</Text>
-            </TouchableHighlight>
+            <View style={styles.buttonContainer}>
+              <TouchableHighlight
+                onPress={closeModal}
+                style={styles.deleteButton}
+              >
+                <Text style={styles.deleteButtonText}>Cancel</Text>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={editBet} style={styles.saveButton}>
+                <Text style={styles.deleteButtonText}>Save</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         ) : (
           <View>
@@ -114,15 +114,29 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 6,
   },
+  title: {
+    fontSize: "24px",
+    textAlign: "center",
+    fontWeight: "600",
+  },
+  buttonContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
   saveButton: {
+    width: 100,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
     backgroundColor: "green",
-    borderRadius: 6,
-    padding: 6,
   },
   deleteButton: {
+    width: 100,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
     backgroundColor: "red",
-    borderRadius: 6,
-    padding: 6,
   },
   deleteButtonText: {
     color: "white",
