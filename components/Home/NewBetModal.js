@@ -67,7 +67,7 @@ const NewBetModal = ({ closeModal, showModal }) => {
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View style={styles.modalView}>
-          <Text>Bet area</Text>
+          <Text style={styles.title}>Bet area</Text>
           <NewBetInput label="Title" value={title} changeHandler={setTitle} />
           <NewBetInput
             label="Person"
@@ -107,6 +107,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  title: {
+    fontSize: "24px",
+    textAlign: "center",
+    fontWeight: "600",
   },
   buttonContainer: {
     width: "100%",
