@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../firebase";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 const ProfileScreen = ({ bets }) => {
   const calculateDollarWinnings = (bets, result) => {
     let winnings = 0;
@@ -48,60 +48,82 @@ const ProfileScreen = ({ bets }) => {
   };
 
   return (
-    <View>
-      <Text>Sign in as: {auth.currentUser.email}</Text>
-      <TouchableHighlight style={styles.logoutButton} onPress={logoutHandler}>
-        <View>
-          <MaterialIcons name="logout" size={30} color="white" />
-          <Text style={styles.buttonText}>Logout</Text>
-        </View>
-      </TouchableHighlight>
-      <View>
-        <View>
-          <Text>Total Bets: {totalBets}</Text>
-        </View>
-        <View>
-          <Text>Total Wins: {betsWon}</Text>
-        </View>
-        <View>
-          <Text>Total Loses: {betsLost}</Text>
-        </View>
-        <View>
-          <Text>Total Pending: {betsPending}</Text>
-        </View>
-        <View>
-          <Text>Total Settled: {betsSettled}</Text>
-        </View>
-        <View>
-          <Text>Win Percentage: {winningPercentage}%</Text>
-        </View>
-        <View>
-          <Text>Total Money Won: ${moneyWon}</Text>
-        </View>
-        <View>
-          <Text>Total Money Lost: ${moneyLost}</Text>
-        </View>
-        <View>
-          <Text>Total Winnings: {othersWon ? othersWon : "Nothing"}</Text>
-        </View>
-        <View>
-          <Text>Total Lost: {othersLost ? othersLost : "Nothing"}</Text>
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}>ACCOUNT</Text>
+
+      <View style={[styles.sectionContainer, styles.accountSection]}>
+        <Text style={styles.textTitle}>Email</Text>
+        <Text>{auth.currentUser.email}</Text>
+      </View>
+      <View style={[styles.sectionContainer, styles.accountSection]}>
+        <Text style={styles.textTitle}>Logout</Text>
+        <TouchableHighlight style={styles.logoutButton} onPress={logoutHandler}>
+          <MaterialIcons name="logout" size={24} color="white" />
+        </TouchableHighlight>
+      </View>
+      <View style={styles.sectionTitle}>
+        <Ionicons name="stats-chart" size={24} color="black" />
+        <Text style={styles.sectionTitleText}>STATS</Text>
+      </View>
+      <View style={[styles.sectionContainer, styles.statsSection]}>
+        <Text>Total Bets: {totalBets}</Text>
+        <Text>Total Wins: {betsWon}</Text>
+        <Text>Total Loses: {betsLost}</Text>
+        <Text>Total Pending: {betsPending}</Text>
+        <Text>Total Settled: {betsSettled}</Text>
+        <Text>Win Percentage: {winningPercentage}%</Text>
+        <Text>Total Money Won: ${moneyWon}</Text>
+        <Text>Total Money Lost: ${moneyLost}</Text>
+        <Text>Total Winnings: {othersWon ? othersWon : "Nothing"}</Text>
+        <Text>Total Lost: {othersLost ? othersLost : "Nothing"}</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  logoutButton: {
-    flexDirection: "row",
-    width: 200,
-    backgroundColor: "red",
-    padding: 6,
+  container: {
+    alignItems: "center",
+    backgroundColor: "#f8f0fc",
+    flex: 1,
   },
-  backButton: {
-    backgroundColor: "black",
-    padding: 6,
+  sectionTitle: {
+    width: "90%",
+    fontWeight: "600",
+    marginTop: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  sectionTitleText: {
+    fontWeight: "600",
+    alignSelf: "end",
+  },
+  sectionContainer: {
+    width: "90%",
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 3,
+    marginBottom: 5,
+    borderWidth: 1,
+    borderColor: "#e599f7",
+    alignItems: "center",
+  },
+  textTitle: {
+    fontWeight: "600",
+  },
+  accountSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  logoutButton: {
+    width: 50,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+    backgroundColor: "red",
+  },
+  statsSection: {
+    alignItems: "start",
   },
   buttonText: {
     color: "white",
