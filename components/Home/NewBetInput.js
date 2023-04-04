@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 const NewBetInput = ({ label, value, changeHandler }) => {
   return (
     <View style={styles.rowContainer}>
-      <Text>{label}</Text>
+      <Text style={styles.text}>{label}</Text>
       <TextInput
         style={styles.input}
         value={value}
@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   text: {
-
+    fontWeight: '600'
   },
   input: {
     height: 40,
-    margin: 12,
+    margin: 10,
     width: '70%',
     borderWidth: 1,
     padding: 10,
