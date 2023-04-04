@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { auth } from "../firebase";
-
+import { MaterialIcons } from "@expo/vector-icons";
 const ProfileScreen = ({ bets }) => {
   const calculateDollarWinnings = (bets, result) => {
     let winnings = 0;
@@ -26,7 +26,9 @@ const ProfileScreen = ({ bets }) => {
   const totalBets = bets.length;
   const betsWon = bets.filter((bet) => bet.result === "winner").length;
   const betsLost = bets.filter((bet) => bet.result === "loser").length;
-  const winningPercentage = Math.round((betsWon / (totalBets - betsPending)) * 100);
+  const winningPercentage = Math.round(
+    (betsWon / (totalBets - betsPending)) * 100
+  );
   const betsPending = bets.filter((bet) => bet.result === "pending").length;
   const betsSettled = bets.filter((bet) => !bet.active).length;
   const moneyWon = calculateDollarWinnings(bets, "winner");
@@ -49,7 +51,10 @@ const ProfileScreen = ({ bets }) => {
     <View>
       <Text>Sign in as: {auth.currentUser.email}</Text>
       <TouchableHighlight style={styles.logoutButton} onPress={logoutHandler}>
-        <Text style={styles.buttonText}>Logout</Text>
+        <View>
+          <MaterialIcons name="logout" size={30} color="white" />
+          <Text style={styles.buttonText}>Logout</Text>
+        </View>
       </TouchableHighlight>
       <View>
         <View>
@@ -71,24 +76,16 @@ const ProfileScreen = ({ bets }) => {
           <Text>Win Percentage: {winningPercentage}%</Text>
         </View>
         <View>
-          <Text>
-            Total Money Won: ${moneyWon}
-          </Text>
+          <Text>Total Money Won: ${moneyWon}</Text>
         </View>
         <View>
-          <Text>
-            Total Money Lost: ${moneyLost}
-          </Text>
+          <Text>Total Money Lost: ${moneyLost}</Text>
         </View>
         <View>
-          <Text>
-            Total Winnings: {othersWon ? othersWon : "Nothing"}
-          </Text>
+          <Text>Total Winnings: {othersWon ? othersWon : "Nothing"}</Text>
         </View>
         <View>
-          <Text>
-            Total Lost: {othersLost ? othersLost : "Nothing"}
-          </Text>
+          <Text>Total Lost: {othersLost ? othersLost : "Nothing"}</Text>
         </View>
       </View>
     </View>
@@ -97,6 +94,8 @@ const ProfileScreen = ({ bets }) => {
 
 const styles = StyleSheet.create({
   logoutButton: {
+    flexDirection: "row",
+    width: 200,
     backgroundColor: "red",
     padding: 6,
   },

@@ -7,50 +7,62 @@ import FooterBar from "./FooterBar";
 import NewBetModal from "./NewBetModal";
 import SortModal from "./SortModal";
 import StatBar from "./StatBar";
-import StatsModal from "./StatsModal";
+// import StatsModal from "./StatsModal";
 
 const Home = ({ bets, setBets }) => {
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
-  const [showStatsModal, setShowStatsModal] = useState(false);
   const [sortedBets, setSortedBets] = useState(bets);
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
-  const betsDbRef = ref(db, "/bets");
+  const fireBets = ref(db, "/bets");
 
-  useEffect(() => {
-    onValue(betsDbRef, (snapshot) => {
-      const fireData = snapshot.val();
-      const arrayBets = Object.values(fireData).sort((a, b) => a.date < b.date);
-      setBets(arrayBets);
-    });
-  }, []);
+  const activeFilterHandler = (status, bets) => {
+    if (status === "all") {
+      return [...bets];
+    }
+    if (status === "active") {
+      const activeBets = [...bets].filter((bet) => bet.active);
+      console.log('activeBets', activeBets)
+      return activeBets;
+    }
+    if (status === "settled") {
+      const settledBets = [...bets].filter((bet) => !bet.active);
+      return settledBets;
+    }
+  };
 
-  useEffect(() => {
-    if (activeFilter === "all") {
-      setSortedBets(bets);
-    }
-    if (activeFilter === "active") {
-      const activeBets = bets.filter((bet) => bet.active);
-      setSortedBets(activeBets);
-    }
-    if (activeFilter === "settled") {
-      const settledBets = bets.filter((bet) => !bet.active);
-      setSortedBets(settledBets);
-    }
-  }, [activeFilter, bets]);
-
-  useEffect(() => {
+  const sortMethodHandler = (status, bets) => {
     if (sortMethod === "date") {
       const sortedArray = sortedBets.sort((a, b) => b.date - a.date);
-      setSortedBets(sortedArray);
+      return sortedArray;
     }
     if (sortMethod === "alphabetical") {
       const sortedArray = sortedBets.sort((a, b) => {
         return a.person.localeCompare(b.person);
       });
-      setSortedBets(sortedArray);
+      return sortedArray;
     }
+  }
+  useEffect(() => {
+    onValue(fireBets, (snapshot) => {
+      const fireData = snapshot.val();
+      const arrayBets = Object.values(fireData).sort((a, b) => b.date - a.date);
+      setBets(arrayBets);
+      setSortedBets(arrayBets);
+    });
+  }, []);
+
+
+
+  useEffect(() => {
+    const filteredBets = activeFilterHandler(activeFilter, bets)
+    setSortedBets(filteredBets)
+  }, [activeFilter, bets]);
+
+  useEffect(() => {
+    const filteredBets = sortMethodHandler(sortMethod, bets)
+    setSortedBets(filteredBets)
   }, [sortMethod, bets]);
 
   const betModalHandler = () => {
@@ -59,10 +71,6 @@ const Home = ({ bets, setBets }) => {
 
   const sortModalHandler = () => {
     setShowSortModal(!showSortModal);
-  };
-
-  const statsModalHandler = () => {
-    setShowStatsModal(!showStatsModal);
   };
 
   const sortBetsAlphabetically = () => {
@@ -92,7 +100,6 @@ const Home = ({ bets, setBets }) => {
       <FooterBar
         showSortModal={sortModalHandler}
         showBetModal={betModalHandler}
-        showStatsModal={statsModalHandler}
       />
       <NewBetModal
         closeModal={betModalHandler}
@@ -109,11 +116,6 @@ const Home = ({ bets, setBets }) => {
         filterSettledBets={filterSettledBets}
         activeFilter={activeFilter}
         sortMethod={sortMethod}
-      />
-      <StatsModal
-        closeModal={statsModalHandler}
-        showModal={showStatsModal}
-        bets={bets}
       />
     </View>
   );

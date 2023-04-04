@@ -1,10 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import {
-  SimpleLineIcons,
-  FontAwesome,
-  Ionicons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { SimpleLineIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 // import { auth } from "../../firebase";
 
@@ -35,15 +30,7 @@ const FooterBar = (props) => {
       </View>
       <View>
         <Ionicons
-          name="stats-chart-sharp"
-          size={30}
-          color="white"
-          onPress={props.showStatsModal}
-        />
-      </View>
-      <View>
-        <MaterialIcons
-          name="logout"
+          name="person"
           size={30}
           color="white"
           onPress={profileScreenHandler}
