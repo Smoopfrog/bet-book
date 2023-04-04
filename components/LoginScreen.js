@@ -30,7 +30,7 @@ const LoginScreen = ({ setBets }) => {
           setBets(arrayBets);
         });
 
-        navigation.replace("Home");
+        navigation.replace("HomeScreen");
       }
     });
 
