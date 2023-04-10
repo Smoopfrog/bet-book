@@ -11,11 +11,15 @@ import {
 import { auth } from "../firebase";
 import { db } from "../firebase";
 import { get, ref, child } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { logIn } from "../betsSlice";
 
 const LoginScreen = ({ setBets }) => {
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("password");
   const dbRef = ref(db);
+  const dispatch = useDispatch();
+
 
   const navigation = useNavigation();
 
@@ -28,6 +32,8 @@ const LoginScreen = ({ setBets }) => {
             (a, b) => b.date - a.date
           );
           setBets(arrayBets);
+          console.log(arrayBets)
+          dispatch(logIn([...arrayBets]))
         });
 
         navigation.replace("HomeScreen");

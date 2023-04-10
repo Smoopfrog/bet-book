@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   sectionTitleText: {
-    alignSelf: "end",
+    alignSelf: "flex-end",
     fontWeight: "600",
   },
   sectionContainer: {
