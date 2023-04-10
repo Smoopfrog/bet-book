@@ -84,19 +84,20 @@ const ProfileScreen = ({ bets }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "#f8f0fc",
     flex: 1,
+    backgroundColor: "#f8f0fc",
   },
   sectionTitle: {
     width: "90%",
-    fontWeight: "600",
     marginTop: 10,
+    marginBottom: 3,
     flexDirection: "row",
     alignItems: "center",
+    fontWeight: "600",
   },
   sectionTitleText: {
-    fontWeight: "600",
     alignSelf: "end",
+    fontWeight: "600",
   },
   sectionContainer: {
     width: "90%",

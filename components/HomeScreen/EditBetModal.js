@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     padding: 6,
   },
   title: {
-    fontSize: "24px",
+    fontSize: 24,
     textAlign: "center",
     fontWeight: "600",
   },
