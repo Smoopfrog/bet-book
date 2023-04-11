@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { auth } from "../firebase";
 import { db } from "../firebase";
 import { get, ref, child } from "firebase/database";
@@ -17,9 +18,10 @@ import { logIn } from "../betsSlice";
 const LoginScreen = ({ setBets }) => {
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("password");
+  const [showPassword, setShowPassword] = useState(false);
+
   const dbRef = ref(db);
   const dispatch = useDispatch();
-
 
   const navigation = useNavigation();
 
@@ -32,8 +34,8 @@ const LoginScreen = ({ setBets }) => {
             (a, b) => b.date - a.date
           );
           setBets(arrayBets);
-          console.log(arrayBets)
-          dispatch(logIn([...arrayBets]))
+          console.log(arrayBets);
+          dispatch(logIn([...arrayBets]));
         });
 
         navigation.replace("HomeScreen");
@@ -69,24 +71,57 @@ const LoginScreen = ({ setBets }) => {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>BETBOOK</Text>
         </View>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          style={styles.input}
-          secureTextEntry
-        />
+        <Text style={styles.inputTitle}>Email</Text>
+        <View style={styles.inputView}>
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={styles.input}
+          />
+          <Ionicons name="person" size={24} color="white" />
+        </View>
+        <Text style={styles.inputTitle}>Password</Text>
+        <View style={styles.inputView}>
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            style={styles.input}
+            secureTextEntry={!showPassword}
+          />
+          {!showPassword && (
+            <Ionicons
+              name="eye"
+              size={24}
+              color="white"
+              onPress={() => {
+                setShowPassword(true);
+              }}
+            />
+          )}
+
+          {showPassword && (
+            <View>
+              <Ionicons
+                name="eye-off"
+                size={24}
+                color="white"
+                onPress={() => {
+                  setShowPassword(false);
+                }}
+              />
+            </View>
+          )}
+        </View>
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+        <TouchableOpacity
+          onPress={handleLogin}
+          style={[styles.button, styles.buttonOutline]}
+        >
+          <Text style={styles.buttonOutlineText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleSignUp}
@@ -106,6 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "black",
   },
   titleContainer: {
     justifyContent: "center",
@@ -115,29 +151,51 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     fontWeight: 700,
+    color: "#37b24d",
+    textShadow: "0 0 25px #06FF00",
   },
 
   inputContainer: {
     width: "80%",
   },
+  inputTitle: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: 600
+
+  },
+  inputView: {
+    borderBottomWidth: 1,
+    borderColor: "white",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+
+  },
   input: {
     borderColor: "grey",
-    borderStyle: "solid",
-    borderWidth: 1,
-    backgroundColor: "white",
-    paddingHorizontal: 15,
+    color: "white",
+    backgroundColor: "transparent",
     paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
+    width: "90%",
+  },
+  inputIcon: {
+    color: "white",
   },
   buttonContainer: {
     width: "60%",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,
+    gap: 10,
   },
   button: {
-    backgroundColor: "#0782F9",
+    backgroundColor: "#37b24d",
+    shadowColor: "#37b24d",
+    shadowOpacity: 1,
+    shadowOffset: { width: 3, height: 5 },
+    shadowRadius: 10,
     width: "100%",
     padding: 15,
     borderRadius: 10,
@@ -146,7 +204,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "#0782F9",
+    borderColor: "#37b24d",
     borderWidth: 2,
   },
   buttonText: {
@@ -155,7 +213,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "#0782F9",
+    color: "#37b24d",
     fontWeight: "700",
     fontSize: 16,
   },

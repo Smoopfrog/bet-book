@@ -8,11 +8,15 @@ import NewBetModal from "./NewBetModal";
 import SortModal from "./SortModal";
 import StatBar from "./StatBar";
 // import StatsModal from "./StatsModal";
+import { selectBets } from "../../betsSlice";
+import { useSelector } from "react-redux";
 
 const Home = ({ bets, setBets }) => {
+  const reduxBets = useSelector(selectBets)
+  console.log(reduxBets)
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
-  const [sortedBets, setSortedBets] = useState(bets);
+  const [sortedBets, setSortedBets] = useState(reduxBets);
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
   const fireBets = ref(db, "/bets");
@@ -23,7 +27,7 @@ const Home = ({ bets, setBets }) => {
     }
     if (status === "active") {
       const activeBets = [...bets].filter((bet) => bet.active);
-      console.log('activeBets', activeBets)
+      console.log("activeBets", activeBets);
       return activeBets;
     }
     if (status === "settled") {
@@ -34,7 +38,7 @@ const Home = ({ bets, setBets }) => {
 
   const sortMethodHandler = (status, bets) => {
     if (sortMethod === "date") {
-      const sortedArray = sortedBets.sort((a, b) => b.date - a.date);
+      const sortedArray = [...sortedBets].sort((a, b) => b.date - a.date);
       return sortedArray;
     }
     if (sortMethod === "alphabetical") {
@@ -43,26 +47,24 @@ const Home = ({ bets, setBets }) => {
       });
       return sortedArray;
     }
-  }
+  };
+
   useEffect(() => {
     onValue(fireBets, (snapshot) => {
       const fireData = snapshot.val();
       const arrayBets = Object.values(fireData).sort((a, b) => b.date - a.date);
-      setBets(arrayBets);
       setSortedBets(arrayBets);
     });
   }, []);
 
-
-
   useEffect(() => {
-    const filteredBets = activeFilterHandler(activeFilter, bets)
-    setSortedBets(filteredBets)
+    const filteredBets = activeFilterHandler(activeFilter, bets);
+    setSortedBets(filteredBets);
   }, [activeFilter, bets]);
 
   useEffect(() => {
-    const filteredBets = sortMethodHandler(sortMethod, bets)
-    setSortedBets(filteredBets)
+    const filteredBets = sortMethodHandler(sortMethod, bets);
+    setSortedBets(filteredBets);
   }, [sortMethod, bets]);
 
   const betModalHandler = () => {
@@ -123,7 +125,7 @@ const Home = ({ bets, setBets }) => {
 
 const styles = StyleSheet.create({
   app: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     flex: 1,
   },
 });

@@ -23,7 +23,7 @@ const Bet = ({ bet, setBets }) => {
   //     // navigation.replace("Home");
   //   });
   // }, [bet.result]);
-  
+
   const editBetModalHandler = () => {
     setShowEditBetModal(!showEditBetModal);
   };
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
+
   },
 });
 

@@ -4,6 +4,7 @@ export const betsSlice = createSlice({
   name: "bets",
   initialState: {
     bets: null,
+    sortedBets: null
   },
   reducers: {
     logIn: (state, action) => {
@@ -16,5 +17,5 @@ export const betsSlice = createSlice({
 });
 
 export const { logIn, logOut } = betsSlice.actions;
-export const selectUser = (state) => state.bets.bets;
+export const selectBets = (state) => state.bets.bets;
 export default betsSlice.reducer;
