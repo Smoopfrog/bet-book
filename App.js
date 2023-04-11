@@ -24,11 +24,12 @@ const App = () => {
             options={{
               title: "BETBOOK",
               headerStyle: {
-                backgroundColor: "#f4511e",
+                backgroundColor: "black",
               },
-              headerTintColor: "#fff",
+              headerTintColor: "black",
               headerTitleStyle: {
                 fontWeight: "bold",
+                color: "white",
               },
             }}
           >
@@ -39,11 +40,12 @@ const App = () => {
             options={{
               title: "Profile",
               headerStyle: {
-                backgroundColor: "#f4511e",
+                backgroundColor: "black",
               },
-              headerTintColor: "#fff",
+              headerTintColor: "black",
               headerTitleStyle: {
                 fontWeight: "bold",
+                color: "white",
               },
             }}
           >
