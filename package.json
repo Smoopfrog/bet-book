@@ -13,6 +13,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "@reduxjs/toolkit": "^1.9.3",
     "expo": "~48.0.9",
+    "expo-font": "~11.1.1",
     "expo-splash-screen": "~0.18.1",
     "expo-status-bar": "~1.4.4",
     "firebase": "^9.18.0",

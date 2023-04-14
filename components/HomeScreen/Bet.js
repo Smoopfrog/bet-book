@@ -4,25 +4,30 @@ import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
 import EditBetModal from "./EditBetModal";
-import { useEffect, useState } from "react";
-// import { ref, set } from "firebase/database";
+import { useState, useCallback } from "react";
 import { db } from "../../firebase";
-import { get, ref, child, set } from "firebase/database";
+import { ref, set } from "firebase/database";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 const Bet = ({ bet, setBets }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
   const [active, setActive] = useState(bet.active);
-  const dbRef = ref(db);
 
-  // useEffect(() => {
-  //   get(child(dbRef, "/bets")).then((snapshot) => {
-  //     const fireData = snapshot.val();
-  //     const arrayBets = Object.values(fireData);
-  //     console.log("result change bets", arrayBets);
-  //     setBets([...arrayBets]);
-  //     // navigation.replace("Home");
-  //   });
-  // }, [bet.result]);
+  const [fontsLoaded] = useFonts({
+    "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
 
   const editBetModalHandler = () => {
     setShowEditBetModal(!showEditBetModal);
@@ -66,16 +71,67 @@ const Bet = ({ bet, setBets }) => {
             bet.result === "pending" && styles.activeCard,
             bet.result === "loser" && styles.loserCard,
           ]}
+          onLayout={onLayoutRootView}
         >
           <View style={styles.header}>
             <View style={styles.title}>
-              <Text style={styles.titleFont}>{bet.title}</Text>
-              <Text style={styles.text}>#{bet.id}</Text>
+              <Text
+                style={[
+                  styles.titleFont,
+                  { fontFamily: "Orbitron-Regular" },
+                  bet.result === "winner" && { color: "green" },
+                  bet.result === "pending" && { color: "white" },
+                  bet.result === "loser" && { color: "red" },
+                ]}
+              >
+                {bet.title}
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { fontFamily: "Orbitron-Regular" },
+                  bet.result === "winner" && { color: "green" },
+                  bet.result === "pending" && { color: "white" },
+                  bet.result === "loser" && { color: "red" },
+                ]}
+              >
+                #{bet.id}
+              </Text>
             </View>
             <View style={styles.body}>
-              <Text style={styles.text}>{date}</Text>
-              <Text style={styles.text}>{bet.person}</Text>
-              <Text style={styles.text}>{bet.wager}</Text>
+              <Text
+                style={[
+                  styles.text,
+                  { fontFamily: "Orbitron-Regular" },
+                  bet.result === "winner" && { color: "green" },
+                  bet.result === "pending" && { color: "white" },
+                  bet.result === "loser" && { color: "red" },
+                ]}
+              >
+                {date}
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { fontFamily: "Orbitron-Regular" },
+                  bet.result === "winner" && { color: "green" },
+                  bet.result === "pending" && { color: "white" },
+                  bet.result === "loser" && { color: "red" },
+                ]}
+              >
+                {bet.person}
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  { fontFamily: "Orbitron-Regular" },
+                  bet.result === "winner" && { color: "green" },
+                  bet.result === "pending" && { color: "white" },
+                  bet.result === "loser" && { color: "red" },
+                ]}
+              >
+                {bet.wager}
+              </Text>
             </View>
             <View style={styles.icon}>
               <BouncyCheckbox
@@ -99,13 +155,20 @@ const Bet = ({ bet, setBets }) => {
 
 const styles = StyleSheet.create({
   winnercard: {
-    backgroundColor: "green",
+    borderColor: "green",
+    borderWidth: 2,
+    color: "green",
   },
   loserCard: {
-    backgroundColor: "red",
+    borderColor: "red",
+    borderWidth: 2,
+    color: "red",
   },
   activeCard: {
-    backgroundColor: "#FFAC41",
+    // backgroundColor: "#FFAC41",
+    borderColor: "#FFF",
+    borderWidth: 2,
+    color: "#FFF",
   },
   card: {
     width: "100%",
@@ -120,9 +183,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleFont: {
-    color: "white",
+    color: "inherit",
     fontSize: 20,
     fontWeight: "bold",
+    // fontFamily: "monospace",
   },
   icon: {
     justifyContent: "center",
@@ -131,8 +195,8 @@ const styles = StyleSheet.create({
     color: "green",
   },
   text: {
-    color: "white",
-
+    color: "inherit",
+    // fontFamily: "monospace",
   },
 });
 
