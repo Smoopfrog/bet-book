@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -14,6 +14,8 @@ import { db } from "../firebase";
 import { get, ref, child } from "firebase/database";
 import { useDispatch } from "react-redux";
 import { logIn } from "../betsSlice";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 const LoginScreen = ({ setBets }) => {
   const [email, setEmail] = useState("test@test.com");
@@ -43,7 +45,19 @@ const LoginScreen = ({ setBets }) => {
 
     return unsubscribe;
   }, []);
+  const [fontsLoaded] = useFonts({
+    "Orbitron-Regular": require("../assets/fonts/Orbitron-Regular.ttf"),
+  });
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
   const handleSignUp = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
@@ -66,27 +80,33 @@ const LoginScreen = ({ setBets }) => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View style={styles.inputContainer}>
+      <View style={styles.inputContainer} onLayout={onLayoutRootView}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>BETBOOK</Text>
+          <Text style={[styles.title, { fontFamily: "Orbitron-Regular" }]}>
+            BETBOOK
+          </Text>
         </View>
-        <Text style={styles.inputTitle}>Email</Text>
+        <Text style={[styles.inputTitle, , { fontFamily: "Orbitron-Regular" }]}>
+          Email
+        </Text>
         <View style={styles.inputView}>
           <TextInput
             placeholder="Email"
             value={email}
             onChangeText={(text) => setEmail(text)}
-            style={styles.input}
+            style={[styles.input, { fontFamily: "Orbitron-Regular" }]}
           />
           <Ionicons name="person" size={24} color="white" />
         </View>
-        <Text style={styles.inputTitle}>Password</Text>
-        <View style={styles.inputView}>
+        <Text style={[styles.inputTitle, { fontFamily: "Orbitron-Regular" }]}>
+          Password
+        </Text>
+        <View style={[styles.inputView, { fontFamily: "Orbitron-Regular" }]}>
           <TextInput
             placeholder="Password"
             value={password}
             onChangeText={(text) => setPassword(text)}
-            style={styles.input}
+            style={[styles.input, { fontFamily: "Orbitron-Regular" }]}
             secureTextEntry={!showPassword}
           />
           {!showPassword && (
@@ -120,13 +140,27 @@ const LoginScreen = ({ setBets }) => {
           onPress={handleLogin}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Login</Text>
+          <Text
+            style={[
+              styles.buttonOutlineText,
+              { fontFamily: "Orbitron-Regular" },
+            ]}
+          >
+            Login
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+          <Text
+            style={[
+              styles.buttonOutlineText,
+              { fontFamily: "Orbitron-Regular" },
+            ]}
+          >
+            Register
+          </Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -160,8 +194,7 @@ const styles = StyleSheet.create({
   inputTitle: {
     color: "white",
     fontSize: 18,
-    fontWeight: 600
-
+    fontWeight: 600,
   },
   inputView: {
     borderBottomWidth: 1,
@@ -170,7 +203,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
-
   },
   input: {
     borderColor: "grey",
@@ -192,7 +224,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#37b24d",
     shadowColor: "#37b24d",
-    shadowOpacity: 1,
+    shadowOpacity: 0.7,
     shadowOffset: { width: 3, height: 5 },
     shadowRadius: 10,
     width: "100%",
