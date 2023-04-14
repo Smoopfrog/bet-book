@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./components/HomeScreen/HomeScreen";
@@ -6,10 +6,24 @@ import LoginScreen from "./components/LoginScreen";
 import ProfileScreen from "./components/ProfileScreen";
 import { Provider } from "react-redux";
 import store from "./store";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 const App = () => {
   const [bets, setBets] = useState([]);
+  const [fontsLoaded] = useFonts({
+    "Orbitron-Regular": require("./assets/fonts/Orbitron-Regular.ttf"),
+  });
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
   const Stack = createNativeStackNavigator();
 
   return (
@@ -30,6 +44,7 @@ const App = () => {
               headerTitleStyle: {
                 fontWeight: "bold",
                 color: "white",
+                fontFamily: "Orbitron-Regular",
               },
             }}
           >
@@ -38,14 +53,15 @@ const App = () => {
           <Stack.Screen
             name="ProfileScreen"
             options={{
-              title: "Profile",
+              title: "PROFILE",
               headerStyle: {
                 backgroundColor: "black",
               },
-              headerTintColor: "black",
+              headerTintColor: "white",
               headerTitleStyle: {
                 fontWeight: "bold",
                 color: "white",
+                fontFamily: "Orbitron-Regular",
               },
             }}
           >

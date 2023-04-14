@@ -20,6 +20,7 @@ const ProfileScreen = ({ bets }) => {
   if (!fontsLoaded) {
     return null;
   }
+
   const calculateDollarWinnings = (bets, result) => {
     let winnings = 0;
     for (const bet of bets) {
@@ -43,11 +44,10 @@ const ProfileScreen = ({ bets }) => {
   const totalBets = bets.length;
   const betsWon = bets.filter((bet) => bet.result === "winner").length;
   const betsLost = bets.filter((bet) => bet.result === "loser").length;
+  const betsPending = bets.filter((bet) => bet.result === "pending").length;
   const winningPercentage = Math.round(
     (betsWon / (totalBets - betsPending)) * 100
   );
-  console.log("winningPercentage", winningPercentage /*  */);
-  const betsPending = bets.filter((bet) => bet.result === "pending").length;
   const betsSettled = bets.filter((bet) => !bet.active).length;
   const moneyWon = calculateDollarWinnings(bets, "winner");
   const moneyLost = calculateDollarWinnings(bets, "loser");
@@ -66,7 +66,7 @@ const ProfileScreen = ({ bets }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.sectionTitle}>
         <Ionicons name="person" size={24} color="white" />
         <Text
@@ -128,9 +128,9 @@ const ProfileScreen = ({ bets }) => {
         <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Total Pending: {betsPending}
         </Text>
-        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
+        {/* <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Total Settled: {betsSettled}
-        </Text>
+        </Text> */}
         <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Win Percentage: {winningPercentage}%
         </Text>
