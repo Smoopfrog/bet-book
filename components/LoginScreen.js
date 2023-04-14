@@ -34,7 +34,6 @@ const LoginScreen = ({ setBets }) => {
             (a, b) => b.date - a.date
           );
           setBets(arrayBets);
-          console.log(arrayBets);
           dispatch(logIn([...arrayBets]));
         });
 

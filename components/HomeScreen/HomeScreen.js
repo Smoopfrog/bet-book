@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 
 const Home = ({ bets, setBets }) => {
   const reduxBets = useSelector(selectBets)
-  console.log(reduxBets)
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
   const [sortedBets, setSortedBets] = useState(reduxBets);
@@ -27,7 +26,6 @@ const Home = ({ bets, setBets }) => {
     }
     if (status === "active") {
       const activeBets = [...bets].filter((bet) => bet.active);
-      console.log("activeBets", activeBets);
       return activeBets;
     }
     if (status === "settled") {
