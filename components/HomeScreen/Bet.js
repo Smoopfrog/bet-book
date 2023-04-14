@@ -28,7 +28,6 @@ const Bet = ({ bet, setBets }) => {
     return null;
   }
 
-
   const editBetModalHandler = () => {
     setShowEditBetModal(!showEditBetModal);
   };
@@ -86,17 +85,6 @@ const Bet = ({ bet, setBets }) => {
               >
                 {bet.title}
               </Text>
-              <Text
-                style={[
-                  styles.text,
-                  { fontFamily: "Orbitron-Regular" },
-                  bet.result === "winner" && { color: "green" },
-                  bet.result === "pending" && { color: "white" },
-                  bet.result === "loser" && { color: "red" },
-                ]}
-              >
-                #{bet.id}
-              </Text>
             </View>
             <View style={styles.body}>
               <Text
@@ -133,14 +121,6 @@ const Bet = ({ bet, setBets }) => {
                 {bet.wager}
               </Text>
             </View>
-            <View style={styles.icon}>
-              <BouncyCheckbox
-                fillColor={"black"}
-                iconComponent={<Feather name="lock" size={15} color="white" />}
-                isChecked={!bet.active}
-                onPress={settledHandler}
-              />
-            </View>
           </View>
           <EditBetModal
             closeModal={editBetModalHandler}
@@ -155,17 +135,19 @@ const Bet = ({ bet, setBets }) => {
 
 const styles = StyleSheet.create({
   winnercard: {
+    backgroundColor: "black",
     borderColor: "green",
     borderWidth: 2,
     color: "green",
   },
   loserCard: {
+    backgroundColor: "black",
     borderColor: "red",
     borderWidth: 2,
     color: "red",
   },
   activeCard: {
-    // backgroundColor: "#FFAC41",
+    backgroundColor: "black",
     borderColor: "#FFF",
     borderWidth: 2,
     color: "#FFF",
@@ -176,8 +158,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   body: {
-    flexDirection: "row",
     justifyContent: "space-evenly",
+    alignItems: 'center'
   },
   title: {
     alignItems: "center",
