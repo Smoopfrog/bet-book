@@ -55,13 +55,19 @@ const Home = () => {
   useEffect(() => {
     onValue(fireBets, (snapshot) => {
       const fireData = snapshot.val();
-      const arrayBets = Object.values(fireData).sort((a, b) => b.date - a.date);
-      setSortedBets(arrayBets);
+      if (fireData) {
+        const arrayBets = Object.values(fireData).sort(
+          (a, b) => b.date - a.date
+        );
+        setSortedBets(arrayBets);
+      } else {
+        setSortedBets([]);
+      }
     });
   }, []);
 
   useEffect(() => {
-    console.log(resultFilter)
+    console.log(resultFilter);
     const filteredBets = resultFilterHandler(resultFilter, reduxBets);
     setSortedBets(filteredBets);
   }, [resultFilter, reduxBets]);

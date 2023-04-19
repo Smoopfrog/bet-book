@@ -8,15 +8,10 @@ import NewBetInput from "./NewBetInput";
 import { auth } from "../../firebase";
 
 const EditBetModal = ({ showModal, closeModal, bet }) => {
-  const [editMode, setEditMode] = useState(true);
   const [title, setTitle] = useState(bet.title);
   const [wager, setWager] = useState(bet.wager);
   const [person, setPerson] = useState(bet.person);
   const userId = auth.currentUser.uid;
-
-  // const editModeHandler = () => {
-  //   setEditMode(!editMode);
-  // };
 
   const deleteBet = () => {
     set(ref(db, "bets/" + userId + "/" + bet.id), null)
@@ -54,41 +49,32 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <View style={styles.modalView}>
-        {/* <TouchableHighlight onPress={editModeHandler} style={styles.editButton}>
-          <Text style={styles.deleteButtonText}>Edit</Text>
-        </TouchableHighlight> */}
-        {editMode ? (
-          <View>
-            <Text style={styles.title}>Edit your bet</Text>
-            <NewBetInput label="Title" value={title} changeHandler={setTitle} />
-            <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
-            <NewBetInput
-              label="Person"
-              value={person}
-              changeHandler={setPerson}
-            />
-            <View style={styles.buttonContainer}>
-              <TouchableHighlight
-                onPress={closeModal}
-                style={styles.deleteButton}
-              >
-                <Text style={styles.deleteButtonText}>Cancel</Text>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={editBet} style={styles.saveButton}>
-                <Text style={styles.deleteButtonText}>Save</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        ) : (
-          <View>
-            <Text>{bet.title}</Text>
-            <Text>{bet.wager}</Text>
-            <Text>{bet.person}</Text>
-            <TouchableHighlight onPress={deleteBet} style={styles.deleteButton}>
-              <Text style={styles.deleteButtonText}>Delete</Text>
+        <View>
+          <Text style={[styles.title, { fontFamily: "Orbitron-Regular" }]}>
+            Edit your bet
+          </Text>
+          <NewBetInput label="Title" value={title} changeHandler={setTitle} />
+          <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
+          <NewBetInput
+            label="Person"
+            value={person}
+            changeHandler={setPerson}
+          />
+          <View style={styles.buttonContainer}>
+            <TouchableHighlight
+              onPress={closeModal}
+              style={styles.deleteButton}
+            >
+              <Text style={styles.deleteButtonText}>Cancel</Text>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={editBet} style={styles.saveButton}>
+              <Text style={styles.deleteButtonText}>Save</Text>
             </TouchableHighlight>
           </View>
-        )}
+          <TouchableHighlight onPress={deleteBet} style={styles.deleteButton}>
+            <Text style={styles.deleteButtonText}>Delete</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     </ModalCard>
   );
