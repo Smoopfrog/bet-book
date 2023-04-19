@@ -75,7 +75,7 @@ const SortModal = ({
   if (!fontsLoaded) {
     return null;
   }
-  
+
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <View style={styles.modalView} onLayout={onLayoutRootView}>
@@ -165,7 +165,9 @@ const SortModal = ({
           </View>
         </View>
         <TouchableOpacity onPress={closeModal} style={styles.closeBtn}>
-          <Text style={styles.innerBtn}>Close</Text>
+          <Text style={[styles.innerBtn, { fontFamily: "Orbitron-Regular" }]}>
+            Close
+          </Text>
         </TouchableOpacity>
       </View>
     </ModalCard>
