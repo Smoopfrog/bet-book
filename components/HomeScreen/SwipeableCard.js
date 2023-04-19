@@ -42,6 +42,7 @@ const SwipeableCard = (props) => {
             alignItems: "center",
             justifyContent: "center",
           }}
+          onLayout={onLayoutRootView}
         >
           <Animated.Text
             style={{
@@ -65,6 +66,7 @@ const SwipeableCard = (props) => {
           alignItems: "center",
           justifyContent: "center",
         }}
+        onLayout={onLayoutRootView}
       >
         <Animated.Text
           style={{
@@ -102,6 +104,7 @@ const SwipeableCard = (props) => {
             alignItems: "center",
             justifyContent: "center",
           }}
+          onLayout={onLayoutRootView}
         >
           <Animated.Text
             style={{
@@ -126,6 +129,7 @@ const SwipeableCard = (props) => {
           alignItems: "center",
           justifyContent: "center",
         }}
+        onLayout={onLayoutRootView}
       >
         <Animated.Text
           style={{
