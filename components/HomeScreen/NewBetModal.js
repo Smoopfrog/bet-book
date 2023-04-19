@@ -11,6 +11,9 @@ import { ref, set } from "firebase/database";
 import { db } from "../../firebase";
 import NewBetInput from "./NewBetInput";
 import ModalCard from "./ModalCard";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useCallback } from "react";
 
 const createTwoButtonAlert = (msg) =>
   Alert.alert("Missing Info", msg, [
@@ -24,6 +27,20 @@ const NewBetModal = ({ closeModal, showModal }) => {
   const [title, setTitle] = useState("");
   const [person, setPerson] = useState("");
   const [wager, setWager] = useState("");
+
+  const [fontsLoaded] = useFonts({
+    "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   let date = Date.now();
 
@@ -67,7 +84,9 @@ const NewBetModal = ({ closeModal, showModal }) => {
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <View style={styles.modalView}>
-          <Text style={styles.title}>Bet area</Text>
+          <Text style={[styles.title, { fontFamily: "Orbitron-Regular" }]}>
+            Bet area
+          </Text>
           <NewBetInput label="Title" value={title} changeHandler={setTitle} />
           <NewBetInput
             label="Person"
@@ -77,10 +96,18 @@ const NewBetModal = ({ closeModal, showModal }) => {
           <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.closeBtn} onPress={closeModal}>
-              <Text style={styles.innerBtn}>Close</Text>
+              <Text
+                style={[styles.innerBtn, { fontFamily: "Orbitron-Regular" }]}
+              >
+                Close
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.confirmBtn} onPress={createNewBet}>
-              <Text style={styles.innerBtn}>Confirm</Text>
+              <Text
+                style={[styles.innerBtn, { fontFamily: "Orbitron-Regular" }]}
+              >
+                Confirm
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -75,6 +75,7 @@ const SortModal = ({
   if (!fontsLoaded) {
     return null;
   }
+  
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <View style={styles.modalView} onLayout={onLayoutRootView}>
