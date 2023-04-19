@@ -33,7 +33,6 @@ const SortModal = ({
   const [sortDateButton, setSortDateButton] = useState();
   const [sortAlphabeticalButton, setSortAlphabeticalButton] = useState();
 
-  // const toggleSwitch = () => setIsEnabled();
   useEffect(() => {
     if (sortMethod === "date") {
       setSortDateButton(true);
@@ -52,7 +51,7 @@ const SortModal = ({
       setFilterPendingButton(false);
       setFilterLostButton(false)
     }
-    if (resultFilter === "won") {
+    if (resultFilter === "winner") {
       setFilterAllButton(false);
       setFilterWonButton(true);
       setFilterPendingButton(false);
@@ -64,7 +63,7 @@ const SortModal = ({
       setFilterPendingButton(true);
       setFilterLostButton(false)
     }
-    if (resultFilter === "lost") {
+    if (resultFilter === "loser") {
       setFilterAllButton(false);
       setFilterWonButton(false);
       setFilterPendingButton(false);
