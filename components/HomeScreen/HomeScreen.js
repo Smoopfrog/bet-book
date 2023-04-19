@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { ref, onValue } from "firebase/database";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import BetFeed from "./BetFeed";
 import FooterBar from "./FooterBar";
 import NewBetModal from "./NewBetModal";
@@ -12,13 +12,14 @@ import { selectBets } from "../../betsSlice";
 import { useSelector } from "react-redux";
 
 const Home = ({ bets, setBets }) => {
-  const reduxBets = useSelector(selectBets)
+  const reduxBets = useSelector(selectBets);
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
   const [sortedBets, setSortedBets] = useState(reduxBets);
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
-  const fireBets = ref(db, "/bets");
+  const userId = auth.currentUser.uid;
+  const fireBets = ref(db, "/bets/" + userId);
 
   const activeFilterHandler = (status, bets) => {
     if (status === "all") {

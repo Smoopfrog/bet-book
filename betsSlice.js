@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export const betsSlice = createSlice({
   name: "bets",
   initialState: {
-    bets: null,
-    sortedBets: null
+    bets: [],
+    sortedBets: []
   },
   reducers: {
     logIn: (state, action) => {
       state.bets = action.payload;
     },
     logOut: (state) => {
-      state.bets = null;
+      state.bets = [];
     },
   },
 });

@@ -14,6 +14,7 @@ import ModalCard from "./ModalCard";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
+import { auth } from "../../firebase";
 
 const createTwoButtonAlert = (msg) =>
   Alert.alert("Missing Info", msg, [
@@ -27,7 +28,8 @@ const NewBetModal = ({ closeModal, showModal }) => {
   const [title, setTitle] = useState("");
   const [person, setPerson] = useState("");
   const [wager, setWager] = useState("");
-
+  const userId = auth.currentUser.uid;
+  
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
   });
@@ -67,9 +69,10 @@ const NewBetModal = ({ closeModal, showModal }) => {
       date: date,
       active: true,
       result: "pending",
+      uid: userId,
     };
 
-    set(ref(db, "bets/" + newBet.id), newBet)
+    set(ref(db, "bets/" + userId + "/" + newBet.id), newBet)
       .then(() => {
         alert("Bet added");
       })
@@ -83,7 +86,7 @@ const NewBetModal = ({ closeModal, showModal }) => {
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <KeyboardAvoidingView style={styles.container} behavior="padding">
-        <View style={styles.modalView}>
+        <View style={styles.modalView} onLayout={onLayoutRootView}>
           <Text style={[styles.title, { fontFamily: "Orbitron-Regular" }]}>
             Bet area
           </Text>

@@ -30,13 +30,16 @@ const LoginScreen = ({ setBets }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        await get(child(dbRef, "/bets")).then((snapshot) => {
+        const userId = auth.currentUser.uid;
+        await get(child(dbRef, "/bets/" + userId)).then((snapshot) => {
           const fireData = snapshot.val();
-          const arrayBets = Object.values(fireData).sort(
-            (a, b) => b.date - a.date
-          );
-          setBets(arrayBets);
-          dispatch(logIn([...arrayBets]));
+          if (fireData) {
+            const arrayBets = Object.values(fireData).sort(
+              (a, b) => b.date - a.date
+            );
+            setBets(arrayBets);
+            dispatch(logIn([...arrayBets]));
+          }
         });
 
         navigation.replace("HomeScreen");

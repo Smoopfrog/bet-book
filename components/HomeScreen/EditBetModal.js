@@ -5,19 +5,21 @@ import { set, ref } from "firebase/database";
 import { db } from "../../firebase";
 import { useState } from "react";
 import NewBetInput from "./NewBetInput";
+import { auth } from "../../firebase";
 
 const EditBetModal = ({ showModal, closeModal, bet }) => {
   const [editMode, setEditMode] = useState(true);
   const [title, setTitle] = useState(bet.title);
   const [wager, setWager] = useState(bet.wager);
   const [person, setPerson] = useState(bet.person);
+  const userId = auth.currentUser.uid;
 
   const editModeHandler = () => {
     setEditMode(!editMode);
   };
 
   const deleteBet = () => {
-    set(ref(db, "bets/" + bet.id), null)
+    set(ref(db, "bets/" + userId + "/" + bet.id), null)
       .then(() => {
         alert("Bet deleted");
         closeModal();
@@ -36,9 +38,10 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
       person,
       title,
       wager,
+      userId,
     };
 
-    set(ref(db, "bets/" + bet.id), newBet)
+    set(ref(db, "bets/" + userId + "/" + newBet.id), newBet)
       .then(() => {
         alert("Bet updated");
         setEditMode(false);
