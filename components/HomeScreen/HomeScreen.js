@@ -16,22 +16,26 @@ const Home = ({ bets, setBets }) => {
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
   const [sortedBets, setSortedBets] = useState(reduxBets);
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [resultFilter, setResultFilter] = useState("all");
   const [sortMethod, setSortMethod] = useState("date");
   const userId = auth.currentUser.uid;
   const fireBets = ref(db, "/bets/" + userId);
 
-  const activeFilterHandler = (status, bets) => {
+  const resultFilterHandler = (status, bets) => {
     if (status === "all") {
       return [...bets];
     }
-    if (status === "active") {
-      const activeBets = [...bets].filter((bet) => bet.active);
-      return activeBets;
+    if (status === "winner") {
+      const wonBets = [...bets].filter((bet) => bet.result === "winner");
+      return wonBets;
     }
-    if (status === "settled") {
-      const settledBets = [...bets].filter((bet) => !bet.active);
-      return settledBets;
+    if (status === "pending") {
+      const pendingBets = [...bets].filter((bet) => bet.result === "pending");
+      return pendingBets;
+    }
+    if (status === "loser") {
+      const lostBets = [...bets].filter((bet) => bet.result === "loser");
+      return lostBets;
     }
   };
 
@@ -57,9 +61,10 @@ const Home = ({ bets, setBets }) => {
   }, []);
 
   useEffect(() => {
-    const filteredBets = activeFilterHandler(activeFilter, bets);
+    console.log(resultFilter)
+    const filteredBets = resultFilterHandler(resultFilter, bets);
     setSortedBets(filteredBets);
-  }, [activeFilter, bets]);
+  }, [resultFilter, bets]);
 
   useEffect(() => {
     const filteredBets = sortMethodHandler(sortMethod, bets);
@@ -83,17 +88,20 @@ const Home = ({ bets, setBets }) => {
   };
 
   const filterAllBets = () => {
-    setActiveFilter("all");
+    setResultFilter("all");
   };
 
-  const filterActiveBets = () => {
-    setActiveFilter("active");
+  const filterWonBets = () => {
+    setResultFilter("winner");
   };
 
-  const filterSettledBets = () => {
-    setActiveFilter("settled");
+  const filterPendingBets = () => {
+    setResultFilter("pending");
   };
 
+  const filterLostBets = () => {
+    setResultFilter("loser");
+  };
   return (
     <View style={styles.app}>
       <StatBar bets={sortedBets} />
@@ -113,9 +121,10 @@ const Home = ({ bets, setBets }) => {
         sortBetsAlphabetically={sortBetsAlphabetically}
         sortBetsChronologically={sortBetsChronologically}
         filterAllBets={filterAllBets}
-        filterActiveBets={filterActiveBets}
-        filterSettledBets={filterSettledBets}
-        activeFilter={activeFilter}
+        filterWonBets={filterWonBets}
+        filterPendingBets={filterPendingBets}
+        filterLostBets={filterLostBets}
+        resultFilter={resultFilter}
         sortMethod={sortMethod}
       />
     </View>

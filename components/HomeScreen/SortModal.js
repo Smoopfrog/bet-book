@@ -20,17 +20,18 @@ const SortModal = ({
   sortBetsAlphabetically,
   sortBetsChronologically,
   filterAllBets,
-  filterActiveBets,
-  filterSettledBets,
-  activeFilter,
+  filterWonBets,
+  filterPendingBets,
+  filterLostBets,
+  resultFilter,
   sortMethod,
 }) => {
   const [filterAllButton, setFilterAllButton] = useState();
-  const [filterActiveButton, setFilterActiveButton] = useState();
-  const [filterSettledButton, setFilterSettledButton] = useState();
+  const [filterWonButton, setFilterWonButton] = useState();
+  const [filterPendingButton, setFilterPendingButton] = useState();
+  const [filterLostButton, setFilterLostButton] = useState();
   const [sortDateButton, setSortDateButton] = useState();
   const [sortAlphabeticalButton, setSortAlphabeticalButton] = useState();
-  // const [isEnabled, setIsEnabled] = useState(false);
 
   // const toggleSwitch = () => setIsEnabled();
   useEffect(() => {
@@ -45,22 +46,31 @@ const SortModal = ({
   }, [sortMethod]);
 
   useEffect(() => {
-    if (activeFilter === "all") {
+    if (resultFilter === "all") {
       setFilterAllButton(true);
-      setFilterActiveButton(false);
-      setFilterSettledButton(false);
+      setFilterWonButton(false);
+      setFilterPendingButton(false);
+      setFilterLostButton(false)
     }
-    if (activeFilter === "active") {
+    if (resultFilter === "won") {
       setFilterAllButton(false);
-      setFilterActiveButton(true);
-      setFilterSettledButton(false);
+      setFilterWonButton(true);
+      setFilterPendingButton(false);
+      setFilterLostButton(false)
     }
-    if (activeFilter === "settled") {
+    if (resultFilter === "pending") {
       setFilterAllButton(false);
-      setFilterActiveButton(false);
-      setFilterSettledButton(true);
+      setFilterWonButton(false);
+      setFilterPendingButton(true);
+      setFilterLostButton(false)
     }
-  }, [activeFilter]);
+    if (resultFilter === "lost") {
+      setFilterAllButton(false);
+      setFilterWonButton(false);
+      setFilterPendingButton(false);
+      setFilterLostButton(true)
+    }
+  }, [resultFilter]);
 
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
@@ -138,28 +148,41 @@ const SortModal = ({
             </View>
             <View style={styles.switchContainer}>
               <Switch
-                onValueChange={filterActiveBets}
-                value={filterActiveButton}
+                onValueChange={filterWonBets}
+                value={filterWonButton}
               />
               <Text
                 style={{
                   fontFamily: "Orbitron-Regular",
                 }}
               >
-                Active
+                Won
               </Text>
             </View>
             <View style={styles.switchContainer}>
               <Switch
-                onValueChange={filterSettledBets}
-                value={filterSettledButton}
+                onValueChange={filterPendingBets}
+                value={filterPendingButton}
               />
               <Text
                 style={{
                   fontFamily: "Orbitron-Regular",
                 }}
               >
-                Settled
+                Pending
+              </Text>
+            </View>
+            <View style={styles.switchContainer}>
+              <Switch
+                onValueChange={filterLostBets}
+                value={filterLostButton}
+              />
+              <Text
+                style={{
+                  fontFamily: "Orbitron-Regular",
+                }}
+              >
+                Lost
               </Text>
             </View>
           </View>
