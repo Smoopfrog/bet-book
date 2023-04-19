@@ -1,7 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { SimpleLineIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-// import { auth } from "../../firebase";
 
 const FooterBar = (props) => {
   const navigation = useNavigation();

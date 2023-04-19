@@ -1,11 +1,16 @@
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-
+import {
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SimpleLineIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useCallback } from "react";
-
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
-const EmptyErrorMsg = () => {
+const EmptyErrorMsg = (props) => {
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
   });
@@ -27,6 +32,12 @@ const EmptyErrorMsg = () => {
           <Text style={[styles.titleFont, { fontFamily: "Orbitron-Regular" }]}>
             You have no current bets. Please add some by using the button below.
           </Text>
+          <TouchableOpacity
+            style={styles.addBetBtn}
+            onPress={props.showBetModal}
+          >
+            <SimpleLineIcons name="plus" size={48} color="white" />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -51,6 +62,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  addBetBtn: {
+    marginTop: 10,
   },
 });
 
