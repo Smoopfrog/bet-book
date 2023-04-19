@@ -1,62 +1,20 @@
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import {
-  useFocusEffect,
-  useIsFocused,
-  useNavigation,
-} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { auth } from "../firebase";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { selectBets } from "../betsSlice";
 
 const ProfileScreen = () => {
-  const [totalBets, setTotalBets] = useState();
-  const [betsWon, setBetsWon] = useState();
-
   const bets = useSelector(selectBets);
-  const isFocused = useIsFocused();
+  // const isFocused = useIsFocused();
 
-  // listen for isFocused, if useFocused changes
-  // call the function that you use to mount the component.
-
-  const calculateDollarWinnings = (bets, result) => {
-    let winnings = 0;
-    for (const bet of bets) {
-      if (bet.wager[0] === "$" && bet.result === result) {
-        winnings += Number(bet.wager.slice(1));
-      }
-    }
-    return winnings;
-  };
-
-  const calculateOtherWinnings = (bets, result) => {
-    let winnings = [];
-    for (const bet of bets) {
-      if (bet.wager[0] !== "$" && bet.result === result) {
-        winnings.push(bet.wager);
-      }
-    }
-    return winnings.join(", ");
-  };
-  useEffect(() => {
-    if (isFocused) {
-      console.log(bets)
-      setTotalBets(bets.length);
-      const betsWon = bets.filter((bet) => bet.result === "winner").length;
-      const betsLost = bets.filter((bet) => bet.result === "loser").length;
-      const betsPending = bets.filter((bet) => bet.result === "pending").length;
-      const winningPercentage = Math.round(
-        (betsWon / (totalBets - betsPending)) * 100
-      );
-      const moneyWon = calculateDollarWinnings(bets, "winner");
-      const moneyLost = calculateDollarWinnings(bets, "loser");
-      const othersWon = calculateOtherWinnings(bets, "winner");
-      const othersLost = calculateOtherWinnings(bets, "loser");
-    }
-  }, [isFocused]);
+  // useEffect(() => {
+  //   isFocused && updateSomeFunction()
+  // },[isFocused]);
 
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../assets/fonts/Orbitron-Regular.ttf"),
@@ -71,6 +29,39 @@ const ProfileScreen = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  const calculateDollarWinnings = (bets, result) => {
+    let winnings = 0;
+    for (const bet of bets) {
+      if (bet.wager[0] === "$" && bet.result === result) {
+        winnings += Number(bet.wager.slice(1));
+      }
+    }
+    return winnings;
+  };
+
+
+  const calculateOtherWinnings = (bets, result) => {
+    let winnings = [];
+    for (const bet of bets) {
+      if (bet.wager[0] !== "$" && bet.result === result) {
+        winnings.push(bet.wager);
+      }
+    }
+    return winnings.join(", ");
+  };
+
+  const totalBets = bets.length;
+  const betsWon = bets.filter((bet) => bet.result === "winner").length;
+  const betsLost = bets.filter((bet) => bet.result === "loser").length;
+  const betsPending = bets.filter((bet) => bet.result === "pending").length;
+  const winningPercentage = Math.round(
+    (betsWon / (totalBets - betsPending)) * 100
+  );
+  const moneyWon = calculateDollarWinnings(bets, "winner");
+  const moneyLost = calculateDollarWinnings(bets, "loser");
+  const othersWon = calculateOtherWinnings(bets, "winner");
+  const othersLost = calculateOtherWinnings(bets, "loser");
 
   const navigation = useNavigation();
 
@@ -137,7 +128,7 @@ const ProfileScreen = () => {
         <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Total Bets: {totalBets}
         </Text>
-        {/* <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
+        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Total Wins: {betsWon}
         </Text>
         <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
@@ -146,9 +137,9 @@ const ProfileScreen = () => {
         <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Total Pending: {betsPending}
         </Text>
-        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
+        {/* <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Total Settled: {betsSettled}
-        </Text>
+        </Text> */}
         <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Win Percentage: {winningPercentage}%
         </Text>
@@ -163,7 +154,7 @@ const ProfileScreen = () => {
         </Text>
         <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Total Lost: {othersLost ? othersLost : "Nothing"}
-        </Text> */}
+        </Text>
       </View>
     </View>
   );

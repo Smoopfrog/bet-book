@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import Bet from "./Bet";
-
+import EmptyErrorMsg from "./EmptyError";
 const BetFeed = ({ bets }) => {
   const betComponents = bets.map((bet) => {
     return <Bet key={bet.id} bet={bet} />;
@@ -8,9 +8,7 @@ const BetFeed = ({ bets }) => {
 
   return (
     <SafeAreaView style={styles.scrollViewContainer}>
-      <ScrollView >
-        {betComponents}
-      </ScrollView>
+      <ScrollView>{bets.length ? betComponents : <EmptyErrorMsg />}</ScrollView>
     </SafeAreaView>
   );
 };

@@ -67,7 +67,6 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    console.log(resultFilter);
     const filteredBets = resultFilterHandler(resultFilter, reduxBets);
     setSortedBets(filteredBets);
   }, [resultFilter, reduxBets]);
