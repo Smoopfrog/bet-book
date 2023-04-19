@@ -5,7 +5,7 @@ import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
 import EditBetModal from "./EditBetModal";
 import { useState, useCallback } from "react";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { ref, set } from "firebase/database";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -13,6 +13,7 @@ import * as SplashScreen from "expo-splash-screen";
 const Bet = ({ bet, setBets }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
   const [active, setActive] = useState(bet.active);
+  const userId = auth.currentUser.uid;
 
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
@@ -33,7 +34,7 @@ const Bet = ({ bet, setBets }) => {
   };
 
   const resultHandler = (result) => {
-    set(ref(db, "bets/" + bet.id + "/result"), result)
+    set(ref(db, "bets/" + userId + "/" + bet.id + "/result"), result)
       .then(() => {
         console.log("Result updated to: ", result);
       })
@@ -45,7 +46,7 @@ const Bet = ({ bet, setBets }) => {
   const settledHandler = () => {
     const newActiveStatus = !active;
 
-    set(ref(db, "bets/" + bet.id + "/active"), newActiveStatus)
+    set(ref(db, "bets/" + userId + "/" + bet.id + "/active"), newActiveStatus)
       .then(() => {
         console.log("Active status updated to: ", newActiveStatus);
         setActive(newActiveStatus);
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
   },
   body: {
     justifyContent: "space-evenly",
-    alignItems: 'center'
+    alignItems: "center",
   },
   title: {
     alignItems: "center",
