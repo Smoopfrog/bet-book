@@ -17,7 +17,7 @@ import { logIn } from "../betsSlice";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
-const LoginScreen = ({ setBets }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("password");
   const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +37,6 @@ const LoginScreen = ({ setBets }) => {
             const arrayBets = Object.values(fireData).sort(
               (a, b) => b.date - a.date
             );
-            setBets(arrayBets);
             dispatch(logIn([...arrayBets]));
           }
         });

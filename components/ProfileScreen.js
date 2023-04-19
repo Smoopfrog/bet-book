@@ -5,8 +5,12 @@ import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
+import { useSelector } from "react-redux";
+import { selectBets } from "../betsSlice";
 
-const ProfileScreen = ({ bets }) => {
+const ProfileScreen = () => {
+  const bets = useSelector(selectBets);
+
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../assets/fonts/Orbitron-Regular.ttf"),
   });
@@ -31,6 +35,7 @@ const ProfileScreen = ({ bets }) => {
     return winnings;
   };
 
+
   const calculateOtherWinnings = (bets, result) => {
     let winnings = [];
     for (const bet of bets) {
@@ -48,7 +53,6 @@ const ProfileScreen = ({ bets }) => {
   const winningPercentage = Math.round(
     (betsWon / (totalBets - betsPending)) * 100
   );
-  const betsSettled = bets.filter((bet) => !bet.active).length;
   const moneyWon = calculateDollarWinnings(bets, "winner");
   const moneyLost = calculateDollarWinnings(bets, "loser");
   const othersWon = calculateOtherWinnings(bets, "winner");

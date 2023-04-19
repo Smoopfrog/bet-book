@@ -14,9 +14,9 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
   const [person, setPerson] = useState(bet.person);
   const userId = auth.currentUser.uid;
 
-  const editModeHandler = () => {
-    setEditMode(!editMode);
-  };
+  // const editModeHandler = () => {
+  //   setEditMode(!editMode);
+  // };
 
   const deleteBet = () => {
     set(ref(db, "bets/" + userId + "/" + bet.id), null)

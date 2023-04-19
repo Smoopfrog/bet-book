@@ -11,7 +11,7 @@ import StatBar from "./StatBar";
 import { selectBets } from "../../betsSlice";
 import { useSelector } from "react-redux";
 
-const Home = ({ bets, setBets }) => {
+const Home = () => {
   const reduxBets = useSelector(selectBets);
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
@@ -62,14 +62,14 @@ const Home = ({ bets, setBets }) => {
 
   useEffect(() => {
     console.log(resultFilter)
-    const filteredBets = resultFilterHandler(resultFilter, bets);
+    const filteredBets = resultFilterHandler(resultFilter, reduxBets);
     setSortedBets(filteredBets);
-  }, [resultFilter, bets]);
+  }, [resultFilter, reduxBets]);
 
   useEffect(() => {
-    const filteredBets = sortMethodHandler(sortMethod, bets);
+    const filteredBets = sortMethodHandler(sortMethod, reduxBets);
     setSortedBets(filteredBets);
-  }, [sortMethod, bets]);
+  }, [sortMethod, reduxBets]);
 
   const betModalHandler = () => {
     setShowBetModal(!showBetModal);
@@ -105,7 +105,7 @@ const Home = ({ bets, setBets }) => {
   return (
     <View style={styles.app}>
       <StatBar bets={sortedBets} />
-      <BetFeed setBets={setBets} bets={sortedBets} />
+      <BetFeed bets={sortedBets} />
       <FooterBar
         showSortModal={sortModalHandler}
         showBetModal={betModalHandler}

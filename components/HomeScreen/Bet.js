@@ -10,7 +10,7 @@ import { ref, set } from "firebase/database";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
-const Bet = ({ bet, setBets }) => {
+const Bet = ({ bet }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
   const [active, setActive] = useState(bet.active);
   const userId = auth.currentUser.uid;

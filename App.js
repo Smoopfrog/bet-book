@@ -10,7 +10,6 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 const App = () => {
-  const [bets, setBets] = useState([]);
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("./assets/fonts/Orbitron-Regular.ttf"),
   });
@@ -31,7 +30,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="LoginScreen" options={{ headerShown: false }}>
-            {() => <LoginScreen setBets={setBets} />}
+            {() => <LoginScreen />}
           </Stack.Screen>
           <Stack.Screen
             name="HomeScreen"
@@ -48,7 +47,7 @@ const App = () => {
               },
             }}
           >
-            {() => <HomeScreen bets={bets} setBets={setBets} />}
+            {() => <HomeScreen />}
           </Stack.Screen>
           <Stack.Screen
             name="ProfileScreen"
@@ -65,7 +64,7 @@ const App = () => {
               },
             }}
           >
-            {() => <ProfileScreen bets={bets} />}
+            {() => <ProfileScreen />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

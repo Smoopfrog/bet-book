@@ -1,9 +1,9 @@
 import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import Bet from "./Bet";
 
-const BetFeed = ({ bets, setBets }) => {
+const BetFeed = ({ bets }) => {
   const betComponents = bets.map((bet) => {
-    return <Bet key={bet.id} bet={bet} setBets={setBets} />;
+    return <Bet key={bet.id} bet={bet} />;
   });
 
   return (
