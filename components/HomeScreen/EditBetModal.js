@@ -39,7 +39,7 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
     set(ref(db, "bets/" + userId + "/" + newBet.id), newBet)
       .then(() => {
         alert("Bet updated");
-        setEditMode(false);
+        closeModal();
       })
       .catch((error) => {
         alert(error);
