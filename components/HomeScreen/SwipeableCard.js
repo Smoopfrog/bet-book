@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Animated } from "react-native";
-import { RectButton, Swipeable } from "react-native-gesture-handler";
+import { View, Animated } from "react-native";
+import { Swipeable } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";

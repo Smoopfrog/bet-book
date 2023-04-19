@@ -9,7 +9,10 @@ import {
   Switch,
 } from "react-native";
 import ModalCard from "./ModalCard";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
+// import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useCallback } from "react";
 
 const SortModal = ({
   showModal,
@@ -27,10 +30,9 @@ const SortModal = ({
   const [filterSettledButton, setFilterSettledButton] = useState();
   const [sortDateButton, setSortDateButton] = useState();
   const [sortAlphabeticalButton, setSortAlphabeticalButton] = useState();
+  // const [isEnabled, setIsEnabled] = useState(false);
 
-  const [isEnabled, setIsEnabled] = useState(false);
-
-  const toggleSwitch = () => setIsEnabled();
+  // const toggleSwitch = () => setIsEnabled();
   useEffect(() => {
     if (sortMethod === "date") {
       setSortDateButton(true);
@@ -60,23 +62,57 @@ const SortModal = ({
     }
   }, [activeFilter]);
 
+  const [fontsLoaded] = useFonts({
+    "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
-      <View style={styles.modalView}>
+      <View style={styles.modalView} onLayout={onLayoutRootView}>
         <View style={styles.buttonContainer}>
           <View style={styles.leftContainer}>
             <View>
-              <Text style={styles.sectionTitle}>Sort by:</Text>
+              <Text
+                style={[
+                  styles.sectionTitle,
+                  {
+                    fontFamily: "Orbitron-Regular",
+                  },
+                ]}
+              >
+                Sort by:
+              </Text>
             </View>
             <View style={styles.switchContainer}>
-              <Text>Date</Text>
+              <Text
+                style={{
+                  fontFamily: "Orbitron-Regular",
+                }}
+              >
+                Date
+              </Text>
               <Switch
                 onValueChange={sortBetsChronologically}
                 value={sortDateButton}
               />
             </View>
             <View style={styles.switchContainer}>
-              <Text>A-Z</Text>
+              <Text
+                style={{
+                  fontFamily: "Orbitron-Regular",
+                }}
+              >
+                A-Z
+              </Text>
               <Switch
                 onValueChange={sortBetsAlphabetically}
                 value={sortAlphabeticalButton}
@@ -84,24 +120,46 @@ const SortModal = ({
             </View>
           </View>
           <View>
-            <Text style={styles.sectionTitle}>Filter by:</Text>
+            <Text
+              style={[styles.sectionTitle, { fontFamily: "Orbitron-Regular" }]}
+            >
+              Filter by:
+            </Text>
             <View style={styles.switchContainer}>
               <Switch onValueChange={filterAllBets} value={filterAllButton} />
-              <Text>All</Text>
+              <Text
+                style={{
+                  fontFamily: "Orbitron-Regular",
+                }}
+              >
+                All
+              </Text>
             </View>
             <View style={styles.switchContainer}>
               <Switch
                 onValueChange={filterActiveBets}
                 value={filterActiveButton}
               />
-              <Text>Active</Text>
+              <Text
+                style={{
+                  fontFamily: "Orbitron-Regular",
+                }}
+              >
+                Active
+              </Text>
             </View>
             <View style={styles.switchContainer}>
               <Switch
                 onValueChange={filterSettledBets}
                 value={filterSettledButton}
               />
-              <Text>Settled</Text>
+              <Text
+                style={{
+                  fontFamily: "Orbitron-Regular",
+                }}
+              >
+                Settled
+              </Text>
             </View>
           </View>
         </View>
