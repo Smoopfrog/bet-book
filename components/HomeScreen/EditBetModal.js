@@ -49,10 +49,22 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
   return (
     <ModalCard showModal={showModal} closeModal={closeModal}>
       <View style={styles.modalView}>
-        <View>
           <Text style={[styles.title, { fontFamily: "Orbitron-Regular" }]}>
             Edit your bet
           </Text>
+          {/* <TouchableHighlight
+              onPress={closeModal}
+              style={styles.exitBtn}
+            >
+              <Text
+                style={[
+                  styles.exitBtnText,
+                  { fontFamily: "Orbitron-Regular" },
+                ]}
+              >
+                X
+              </Text>
+            </TouchableHighlight> */}
           <NewBetInput label="Title" value={title} changeHandler={setTitle} />
           <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
           <NewBetInput
@@ -61,21 +73,29 @@ const EditBetModal = ({ showModal, closeModal, bet }) => {
             changeHandler={setPerson}
           />
           <View style={styles.buttonContainer}>
-            <TouchableHighlight
-              onPress={closeModal}
-              style={styles.deleteButton}
-            >
-              <Text style={styles.deleteButtonText}>Cancel</Text>
+            <TouchableHighlight onPress={deleteBet} style={styles.deleteButton}>
+              <Text
+                style={[
+                  styles.deleteButtonText,
+                  { fontFamily: "Orbitron-Regular" },
+                ]}
+              >
+                Delete
+              </Text>
             </TouchableHighlight>
+
             <TouchableHighlight onPress={editBet} style={styles.saveButton}>
-              <Text style={styles.deleteButtonText}>Save</Text>
+              <Text
+                style={[
+                  styles.deleteButtonText,
+                  { fontFamily: "Orbitron-Regular" },
+                ]}
+              >
+                Save
+              </Text>
             </TouchableHighlight>
           </View>
-          <TouchableHighlight onPress={deleteBet} style={styles.deleteButton}>
-            <Text style={styles.deleteButtonText}>Delete</Text>
-          </TouchableHighlight>
         </View>
-      </View>
     </ModalCard>
   );
 };
@@ -129,6 +149,15 @@ const styles = StyleSheet.create({
   },
   deleteButtonText: {
     color: "white",
+  },
+  exitBtn: {
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    // backgroundColor: "red",
+  },
+  exitBtnText: {
+    color: "black",
   },
 });
 

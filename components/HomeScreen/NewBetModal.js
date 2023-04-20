@@ -29,7 +29,7 @@ const NewBetModal = ({ closeModal, showModal }) => {
   const [person, setPerson] = useState("");
   const [wager, setWager] = useState("");
   const userId = auth.currentUser.uid;
-  
+
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
   });
@@ -74,6 +74,9 @@ const NewBetModal = ({ closeModal, showModal }) => {
 
     set(ref(db, "bets/" + userId + "/" + newBet.id), newBet)
       .then(() => {
+        setTitle("");
+        setPerson("");
+        setWager("");
         alert("Bet added");
       })
       .catch((error) => {
@@ -98,13 +101,13 @@ const NewBetModal = ({ closeModal, showModal }) => {
           />
           <NewBetInput label="Wager" value={wager} changeHandler={setWager} />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.closeBtn} onPress={closeModal}>
+            {/* <TouchableOpacity style={styles.closeBtn} onPress={closeModal}>
               <Text
                 style={[styles.innerBtn, { fontFamily: "Orbitron-Regular" }]}
               >
                 Close
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity style={styles.confirmBtn} onPress={createNewBet}>
               <Text
                 style={[styles.innerBtn, { fontFamily: "Orbitron-Regular" }]}
