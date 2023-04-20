@@ -10,25 +10,26 @@ import { selectBets } from "../betsSlice";
 
 const ProfileScreen = () => {
   const bets = useSelector(selectBets);
+  console.log('bets', bets)
   // const isFocused = useIsFocused();
 
   // useEffect(() => {
   //   isFocused && updateSomeFunction()
   // },[isFocused]);
 
-  const [fontsLoaded] = useFonts({
-    "Orbitron-Regular": require("../assets/fonts/Orbitron-Regular.ttf"),
-  });
+  // const [fontsLoaded] = useFonts({
+  //   "Orbitron-Regular": require("../assets/fonts/Orbitron-Regular.ttf"),
+  // });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
 
   const calculateDollarWinnings = (bets, result) => {
     let winnings = 0;
@@ -75,7 +76,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <View style={styles.container}>
       <View style={styles.sectionTitle}>
         <Ionicons name="person" size={24} color="white" />
         <Text

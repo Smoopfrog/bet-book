@@ -13,7 +13,7 @@ import { auth } from "../firebase";
 import { db } from "../firebase";
 import { get, ref, child } from "firebase/database";
 import { useDispatch } from "react-redux";
-import { logIn } from "../betsSlice";
+import { getBets } from "../betsSlice";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -37,7 +37,7 @@ const LoginScreen = () => {
             const arrayBets = Object.values(fireData).sort(
               (a, b) => b.date - a.date
             );
-            dispatch(logIn([...arrayBets]));
+            dispatch(getBets([...arrayBets]));
           }
         });
 

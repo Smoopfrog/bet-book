@@ -9,11 +9,14 @@ import { auth, db } from "../../firebase";
 import { ref, set } from "firebase/database";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { useDispatch } from "react-redux";
+import { updateBetResult } from "../../betsSlice";
 
 const Bet = ({ bet }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
   const [active, setActive] = useState(bet.active);
   const userId = auth.currentUser.uid;
+  const dispatch = useDispatch();
 
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
@@ -37,6 +40,12 @@ const Bet = ({ bet }) => {
     set(ref(db, "bets/" + userId + "/" + bet.id + "/result"), result)
       .then(() => {
         console.log("Result updated to: ", result);
+        dispatch(
+          updateBetResult({
+            id: bet.id,
+            value: result,
+          })
+        );
       })
       .catch((error) => {
         alert(error);
