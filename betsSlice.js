@@ -4,7 +4,7 @@ export const betsSlice = createSlice({
   name: "bets",
   initialState: {
     bets: [],
-    sortedBets: []
+    sortedBets: [],
   },
   reducers: {
     getBets: (state, action) => {
@@ -18,15 +18,21 @@ export const betsSlice = createSlice({
         if (bet.id === action.payload.id) {
           return {
             ...bet,
-           result: action.payload.value,
+            result: action.payload.value,
           };
         }
         return bet;
       });
     },
+    addBet: (state, action) => {
+      console.log("state", state.bets);
+      console.log("action", action.payload);
+
+      state.bets = [...state.bets, action.payload];
+    },
   },
 });
 
-export const { getBets, logOut, updateBetResult } = betsSlice.actions;
+export const { getBets, logOut, updateBetResult, addBet } = betsSlice.actions;
 export const selectBets = (state) => state.bets.bets;
 export default betsSlice.reducer;

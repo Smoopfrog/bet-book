@@ -24,7 +24,6 @@ const LoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const dbRef = ref(db);
-  console.log(dbRef);
   const dispatch = useDispatch();
 
   const navigation = useNavigation();
@@ -33,11 +32,8 @@ const LoginScreen = () => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const userId = auth.currentUser.uid;
-        console.log(userId);
-        console.log("hello");
         await get(child(dbRef, "/bets/" + userId)).then((snapshot) => {
           const fireData = snapshot.val();
-          console.log(fireData);
           if (fireData) {
             const arrayBets = Object.values(fireData).sort(
               (a, b) => b.date - a.date

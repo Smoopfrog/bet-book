@@ -15,6 +15,8 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 import { auth } from "../../firebase";
+import { addBet } from "../../betsSlice";
+import { useDispatch } from "react-redux";
 
 const createTwoButtonAlert = (msg) =>
   Alert.alert("Missing Info", msg, [
@@ -29,6 +31,8 @@ const NewBetModal = ({ closeModal, showModal }) => {
   const [person, setPerson] = useState("");
   const [wager, setWager] = useState("");
   const userId = auth.currentUser.uid;
+
+  const dispatch = useDispatch();
 
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
@@ -78,6 +82,7 @@ const NewBetModal = ({ closeModal, showModal }) => {
         setPerson("");
         setWager("");
         alert("Bet added");
+        dispatch(addBet(newBet));
       })
       .catch((error) => {
         alert(error);

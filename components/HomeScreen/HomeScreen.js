@@ -15,9 +15,9 @@ const Home = () => {
   const reduxBets = useSelector(selectBets);
   const [showBetModal, setShowBetModal] = useState(false);
   const [showSortModal, setShowSortModal] = useState(false);
-  const [sortedBets, setSortedBets] = useState(reduxBets);
-  const [resultFilter, setResultFilter] = useState("all");
-  const [sortMethod, setSortMethod] = useState("date");
+  const [sortedBets, setSortedBets] = useState(sortedBets || reduxBets);
+  const [resultFilter, setResultFilter] = useState(resultFilter || "all");
+  const [sortMethod, setSortMethod] = useState(sortMethod || "date");
   const userId = auth.currentUser.uid;
   const fireBets = ref(db, "/bets/" + userId);
 
@@ -45,7 +45,7 @@ const Home = () => {
       return sortedArray;
     }
     if (sortMethod === "alphabetical") {
-      const sortedArray = sortedBets.sort((a, b) => {
+      const sortedArray = [...sortedBets].sort((a, b) => {
         return a.person.localeCompare(b.person);
       });
       return sortedArray;
@@ -69,7 +69,7 @@ const Home = () => {
   useEffect(() => {
     const filteredBets = resultFilterHandler(resultFilter, reduxBets);
     setSortedBets(filteredBets);
-  }, [resultFilter, reduxBets]);
+  }, [resultFilter, reduxBets, setSortedBets]);
 
   useEffect(() => {
     const filteredBets = sortMethodHandler(sortMethod, reduxBets);
@@ -117,17 +117,17 @@ const Home = () => {
 
   return (
     <View style={styles.app}>
-      <StatBar bets={sortedBets} sortMethod={sortMethod} resultFilter={resultFilter}/>
+      <StatBar
+        bets={sortedBets}
+        sortMethod={sortMethod}
+        resultFilter={resultFilter}
+      />
       <BetFeed bets={sortedBets} showBetModal={betModalHandler} />
       <FooterBar
         showSortModal={sortModalHandler}
         showBetModal={betModalHandler}
       />
-      <NewBetModal
-        closeModal={betModalHandler}
-        showModal={showBetModal}
-        setBets={setSortedBets}
-      />
+      <NewBetModal closeModal={betModalHandler} showModal={showBetModal} />
       <SortModal
         showModal={showSortModal}
         closeModal={sortModalHandler}
