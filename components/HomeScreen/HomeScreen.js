@@ -7,9 +7,9 @@ import FooterBar from "./FooterBar";
 import NewBetModal from "./NewBetModal";
 import SortModal from "./SortModal";
 import StatBar from "./StatBar";
-// import StatsModal from "./StatsModal";
 import { selectBets } from "../../betsSlice";
 import { useSelector } from "react-redux";
+import * as Haptics from "expo-haptics";
 
 const Home = () => {
   const reduxBets = useSelector(selectBets);
@@ -77,10 +77,17 @@ const Home = () => {
   }, [sortMethod, reduxBets]);
 
   const betModalHandler = () => {
+    if (!showBetModal) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    }
+
     setShowBetModal(!showBetModal);
   };
 
   const sortModalHandler = () => {
+    if (!showSortModal) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    }
     setShowSortModal(!showSortModal);
   };
 
@@ -107,6 +114,7 @@ const Home = () => {
   const filterLostBets = () => {
     setResultFilter("loser");
   };
+
   return (
     <View style={styles.app}>
       <StatBar bets={sortedBets} />

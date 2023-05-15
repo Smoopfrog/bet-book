@@ -1,10 +1,7 @@
-import { Feather } from "@expo/vector-icons";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  Vibration,
   View,
 } from "react-native";
 import SwipeableCard from "./SwipeableCard";

@@ -1,11 +1,13 @@
 import { StyleSheet, View } from "react-native";
 import { SimpleLineIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import * as Haptics from "expo-haptics";
 
 const FooterBar = (props) => {
   const navigation = useNavigation();
 
   const profileScreenHandler = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("ProfileScreen");
   };
 
