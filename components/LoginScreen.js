@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { getBets } from "../betsSlice";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import * as Haptics from "expo-haptics";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("test@test.com");
@@ -23,7 +24,7 @@ const LoginScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const dbRef = ref(db);
-  console.log(dbRef)
+  console.log(dbRef);
   const dispatch = useDispatch();
 
   const navigation = useNavigation();
@@ -32,11 +33,11 @@ const LoginScreen = () => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const userId = auth.currentUser.uid;
-        console.log(userId)
-        console.log('hello')
+        console.log(userId);
+        console.log("hello");
         await get(child(dbRef, "/bets/" + userId)).then((snapshot) => {
           const fireData = snapshot.val();
-          console.log(fireData)
+          console.log(fireData);
           if (fireData) {
             const arrayBets = Object.values(fireData).sort(
               (a, b) => b.date - a.date
@@ -44,7 +45,6 @@ const LoginScreen = () => {
             dispatch(getBets([...arrayBets]));
           }
         });
-
         navigation.replace("HomeScreen");
       }
     });
@@ -71,8 +71,12 @@ const LoginScreen = () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Registered with:", user.email);
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+        alert(error.message);
+      });
   };
 
   const handleLogin = () => {
@@ -80,9 +84,15 @@ const LoginScreen = () => {
       .signInWithEmailAndPassword(email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
         console.log("Logged in with:", user.email);
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+
+        alert(error.message);
+      });
   };
 
   return (
