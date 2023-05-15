@@ -117,7 +117,7 @@ const Home = () => {
 
   return (
     <View style={styles.app}>
-      <StatBar bets={sortedBets} />
+      <StatBar bets={sortedBets} sortMethod={sortMethod} resultFilter={resultFilter}/>
       <BetFeed bets={sortedBets} showBetModal={betModalHandler} />
       <FooterBar
         showSortModal={sortModalHandler}

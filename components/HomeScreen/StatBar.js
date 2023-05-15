@@ -4,7 +4,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 
-const StatBar = ({ bets }) => {
+const StatBar = ({ bets, sortMethod, resultFilter }) => {
   const [fontsLoaded] = useFonts({
     "Orbitron-Regular": require("../../assets/fonts/Orbitron-Regular.ttf"),
   });
@@ -32,9 +32,15 @@ const StatBar = ({ bets }) => {
         <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
           Total Bets: {totalBets}
         </Text>
-        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>Won: {betsWon}</Text>
-        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>Lost: {betsLost}</Text>
-        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>Pending: {betsPending}</Text>
+        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
+          Won: {betsWon}
+        </Text>
+        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
+          Lost: {betsLost}
+        </Text>
+        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
+          Pending: {betsPending}
+        </Text>
       </View>
       <View style={styles.porgressCircleContainter}>
         <Progress.Circle
@@ -45,7 +51,32 @@ const StatBar = ({ bets }) => {
           showsText={true}
         />
       </View>
-      <View style={styles.statsContainer}></View>
+      <View style={[styles.statsContainer, styles.rightContainer]}>
+        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
+          Showing:
+        </Text>
+        <Text
+          style={{
+            fontFamily: "Orbitron-Regular",
+            color: "white",
+            textTransform: "capitalize",
+          }}
+        >
+          {resultFilter} bets
+        </Text>
+        <Text style={{ fontFamily: "Orbitron-Regular", color: "white" }}>
+          Sorted:
+        </Text>
+        <Text
+          style={{
+            fontFamily: "Orbitron-Regular",
+            color: "white",
+            textTransform: "capitalize",
+          }}
+        >
+          {sortMethod}
+        </Text>
+      </View>
     </View>
   );
 };
@@ -60,6 +91,9 @@ const styles = StyleSheet.create({
   },
   statsContainer: {
     flex: 1,
+  },
+  rightContainer: {
+    alignItems: "flex-end",
   },
   porgressCircleContainter: {
     justifyContent: "center",
