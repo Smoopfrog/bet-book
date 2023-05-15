@@ -1,9 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
 import EditBetModal from "./EditBetModal";
@@ -48,6 +43,18 @@ const Bet = ({ bet }) => {
     set(ref(db, "bets/" + userId + "/" + bet.id + "/result"), result)
       .then(() => {
         console.log("Result updated to: ", result);
+        if (result === "winner") {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        }
+
+        if (result === "pending") {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }
+
+        if (result === "loser") {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+        }
+
         dispatch(
           updateBetResult({
             id: bet.id,
@@ -56,6 +63,8 @@ const Bet = ({ bet }) => {
         );
       })
       .catch((error) => {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+
         alert(error);
       });
   };
