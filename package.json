@@ -30,7 +30,9 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.11",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "expo-updates": "~0.16.4",
+    "expo-haptics": "~12.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

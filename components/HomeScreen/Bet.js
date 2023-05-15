@@ -1,6 +1,12 @@
 import { Feather } from "@expo/vector-icons";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  Vibration,
+  View,
+} from "react-native";
 import SwipeableCard from "./SwipeableCard";
 import moment from "moment";
 import EditBetModal from "./EditBetModal";
@@ -11,6 +17,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useDispatch } from "react-redux";
 import { updateBetResult } from "../../betsSlice";
+import * as Haptics from "expo-haptics";
 
 const Bet = ({ bet }) => {
   const [showEditBetModal, setShowEditBetModal] = useState(false);
@@ -33,6 +40,10 @@ const Bet = ({ bet }) => {
   }
 
   const editBetModalHandler = () => {
+    if (!showEditBetModal) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    }
+
     setShowEditBetModal(!showEditBetModal);
   };
 
